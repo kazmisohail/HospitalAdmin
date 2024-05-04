@@ -42,6 +42,20 @@ body {
     font-family: 'Dosis', 'sans-serif';
 }
 
+/* Custom scrollbar */
+
+::-webkit-scrollbar {
+    width: 0.3125rem;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--white-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+}
+
 /* Custom CSS */
 
 h1 {
