@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../css/cards.css">
     <link rel="stylesheet" href="../css/table.css">
     <link rel="stylesheet" href="../css/control.css">
+    <link rel="stylesheet" href="../css/settings.css">
 </head>
 
 <body>
@@ -44,9 +45,12 @@
             <button onclick="home()" class=""><img src="../images/home-icon.png" alt="" height="20px">Dashbord</button>
             <button onclick="doctors()" class=""><img src="../images/doctor.svg" alt="" height="20px">Doctor</button>
             <button onclick="patients()" class=""><img src="../images/patient.png" alt="" height="20px">Patient</button>
-            <button onclick="appointment()" class=""><img src="../images/appointments.svg" alt="" height="20px">Appointment</button>
-            <button onclick="pharmacy()" class=""><img src="../images/pharmacy.png" alt="" height="20px">Pharmacy</button>
-            <button class=""><img src="../images/settings.png" alt="" height="20px">Settings</button>
+            <button onclick="appointment()" class=""><img src="../images/appointments.svg" alt=""
+                    height="20px">Appointment</button>
+            <button onclick="pharmacy()" class=""><img src="../images/pharmacy.png" alt=""
+                    height="20px">Pharmacy</button>
+            <button class="" data-bs-toggle="modal" data-bs-target="#settingModal"><img src="../images/settings.png"
+                    alt="" height="20px">Settings</button>
         </div>
 
         <div class="dash-panels">
@@ -253,40 +257,6 @@
 
     </div>
 
-    <!-- <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h4>Contact</h4>
-                    <p>123 Hospital St, City</p>
-                    <p>Phone: +1 123-456-7890</p>
-                    <p>Email: info@hospital.com</p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Doctors</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h4>Follow Us</h4>
-                    <ul class="social-icons">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-         <div class="bottom-footer">
-            <p>&copy; 2024 Hospital Management System. All Rights Reserved.</p>
-        </div>
-    </footer> -->
-
     <!-- New Footer!!! -->
     <!-- Footer -->
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -319,17 +289,55 @@
             </div>
 
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com" target="_blank"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com" target="_blank"><svg
+                            class="bi" width="24" height="24">
                             <use xlink:href="#twitter" />
                         </svg></a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="https://instagram.com" target="_blank"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-body-secondary" href="https://instagram.com" target="_blank"><svg
+                            class="bi" width="24" height="24">
                             <use xlink:href="#instagram" />
                         </svg></a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="https://facebook.com" target="_blank"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-body-secondary" href="https://facebook.com" target="_blank"><svg
+                            class="bi" width="24" height="24">
                             <use xlink:href="#facebook" />
                         </svg></a></li>
             </ul>
         </footer>
+    </div>
+
+
+
+    <!-- Settings -->
+    <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Settings</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Admin ID: </strong><span>ADM123456</span></p>
+                    <p><strong>Name: </strong><span>John Doe</span></p>
+                    <p><strong>Email: </strong><span>john.doe@example.com</span></p>
+                    <p><strong>Contact: </strong><span>+1 (555) 123-4567</span></p>
+                    <hr>
+                    <form action="">
+                        <h3>Change Details</h3>
+                        <input type="text" class="form-control" name="name" placeholder="Enter New Name" required="false">
+                        <input type="tel" class="form-control" name="number" placeholder="Enter New Contact" required="false">
+                        <hr>
+                        <h3>Change Password</h3>
+                        <input type="password" class="form-control" name="cpassword" placeholder="Current Password" required="false">
+                        <input type="password" class="form-control" name="npassword" placeholder="New Password" required="false">
+                        <input type="password" class="form-control" name="npassword" placeholder="New Password Again" required="false">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- !!! -->
 
