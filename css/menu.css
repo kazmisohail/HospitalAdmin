@@ -1,14 +1,13 @@
 .dash-menu {
     display: flex;
     flex-direction: column;
-    background-color: #535353;
     width: 0%;
     transition: width 0.5s ease;
     min-height: 100vh;
 
 }
 
-.menu-open {
+.dash-menu.open {
     width: 20%;
 }
 
@@ -16,15 +15,9 @@
     text-align: left;
     display: flex;
     justify-content: flex-start;
-    background-color: rgb(102, 102, 102);
     border: 1px solid transparent;
     margin: 1% !important;
     color: white;
-}
-
-.dash-menu button:hover {
-    box-shadow: 0px 0px 5px grey;
-    background-color: rgb(125, 125, 125);
 }
 
 .dash-menu button:active {
@@ -36,8 +29,16 @@
     margin-right: 5%;
 }
 
-.brand-logo {
-    margin: 0 auto;
+.brand-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
+}
+
+.dark-mode-button {
+    margin-right: 3%;
+    margin-top: 4%;
 }
 
 .profile-panel {
@@ -45,9 +46,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 40%;
-    border-top: 1px solid grey;
-    border-bottom: 1px solid grey;
+    height: 30%;
     margin-top: 5%;
 }
 
@@ -71,14 +70,3 @@
     border-radius: 0px;
 }
 
-.dash-panels {
-    width: 100%;
-    background-color: #333333;
-}
-
-.welcome-panel {
-    background-color: rgb(211, 211, 211);
-    border: 2px solid rgb(79, 79, 79);
-    padding: 0.8% 3% 0% 3%;
-    border-radius: 20px;
-}

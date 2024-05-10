@@ -1,0 +1,131 @@
+body {
+    background-color: #ffffff;
+}
+
+.dash-panels {
+    background-color: #252525;
+}
+
+.brand-logo {
+    filter: brightness(0.8);
+}
+
+.navbar {
+    background-color: #7d7d7d !important;
+}
+
+.nav-custom {
+    border-bottom: 1px solid rgb(58, 58, 58);
+}
+
+.admin-profile {
+    background-color: #fff;
+}
+
+.dash-menu {
+    background: linear-gradient(to bottom, #02121d, #012710);
+}
+
+.dash-menu button {
+    background-color: #045335;
+}
+
+.dash-menu button:hover {
+    box-shadow: 0px 0px 5px #046842;
+    background-color: #046842;
+}
+
+.profile-panel {
+    background-color: transparent;
+}
+
+.notification-panel {
+    background-color: #fff;
+}
+
+.notification-item {
+    background-color: #f8f9fa;
+}
+
+.notification-header {
+    background-color: #007bff;
+}
+
+.card-1 {
+    background: linear-gradient(to right, #085284, #0b72b6);
+}
+
+.card-2 {
+    background: linear-gradient(to left, #de360c, #b42d0b);
+}
+
+.card-3 {
+    background: linear-gradient(to left, #17cf2c, #129e22);
+}
+
+.tab {
+    border: 1px solid #3e3e3e;
+}
+
+.tab button {
+    background-color: #05492f;
+    color: #fff;
+}
+
+.tab button:hover {
+    opacity: 0.9;
+}
+
+.tab button.active {
+    background-color: #046842;
+    color: #fff;
+}
+
+.table-container {
+    background-color: transparent;
+}
+
+.table1 th,
+.table1 td,
+.table2 th,
+.table2 td {
+    border: 1px solid rgb(76, 76, 76);
+    color: rgb(255, 255, 255);
+}
+
+.control-panel {
+    background-color: #fff;
+}
+
+.control-panel-content button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.assign-work {
+    background-color: #dc3545;
+}
+
+.raise-issue {
+    background-color: #17a2b8;
+}
+
+.meeting-call {
+    background-color: #ffc107;
+}
+
+.add-admin {
+    background-color: #28a745;
+}
+
+.delete-admin {
+    background-color: #6c757d;
+}
+
+.footer {
+    background-color: #343a40;
+}
+
+.bottom-footer {
+    background-color: #212529;
+}

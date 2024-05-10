@@ -4,12 +4,11 @@
 }
 
 .nav_custom {
-    background-color: rgb(180, 180, 180);
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.5% 1%;
-    border-bottom: 1px solid rgb(205, 205, 205);
 }
 
 .menu-btn {
@@ -38,7 +37,6 @@
     position: absolute;
     top: 55px;
     right: 10px;
-    background-color: #f8f9fa;
     border: 2px solid #dee2e6;
     border-radius: 8px;
     padding: 20px;
@@ -64,22 +62,6 @@
 
 .admin-profile strong {
     color: #343a40;
-}
-
-.admin-profile button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
-
-.admin-profile button:hover {
-    background-color: #0056b3;
 }
 
 .clock {

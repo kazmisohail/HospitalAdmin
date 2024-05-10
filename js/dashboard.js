@@ -43,8 +43,22 @@ function appointment() {
 
 function toggleMenu() {
     var menu = document.getElementById("side-menu");
-    menu.classList.toggle("menu-open");
+    menu.classList.toggle("open");
+
+    const menuState = sideMenu.classList.contains('open') ? 'open' : 'closed';
+    localStorage.setItem('menuState', menuState);
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const menuState = localStorage.getItem('menuState');
+    const sideMenu = document.getElementById('side-menu');
+
+    if (menuState === 'open') {
+        sideMenu.classList.add('open');
+    }
+});
+
 
 
 function addTask() {
@@ -138,6 +152,17 @@ function toggleControlPanel() {
         controlPanel.style.display = "none";
         overlay.style.display = "none";
         document.body.style.overflow = "auto"; // Re-enable scrolling
+    }
+}
+
+function toggleTheme() {
+    const themeStylesheet = document.getElementById('themeStylesheet');
+    const currentHref = themeStylesheet.getAttribute('href');
+
+    if (currentHref.includes('light-mode')) {
+        themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
+    } else {
+        themeStylesheet.setAttribute('href', '../css/light-mode.css?v=' + new Date().getTime());
     }
 }
 

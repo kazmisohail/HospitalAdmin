@@ -7,8 +7,6 @@
 
 .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
     display: flex;
     justify-content: space-between;
     border-top-left-radius: 10px;
@@ -16,7 +14,6 @@
 }
 
 .tab button {
-    background-color: inherit;
     float: left;
     border: none;
     outline: none;
@@ -25,14 +22,6 @@
     transition: 0.3s;
     width: 100%;
     height: 2%;
-}
-
-.tab button:hover {
-    background-color: #ddd;
-}
-
-.tab button.active {
-    background-color: #ccc;
 }
 
 .tabcontent {
@@ -46,7 +35,6 @@ table {
 
 th,
 td {
-    border: 1px solid rgb(146, 146, 146);
     padding: 8px;
     width: 100%;
     color: white;
