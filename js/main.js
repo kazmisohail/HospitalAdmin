@@ -23,3 +23,8 @@ $(document).ready(function(){
         }
     })
 })
+
+// login button
+function home() {
+    window.location.href = './htmlpages/dashboard.html';
+}
