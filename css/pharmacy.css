@@ -4,34 +4,40 @@
     margin: 0;
     padding: 0;
 }
+
 header {
     background-color: #333;
     color: #fff;
     padding: 20px;
     text-align: center;
 }
+
 .container {
     margin: 20px auto;
     max-width: 800px;
     padding: 0 20px;
 }
+
 h2 {
     margin-top: 30px;
 }
-.dc form {
+
+.ph form {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.dc input[type="text"] {
+
+.ph input[type="text"] {
     width: 70%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
-.dc input[type="submit"] {
+
+.ph input[type="submit"] {
     width: 25%;
     padding: 8px;
     background-color: #4CAF50;
@@ -40,16 +46,19 @@ h2 {
     border-radius: 4px;
     cursor: pointer;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
+
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
+
 th {
     background-color: #4CAF50;
     color: white;

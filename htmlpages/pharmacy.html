@@ -15,10 +15,10 @@
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/notification.css">
-    <link rel="stylesheet" href="../css/cards.css">
-    <link rel="stylesheet" href="../css/table.css">
+    <!-- <link rel="stylesheet" href="../css/cards.css"> -->
     <link rel="stylesheet" href="../css/control.css">
     <link rel="stylesheet" href="../css/settings.css">
+    <link rel="stylesheet" href="../css/pharmacy.css">
     <link id="themeStylesheet" rel="stylesheet" href="../css/light-mode.css">
 </head>
 
@@ -136,8 +136,31 @@
                 </div>
             </div>
 
-            <h2 class="text-white">PHARMACY PAGE HERE</h2>
-            <!-- WORK HERE -->
+            <header>
+                <h1>Pharmacy Management System</h1>
+            </header>
+            <div class="ph container">
+                <h2>All Manufacturers</h2>
+                <form id="searchForm">
+                    <input type="text" id="searchInput" placeholder="Search manufacturers...">
+                    <input type="submit" value="Search">
+                </form>
+                <table id="pharmacistsTable">
+                    <tr>
+                        <th>Manufacturer ID</th>
+                        <th>Manufacturer Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                    </tr>
+                    <!-- Patient data will be dynamically inserted here -->
+                    <tr>
+                        <td>101</td>
+                        <td>abc</td>
+                        <td>email</td>
+                        <td>789456132</td>
+                    </tr>
+                </table>
+            </div>
 
         </div>
 
@@ -193,7 +216,7 @@
 
 
     <!-- Settings -->
-    <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="settingss modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
