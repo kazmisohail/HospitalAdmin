@@ -22,7 +22,7 @@ body {
     background-color: #fff;
 }
 
-.dash-menu {
+/* .dash-menu {
     background: linear-gradient(to bottom, #02121d, #012710);
 }
 
@@ -33,7 +33,7 @@ body {
 .dash-menu button:hover {
     box-shadow: 0px 0px 5px #046842;
     background-color: #046842;
-}
+} */
 
 .profile-panel {
     background-color: transparent;
@@ -51,16 +51,9 @@ body {
     background-color: #007bff;
 }
 
-.card-1 {
-    background: linear-gradient(to right, #085284, #0b72b6);
-}
-
-.card-2 {
-    background: linear-gradient(to left, #de360c, #b42d0b);
-}
-
-.card-3 {
-    background: linear-gradient(to left, #17cf2c, #129e22);
+.card {
+    background-color: rgb(53, 53, 53) !important;
+    color: white !important;
 }
 
 .tab {
@@ -68,7 +61,7 @@ body {
 }
 
 .tab button {
-    background-color: #05492f;
+    background-color: #656565;
     color: #fff;
 }
 
@@ -77,7 +70,7 @@ body {
 }
 
 .tab button.active {
-    background-color: #046842;
+    background-color: rgb(60, 60, 60);
     color: #fff;
 }
 
@@ -91,6 +84,10 @@ body {
 .table2 td {
     border: 1px solid rgb(76, 76, 76);
     color: rgb(255, 255, 255);
+}
+
+table {
+    background-color: #2c2c2c;
 }
 
 .control-panel {

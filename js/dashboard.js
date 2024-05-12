@@ -1,5 +1,6 @@
 let menuState = localStorage.getItem('menuState') || "0";
 let viewMode = localStorage.getItem('viewMode') || "0";
+let displayPic = localStorage.getItem('displayPic') || "";
 
 // Function to open a specific tab
 function openTab(evt, tabName) {
@@ -149,12 +150,12 @@ function toggleTheme() {
 
     if (currentHref.includes('light-mode')) {
         themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
-        viewMode="1";
+        viewMode = "1";
         console.log("dark-mode status changed: onn")
     } else {
         themeStylesheet.setAttribute('href', '../css/light-mode.css?v=' + new Date().getTime());
         console.log("dark-mode status changed: off")
-        viewMode="0";
+        viewMode = "0";
     }
 
     localStorage.setItem('viewMode', viewMode);
@@ -178,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
         menu.classList.add("open");
     }
 
-    else{
+    else {
         console.log("menustate is 0")
     }
 
@@ -187,9 +188,11 @@ document.addEventListener('DOMContentLoaded', function () {
         themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
     }
 
-    else{
+    else {
         console.log("dark mode status: off")
     }
+
+    var dp = document.getElementById('')
 
 });
 
