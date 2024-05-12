@@ -75,11 +75,12 @@
     height: 40px;
     border: 2px solid #333;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
     transition: 0.3s ease;
+}
+
+.golayi-frame {
+    background-color: transparent;
+    border: 1px solid transparent;
 }
 
 .bell-icon {

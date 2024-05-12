@@ -42,18 +42,14 @@ function appointment() {
 // !!!
 
 function toggleMenu() {
-    var menu = document.getElementById("side-menu");
-    menu.classList.toggle("open");
-
-    if (menu.classList.contains('open')) {
-        console.log("menu state changed to 1")
-        menuState = "1";
+    var menuFrame = document.getElementById("side-menu");
+    if (menuFrame.style.width === "0px" || menuFrame.style.width === "") {
+        menuFrame.style.width = "250px";
+        localStorage.setItem('menuState', 'open'); // Store menu state
     } else {
-        console.log("menu state changed to 0")
-        menuState = "0";
+        menuFrame.style.width = "0px";
+        localStorage.setItem('menuState', 'closed'); // Store menu state
     }
-
-    localStorage.setItem('menuState', menuState);
 }
 
 function addTask() {
@@ -75,7 +71,11 @@ function updateTime() {
     const amPm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12 || 12; // Convert hours to 12-hour format
     const timeString = `${hours}:${minutes} ${amPm}`;
-    document.getElementById('time').textContent = timeString;
+
+    const timeElement = document.getElementById('time');
+    timeElement.textContent = timeString;
+    console.log("time updated");
+
 }
 
 function openPanel() {
@@ -145,7 +145,10 @@ function toggleControlPanel() {
 }
 
 function toggleTheme() {
-    const themeStylesheet = document.getElementById('themeStylesheet');
+
+    const parentDocument = window.parent.document;
+    const themeStylesheet = parentDocument.getElementById('themeStylesheet');
+
     const currentHref = themeStylesheet.getAttribute('href');
 
     if (currentHref.includes('light-mode')) {
@@ -161,26 +164,13 @@ function toggleTheme() {
     localStorage.setItem('viewMode', viewMode);
 }
 
-//functions that are statics
-
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
     console.log("Page Opened");
-    setInterval(updateTime, 1000);
-    updateTime();
 
-    var menu = document.getElementById("side-menu")
-    const themeStylesheet = document.getElementById('themeStylesheet');
-
-    if (menuState === "1") {
-        console.log("menustate is 1")
-        menu.classList.add("open");
-    }
-
-    else {
-        console.log("menustate is 0")
+    var menuState = localStorage.getItem('menuState');
+    if (menuState === 'open') {
+        var menuFrame = document.getElementById("side-menu");
+        menuFrame.style.width = "18%";
     }
 
     if (viewMode === "1") {
@@ -192,7 +182,13 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("dark mode status: off")
     }
 
-    var dp = document.getElementById('')
+    /* // Get the src attribute of the display picture
+    displayPic = document.getElementById('display-picture').src;
+    localStorage.setItem('displayPic', displayPic);
+
+    // Set the src attribute of the auto-change-dp element
+    var autoChangeDp = document.getElementById('auto-change-dp');
+    autoChangeDp.src = displayPic; */
 
 });
 

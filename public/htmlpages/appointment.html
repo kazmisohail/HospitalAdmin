@@ -23,6 +23,7 @@
 <body>
     <!-- JQuery -->
     <script src="../js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="../js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
@@ -32,27 +33,7 @@
 
     <div class="dashboard">
 
-        <div class="dash-menu" id="side-menu">
-
-            <div class="brand-div">
-                <img class="brand-logo" src="../images/logo.jpg" alt="Logo" width="40" height="40">
-                <div class="dark-mode-button form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onchange="toggleTheme()">
-                </div>
-            </div>
-
-            <div class="profile-panel">
-                <img src="../images/shaheen2.png" alt="" height="100px">
-                <p class="profile-name">Shaheen Afridi</p>
-                <p class="profile-designation">Admin</p>
-            </div>
-            <button onclick="home()" class=""><img src="../images/home-icon.png" alt="" height="20px">Dashbord</button>
-            <button onclick="doctors()" class=""><img src="../images/doctor.svg" alt="" height="20px">Doctor</button>
-            <button onclick="patients()" class=""><img src="../images/patient.png" alt="" height="20px">Patient</button>
-            <button onclick="appointment()" class="active"><img src="../images/appointments.svg" alt="" height="20px">Appointment</button>
-            <button onclick="pharmacy()" class=""><img src="../images/pharmacy.png" alt="" height="20px">Pharmacy</button>
-            <button class="" data-bs-toggle="modal" data-bs-target="#settingModal"><img src="../images/settings.png" alt="" height="20px">Settings</button>
-        </div>
+        <iframe id="side-menu" src="menu.html" frameborder="0" width="0" class="menu-frame"></iframe>
 
         <div class="dash-panels">
 
@@ -71,7 +52,7 @@
                             <img src="../images/bell2.png" alt="Logo">
                         </button>
                         <button class="golayi" onclick="toggleAdminProfile()">
-                            <img src="../images/shaheen2.png" alt="Button Image">
+                            <img id="auto-change-dp" src="../images/hatim.png" alt="Button Image">
                         </button>
                         <div id="admin-profile" class="admin-profile">
                             <p><strong>Name:</strong> John Doe</p>
@@ -220,41 +201,7 @@
         </footer>
     </div>
 
-
-    <!-- Settings -->
-    <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Settings</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Admin ID: </strong><span>ADM123456</span></p>
-                    <p><strong>Name: </strong><span>John Doe</span></p>
-                    <p><strong>Email: </strong><span>john.doe@example.com</span></p>
-                    <p><strong>Contact: </strong><span>+1 (555) 123-4567</span></p>
-                    <hr>
-                    <form action="">
-                        <h3>Change Contact</h3>
-                        <input type="tel" class="form-control" name="number" placeholder="Enter New Contact" required="false">
-                        <hr>
-                        <h3>Change Password</h3>
-                        <input type="password" class="form-control" name="cpassword" placeholder="Current Password" required="false">
-                        <input type="password" class="form-control" name="npassword" placeholder="New Password" required="false">
-                        <input type="password" class="form-control" name="npassword" placeholder="New Password Again" required="false">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- !!! -->
-
-
+    <div id="modalContainer"></div>
 </body>
 
 </html>

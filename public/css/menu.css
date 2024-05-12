@@ -1,16 +1,14 @@
-.dash-menu {
-    display: flex;
-    flex-direction: column;
-    width: 0%;
-    transition: width 0.5s ease;
-    min-height: 100vh;
-    /* background: linear-gradient(to bottom, #031e30, #01421c); */
-    background: linear-gradient(to bottom, #282828, #5b5b5b);
-    height: 100vh;
+.menu-frame {
+    width: 0;
+    transition: width 0.3s ease-in-out;
 }
 
-.dash-menu.open {
-    width: 20%;
+.dash-menu {
+    display: flex;
+    flex-direction: column;/* Adjust the width as needed */
+    height: 100vh !important;  /* Adjust the height as needed */
+    background: linear-gradient(to bottom, #282828, #5b5b5b);
+    width: 100%;
 }
 
 .dash-menu button {
