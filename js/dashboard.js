@@ -1,3 +1,6 @@
+let menuState = localStorage.getItem('menuState') || "0";
+let viewMode = localStorage.getItem('viewMode') || "0";
+
 // Function to open a specific tab
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
@@ -16,14 +19,10 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-// Open default tab on page load
-document.getElementById("defaultOpen").click();
-
+// For all pages
 function home() {
     window.location.href = './dashboard.html';
 }
-
-// For all pages
 function doctors() {
     window.location.href = './doctors.html';
 }
@@ -45,21 +44,16 @@ function toggleMenu() {
     var menu = document.getElementById("side-menu");
     menu.classList.toggle("open");
 
-    const menuState = sideMenu.classList.contains('open') ? 'open' : 'closed';
+    if (menu.classList.contains('open')) {
+        console.log("menu state changed to 1")
+        menuState = "1";
+    } else {
+        console.log("menu state changed to 0")
+        menuState = "0";
+    }
+
     localStorage.setItem('menuState', menuState);
 }
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const menuState = localStorage.getItem('menuState');
-    const sideMenu = document.getElementById('side-menu');
-
-    if (menuState === 'open') {
-        sideMenu.classList.add('open');
-    }
-});
-
-
 
 function addTask() {
     var table = document.getElementById("todo").getElementsByTagName('tbody')[0];
@@ -81,12 +75,6 @@ function updateTime() {
     hours = hours % 12 || 12; // Convert hours to 12-hour format
     const timeString = `${hours}:${minutes} ${amPm}`;
     document.getElementById('time').textContent = timeString;
-
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const dateString = `${day}-${month}-${year}`;
-    document.getElementById('date').textContent = dateString;
 }
 
 function openPanel() {
@@ -161,8 +149,47 @@ function toggleTheme() {
 
     if (currentHref.includes('light-mode')) {
         themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
+        viewMode="1";
+        console.log("dark-mode status changed: onn")
     } else {
         themeStylesheet.setAttribute('href', '../css/light-mode.css?v=' + new Date().getTime());
+        console.log("dark-mode status changed: off")
+        viewMode="0";
     }
+
+    localStorage.setItem('viewMode', viewMode);
 }
+
+//functions that are statics
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("Page Opened");
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    var menu = document.getElementById("side-menu")
+    const themeStylesheet = document.getElementById('themeStylesheet');
+
+    if (menuState === "1") {
+        console.log("menustate is 1")
+        menu.classList.add("open");
+    }
+
+    else{
+        console.log("menustate is 0")
+    }
+
+    if (viewMode === "1") {
+        console.log("dark mode status : onn")
+        themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
+    }
+
+    else{
+        console.log("dark mode status: off")
+    }
+
+});
 

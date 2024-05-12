@@ -39,7 +39,8 @@
             <div class="brand-div">
                 <img class="brand-logo" src="../images/logo.jpg" alt="Logo" width="40" height="40">
                 <div class="dark-mode-button form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onchange="toggleTheme()">
+                    <input class="form-check-input check" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                        onchange="toggleTheme()">
                 </div>
             </div>
 
@@ -51,9 +52,12 @@
             <button onclick="home()" class=""><img src="../images/home-icon.png" alt="" height="20px">Dashbord</button>
             <button onclick="doctors()" class=""><img src="../images/doctor.svg" alt="" height="20px">Doctor</button>
             <button onclick="patients()" class=""><img src="../images/patient.png" alt="" height="20px">Patient</button>
-            <button onclick="appointment()" class=""><img src="../images/appointments.svg" alt="" height="20px">Appointment</button>
-            <button onclick="pharmacy()" class=""><img src="../images/pharmacy.png" alt="" height="20px">Pharmacy</button>
-            <button class="" data-bs-toggle="modal" data-bs-target="#settingModal"><img src="../images/settings.png" alt="" height="20px">Settings</button>
+            <button onclick="appointment()" class=""><img src="../images/appointments.svg" alt=""
+                    height="20px">Appointment</button>
+            <button onclick="pharmacy()" class=""><img src="../images/pharmacy.png" alt=""
+                    height="20px">Pharmacy</button>
+            <button class="" data-bs-toggle="modal" data-bs-target="#settingModal"><img src="../images/settings.png"
+                    alt="" height="20px">Settings</button>
         </div>
 
         <div class="dash-panels">
@@ -64,10 +68,6 @@
 
                     <button class="menu-btn" onclick="toggleMenu()"><img src="../images/more.png" alt=""></button>
                     <div class="nav_right">
-                        <script>
-                            setInterval(updateTime, 1000);
-                            updateTime();
-                        </script>
                         <div id="time" class="clock"></div>
                         <button onmouseover="openPanel()" onclick="togglePanel()" class="bell-icon">
                             <img src="../images/bell2.png" alt="Logo">
@@ -106,8 +106,8 @@
                         <div class="notification-functions">
                             <button class="read-btn" onclick="markAsRead(this)"><img src="../images/read.png"
                                     alt=""></button>
-                            <button class="delete-btn" onclick="deleteNotification(this)"><img src="../images/delete.png"
-                                    alt=""></button>
+                            <button class="delete-btn" onclick="deleteNotification(this)"><img
+                                    src="../images/delete.png" alt=""></button>
                             <div class="notification-time">Today, 10:30 am</div>
                         </div>
                     </div>
@@ -116,8 +116,8 @@
                         <div class="notification-functions">
                             <button class="read-btn" onclick="markAsRead(this)"><img src="../images/read.png"
                                     alt=""></button>
-                            <button class="delete-btn" onclick="deleteNotification(this)"><img src="../images/delete.png"
-                                    alt=""></button>
+                            <button class="delete-btn" onclick="deleteNotification(this)"><img
+                                    src="../images/delete.png" alt=""></button>
                             <div class="notification-time">Yesterday, 9:30 pm</div>
                         </div>
                     </div>
@@ -127,8 +127,8 @@
                         <div class="notification-functions">
                             <button class="read-btn" onclick="markAsRead(this)"><img src="../images/read.png"
                                     alt=""></button>
-                            <button class="delete-btn" onclick="deleteNotification(this)"><img src="../images/delete.png"
-                                    alt=""></button>
+                            <button class="delete-btn" onclick="deleteNotification(this)"><img
+                                    src="../images/delete.png" alt=""></button>
                             <div class="notification-time">2 Sept, 4:44 pm</div>
                         </div>
                     </div>
@@ -324,8 +324,8 @@
         </footer>
     </div>
 
-     <!-- Settings -->
-     <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Settings -->
+    <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -340,12 +340,16 @@
                     <hr>
                     <form action="">
                         <h3>Change Contact</h3>
-                        <input type="tel" class="form-control" name="number" placeholder="Enter New Contact" required="false">
+                        <input type="tel" class="form-control" name="number" placeholder="Enter New Contact"
+                            required="false">
                         <hr>
                         <h3>Change Password</h3>
-                        <input type="password" class="form-control" name="cpassword" placeholder="Current Password" required="false">
-                        <input type="password" class="form-control" name="npassword" placeholder="New Password" required="false">
-                        <input type="password" class="form-control" name="npassword" placeholder="New Password Again" required="false">
+                        <input type="password" class="form-control" name="cpassword" placeholder="Current Password"
+                            required="false">
+                        <input type="password" class="form-control" name="npassword" placeholder="New Password"
+                            required="false">
+                        <input type="password" class="form-control" name="npassword" placeholder="New Password Again"
+                            required="false">
                     </form>
                 </div>
                 <div class="modal-footer">
