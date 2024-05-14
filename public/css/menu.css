@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;/* Adjust the width as needed */
     height: 100vh !important;  /* Adjust the height as needed */
-    background: linear-gradient(to bottom, #282828, #5b5b5b);
+    background: linear-gradient(to bottom, #121212, #262626);
     width: 100%;
 }
 
@@ -40,16 +40,17 @@
     margin-right: 5%;
 }
 
+.theme-div {
+    margin-left: 25%;
+}
+
 .brand-div {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2.5% 0%;
     color: white;
-}
-
-.dark-mode-button {
-    margin-right: 3%;
-    margin-top: 4%;
 }
 
 .profile-panel {
@@ -58,9 +59,8 @@
     align-items: center;
     justify-content: center;
     height: 30%;
-    margin-top: 5%;
+    padding-top: 5%;
     border-bottom: 1px solid grey;
-    border-top: 1px solid grey;
 }
 
 .profile-panel p {
@@ -79,9 +79,4 @@
 
 .profile-designation {
     font-size: small;
-}
-
-.dash-menu button {
-    margin: 0%;
-    border-radius: 0px;
 }

@@ -35,7 +35,7 @@
 
 .control-panel-header {
     margin: auto;
-    border-bottom: 1px solid #cdcdcd;
+    border-bottom: 1px solid #4a4a4a;
     margin-bottom: 1%;
 }
 
@@ -73,7 +73,7 @@
 }
 
 .control-close-btn img {
-    height: 30px;
+    height: 20px;
 }
 
 .control-close-btn {
@@ -83,7 +83,6 @@
     background-color: transparent;
     border: none;
     font-size: 20px;
-    color: #6c757d;
     cursor: pointer;
     transition: color 0.3s ease;
 }

@@ -1,6 +1,6 @@
 let menuState = localStorage.getItem('menuState') || "0";
 let viewMode = localStorage.getItem('viewMode') || "0";
-let displayPic = localStorage.getItem('displayPic') || "";
+let isChecked = localStorage.getItem('isChecked') || "";
 
 // Function to open a specific tab
 function openTab(evt, tabName) {
@@ -25,7 +25,7 @@ function openTab(evt, tabName) {
 function toggleMenu() {
     var menuFrame = document.getElementById("side-menu");
     if (menuFrame.style.width === "0px" || menuFrame.style.width === "") {
-        menuFrame.style.width = "250px";
+        menuFrame.style.width = "16%";
         localStorage.setItem('menuState', 'open'); // Store menu state
     } else {
         menuFrame.style.width = "0px";
@@ -129,20 +129,25 @@ function toggleTheme() {
 
     const parentDocument = window.parent.document;
     const themeStylesheet = parentDocument.getElementById('themeStylesheet');
+    const themeBtn = document.getElementById('flexSwitchCheckDefault');
+    localStorage.setItem('isChecked', themeBtn.checked);
 
     const currentHref = themeStylesheet.getAttribute('href');
 
     if (currentHref.includes('light-mode')) {
         themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
         viewMode = "1";
+
         console.log("dark-mode status changed: onn")
     } else {
         themeStylesheet.setAttribute('href', '../css/light-mode.css?v=' + new Date().getTime());
-        console.log("dark-mode status changed: off")
         viewMode = "0";
+
+        console.log("dark-mode status changed: off")
     }
 
     localStorage.setItem('viewMode', viewMode);
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -151,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var menuState = localStorage.getItem('menuState');
     if (menuState === 'open') {
         var menuFrame = document.getElementById("side-menu");
-        menuFrame.style.width = "18%";
+        menuFrame.style.width = "16%";
     }
 
     if (viewMode === "1") {

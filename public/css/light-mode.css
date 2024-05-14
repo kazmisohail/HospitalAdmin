@@ -35,7 +35,7 @@ body {
 }
 
 .notification-header {
-    background-color: #7d7d7d !important;
+    background-color: #cecece !important;
 }
 
 .tab {
@@ -43,12 +43,12 @@ body {
 }
 
 .tab button {
-    background-color: #5c6560;
+    background-color: #707070;
     color: #fff;
 }
 
 .tab button:hover {
-    opacity: 0.9;
+    background-color: #5f5f5f;
 }
 
 .tab button.active {

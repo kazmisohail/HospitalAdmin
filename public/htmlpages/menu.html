@@ -27,11 +27,8 @@
     <div class="dash-menu">
 
         <div class="brand-div">
-            <img class="brand-logo" src="" alt="Logo" width="40" height="40">
-            <div class="dark-mode-button form-check form-switch">
-                <input class="form-check-input check" type="checkbox" role="switch" id="flexSwitchCheckDefault"
-                    onchange="toggleTheme()">
-            </div>
+            <!--         <img class="brand-logo" src="../images/hospital.png" alt="Logo" width="40" height="40"> -->
+            <!--     <h3>Welcome!</h3> -->
         </div>
 
         <div class="profile-panel">
@@ -39,74 +36,34 @@
             <p class="profile-name">Hatim Haider Ali</p>
             <p class="profile-designation">Admin</p>
         </div>
-        <button onclick="home()" class="menu-btn"><img src="../images/home-icon.png" alt=""
-                height="20px">Dashbord</button>
-        <button onclick="doctors()" class="menu-btn"><img src="../images/doctor.svg" alt=""
+        <button onclick="home()" class="menu-btn" data-function="home">
+            <img src="../images/home-icon.png" alt="" height="20px">Dashboard
+        </button>
+        <button onclick="doctors()" class="menu-btn" data-function="doctors"><img src="../images/doctor.svg" alt=""
                 height="20px">Doctor</button>
-        <button onclick="patients()" class=""><img src="../images/patient.png" alt="" height="20px">Patient</button>
-        <button onclick="appointment()" class="menu-btn"><img src="../images/appointments.svg" alt=""
-                height="20px">Appointment</button>
-        <button onclick="pharmacy()" class="menu-btn"><img src="../images/pharmacy.png" alt=""
+        <button onclick="patients()" class="menu-btn" data-function="patients"><img src="../images/patient.png" alt=""
+                height="20px">Patient</button>
+        <button onclick="appointment()" class="menu-btn" data-function="appointment"><img
+                src="../images/appointments.svg" alt="" height="20px">Appointment</button>
+        <button onclick="pharmacy()" class="menu-btn" data-function="pharmacy"><img src="../images/pharmacy.png" alt=""
                 height="20px">Pharmacy</button>
-        <button class="menu-btn" onclick="loadSettingsModal()" data-bs-toggle="modal" data-bs-target="#settingModal">
+        <button class="" onclick="loadSettingsModal()" data-bs-toggle="modal" data-bs-target="#settingModal">
             <img src="../images/settings.png" alt="" height="20px">Settings
+        </button>
+        <button id="theme-btn">
+            <img src="../images/theme.png" alt="" height="20px">
+            Dark Mode
+            <div class="form-check form-switch theme-div">
+                <input class="form-check-input check" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                    onchange="toggleTheme()">
+            </div>
+            <!-- <img src="../images/check.png" alt="" height="20px"> -->
         </button>
 
     </div>
 
-    <script>
-        // Function to load settings modal content
-        function loadSettingsModal() {
-            // Load modal content from external file into the parent document
-            parent.$("#modalContainer").load("settings-modal.html", function () {
-                // After content is loaded, show the modal
-                parent.$("#settingModal").modal("show");
-            });
-        }
-
-        // For all pages
-        function home() {
-            parent.window.location.href = './dashboard.html';
-            var btn = document.querySelector('.menu-btn');
-            btn.classList.add('active')
-        }
-        function doctors() {
-            parent.window.location.href = './doctors.html';
-        }
-
-        function patients() {
-            parent.window.location.href = './patients.html';
-        }
-
-        function pharmacy() {
-            parent.window.location.href = './pharmacy.html';
-        }
-
-        function appointment() {
-            parent.window.location.href = './appointment.html';
-        }
-        // !!!
-
-        function storeImageSourceToLocal() {
-
-            var imageElement = document.getElementById('display-picture');
-            var autoChangeDpElement = parent.document.getElementById('auto-change-dp');
-
-            if (imageElement) {
-                var imageSource = imageElement.getAttribute('src');
-                localStorage.setItem('imageSource', imageSource);
-                autoChangeDpElement.setAttribute('src', imageSource);
-                console.log("image src: " + imageSource);
-            } else {
-                console.error("Image element with id 'display-picture' not found.");
-            }
-        }
-
-        window.onload = function () {
-            storeImageSourceToLocal();
-        };
-    </script>
-
+    
+    <script src="../js/menu.js"> </script>
 </body>
 
 </html>
