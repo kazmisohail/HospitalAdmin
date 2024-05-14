@@ -155,22 +155,49 @@
                     <table class="table1">
                         <thead>
                             <tr>
-                                <th>Task</th>
-                                <th>Priority</th>
+                                <th>IssueID</th>
+                                <th>DeptID</th>
+                                <th>EmpID</th>
+                                <th>CreationDate</th>
+                                <th>Condition</th>
+                                <th>Category</th>
+                                <th>Content</th>
+                                <th>Resolve</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Task 1</td>
-                                <td>High</td>
+                                <td>1</td>
+                                <td>Dept1</td>
+                                <td>Emp1</td>
+                                <td>2024-05-14</td>
+                                <td>Open</td>
+                                <td>Bug</td>
+                                <td>Description of Issue 1</td>
+                                <td><button class="btn btn-primary resolve-btn" type="button"
+                                        onclick="toggleResolvepanel()">Submit</button></td>
                             </tr>
                             <tr>
-                                <td>Task 2</td>
-                                <td>Medium</td>
+                                <td>2</td>
+                                <td>Dept2</td>
+                                <td>Emp2</td>
+                                <td>2024-05-15</td>
+                                <td>In Progress</td>
+                                <td>Feature Request</td>
+                                <td>Description of Issue 2</td>
+                                <td><button class="btn btn-primary resolve-btn" type="button"
+                                        onclick="toggleResolvepanel()">Submit</button></td>
                             </tr>
                             <tr>
-                                <td>Task 3</td>
-                                <td>Low</td>
+                                <td>3</td>
+                                <td>Dept3</td>
+                                <td>Emp3</td>
+                                <td>2024-05-16</td>
+                                <td>Resolved</td>
+                                <td>Improvement</td>
+                                <td>Description of Issue 3</td>
+                                <td><button class="btn btn-primary resolve-btn" type="button"
+                                        onclick="toggleResolvepanel()">Submit</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -195,6 +222,16 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div id="resolve-panel" class="remarks-panel" style="display: none;">
+                    <form action="">
+                        <textarea name="" id="" placeholder="Provide remarks for the issue.."></textarea>
+                        <div class="resolve-btn-div">
+                            <button class="btn btn-success" type="submit">Resolve</button>
+                            <button class="btn btn-danger" type="submit">Reject</button>
+                        </div>
+                    </form>
                 </div>
 
             </div>

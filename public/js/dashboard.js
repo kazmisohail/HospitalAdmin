@@ -124,6 +124,22 @@ function toggleControlPanel() {
     }
 }
 
+function toggleResolvepanel() {
+    var resolvePanel = document.getElementById("resolve-panel");
+    var overlay = document.getElementById("overlay");
+
+    if (resolvePanel.style.display === "none") {
+        resolvePanel.style.display = "block";
+        overlay.style.display = "block";
+        document.body.style.overflow = "hidden"; // Disable scrolling
+    } else {
+        resolvePanel.style.display = "none";
+        overlay.style.display = "none";
+        document.body.style.overflow = "auto"; // Re-enable scrolling
+    }
+}
+
+
 function toggleTheme() {
 
     const parentDocument = window.parent.document;
