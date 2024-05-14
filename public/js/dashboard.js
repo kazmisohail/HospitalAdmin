@@ -163,6 +163,21 @@ function toggleTheme() {
 
 }
 
+function closeRemarksPanel() {
+    var remarksPanel = document.querySelector('.remarks-panel');
+    var overlay = document.getElementById("overlay");
+
+    if (remarksPanel.style.display === "none") {
+        remarksPanel.style.display = "block";
+        overlay.style.display = "block";
+        document.body.style.overflow = "hidden"; // Disable scrolling
+    } else {
+        remarksPanel.style.display = "none";
+        overlay.style.display = "none";
+        document.body.style.overflow = "auto"; // Re-enable scrolling
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     console.log("Page Opened");
 
@@ -182,4 +197,3 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
-

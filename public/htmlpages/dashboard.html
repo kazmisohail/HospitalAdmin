@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../css/table.css">
     <link rel="stylesheet" href="../css/control.css">
     <link rel="stylesheet" href="../css/settings.css">
+    <link rel="stylesheet" href="../css/clock.css">
     <link id="themeStylesheet" rel="stylesheet" href="../css/light-mode.css">
 </head>
 
@@ -35,7 +36,7 @@
 
         <iframe id="side-menu" src="menu.html" frameborder="0" width="0" class="menu-frame"></iframe>
 
-        <div class="dash-panels">
+        <div class="dash-panels" style="height: 100%;">
 
             <nav class="navbar bg-body-tertiary">
 
@@ -160,7 +161,6 @@
                                 <th>EmpID</th>
                                 <th>CreationDate</th>
                                 <th>Condition</th>
-                                <th>Category</th>
                                 <th>Content</th>
                                 <th>Resolve</th>
                             </tr>
@@ -172,9 +172,8 @@
                                 <td>Emp1</td>
                                 <td>2024-05-14</td>
                                 <td>Open</td>
-                                <td>Bug</td>
                                 <td>Description of Issue 1</td>
-                                <td><button class="btn btn-primary resolve-btn" type="button"
+                                <td><button class="btn btn-primary submit-btn" type="button"
                                         onclick="toggleResolvepanel()">Submit</button></td>
                             </tr>
                             <tr>
@@ -183,9 +182,8 @@
                                 <td>Emp2</td>
                                 <td>2024-05-15</td>
                                 <td>In Progress</td>
-                                <td>Feature Request</td>
                                 <td>Description of Issue 2</td>
-                                <td><button class="btn btn-primary resolve-btn" type="button"
+                                <td><button class="btn btn-primary submit-btn" type="button"
                                         onclick="toggleResolvepanel()">Submit</button></td>
                             </tr>
                             <tr>
@@ -194,9 +192,18 @@
                                 <td>Emp3</td>
                                 <td>2024-05-16</td>
                                 <td>Resolved</td>
-                                <td>Improvement</td>
                                 <td>Description of Issue 3</td>
-                                <td><button class="btn btn-primary resolve-btn" type="button"
+                                <td><button class="btn btn-primary submit-btn" type="button"
+                                        onclick="toggleResolvepanel()">Submit</button></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Dept4</td>
+                                <td>Emp4</td>
+                                <td>2024-05-16</td>
+                                <td>Resolved</td>
+                                <td>Description of Issue 4</td>
+                                <td><button class="btn btn-primary submit-btn" type="button"
                                         onclick="toggleResolvepanel()">Submit</button></td>
                             </tr>
                         </tbody>
@@ -207,20 +214,58 @@
                     <table class="table2">
                         <thead>
                             <tr>
-                                <th>Task</th>
-                                <th>Date Completed</th>
+                                <th>IssueID</th>
+                                <th>DeptID</th>
+                                <th>EmpID</th>
+                                <th>CreationDate</th>
+                                <th>Condition</th>
+                                <th>Status</th>
+                                <th>Content</th>
+                                <th>ResolvedBy</th>
+                                <th>CompletionDate</th>
+                                <th>Remarks</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Task 4</td>
-                                <td>2024-04-29</td>
+                                <td>1</td>
+                                <td>Dept1</td>
+                                <td>Emp1</td>
+                                <td>2024-05-14</td>
+                                <td>Open</td>
+                                <td>Resolved</td>
+                                <td>Description of Issue 1</td>
+                                <td>John Doe</td>
+                                <td>2024-05-15</td>
+                                <td>Resolved with fix</td>
                             </tr>
                             <tr>
-                                <td>Task 5</td>
-                                <td>2024-04-28</td>
+                                <td>2</td>
+                                <td>Dept2</td>
+                                <td>Emp2</td>
+                                <td>2024-05-15</td>
+                                <td>In Progress</td>
+                                <td>Resolved</td>
+                                <td>Description of Issue 2</td>
+                                <td>Jane Smith</td>
+                                <td>2024-05-16</td>
+                                <td>Waiting for approval</td>
                             </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Dept3</td>
+                                <td>Emp3</td>
+                                <td>2024-05-16</td>
+                                <td>Urgent</td>
+                                <td>Resolved</td>
+                                <td>Description of Issue 3</td>
+                                <td>Mark Johnson</td>
+                                <td>2024-05-17</td>
+                                <td>Implemented successfully</td>
+                            </tr>
+
                         </tbody>
+
                     </table>
                 </div>
 
@@ -229,7 +274,7 @@
                         <textarea name="" id="" placeholder="Provide remarks for the issue.."></textarea>
                         <div class="resolve-btn-div">
                             <button class="btn btn-success" type="submit">Resolve</button>
-                            <button class="btn btn-danger" type="submit">Reject</button>
+                            <button class="btn btn-danger" type="button" onclick="closeRemarksPanel()">Cancel</button>
                         </div>
                     </form>
                 </div>
