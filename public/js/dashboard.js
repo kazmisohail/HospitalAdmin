@@ -20,26 +20,7 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-// For all pages
-function home() {
-    window.location.href = './dashboard.html';
-}
-function doctors() {
-    window.location.href = './doctors.html';
-}
 
-function patients() {
-    window.location.href = './patients.html';
-}
-
-function pharmacy() {
-    window.location.href = './pharmacy.html';
-}
-
-function appointment() {
-    window.location.href = './appointment.html';
-}
-// !!!
 
 function toggleMenu() {
     var menuFrame = document.getElementById("side-menu");
@@ -181,14 +162,6 @@ document.addEventListener('DOMContentLoaded', function () {
     else {
         console.log("dark mode status: off")
     }
-
-    /* // Get the src attribute of the display picture
-    displayPic = document.getElementById('display-picture').src;
-    localStorage.setItem('displayPic', displayPic);
-
-    // Set the src attribute of the auto-change-dp element
-    var autoChangeDp = document.getElementById('auto-change-dp');
-    autoChangeDp.src = displayPic; */
 
 });
 
