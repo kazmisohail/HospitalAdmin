@@ -15,6 +15,7 @@
     text-align: left;
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     border: 1px solid transparent;
     margin: 0% !important;
     padding: 2%;
@@ -58,6 +59,8 @@
     justify-content: center;
     height: 30%;
     margin-top: 5%;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
 }
 
 .profile-panel p {
@@ -71,6 +74,7 @@
     box-shadow: 0px 0px 10px grey;
     border-radius: 50%;
     width: 100px;
+    margin-bottom: 4%;
 }
 
 .profile-designation {
