@@ -1,44 +1,52 @@
-const express = require('express')
-const cookieParser = require('cookie-parser');
-const sql = require('mssql/msnodesqlv8');
+const express = require("express");
+const sql = require("mssql");
 
-
-// port connection
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-// middleware static website
 app.use(express.static('./public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+
+const PORT = process.env.PORT || 3001;
+
 
 
 // run server and port
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+// SQL Server configuration
+var config = {
+    "user": "sa", // Database username
+    "password": "1234", // Database password
+    "server": "Arham_laptop", // Server IP address
+    "database": "HospitalManagementSystem", // Database name
+    "options": {
+        "encrypt": false // Disable encryption
+    }
+}
 
-// db connection
-// var config = {
-//     server: "KAZMI",
-//     database: "HospitalManagementSystem",
-//     driver: "msnodesqlv8",
-//     options: {
-//         trustedConnection: true
-//     }
-// }
+// Connect to SQL Server
+sql.connect(config, err => {
+    if (err) {
+        throw err;
+    }
+    console.log("Connection Successful!");
+});
 
-// sql.connect(config, function(err) {
-//     if (err)
-//         console.log("DB ERROR", err)
-//     else
-//         console.log("Connected")
-//     var request = new sql.Request();
-//     request.query("select * from Admin", function(err, records){
-//         if(err)
-//             console.log("Query ERROR", err)
-//         else
-//             console.log(records)
-//     })
-// })
+// Define route for fetching data from SQL Server
+app.get("/", (request, response) => {
+    // Execute a SELECT query
+    new sql.Request().query("SELECT * FROM Admin", (err, result) => {
+        if (err) {
+            console.error("Error executing query:", err);
+        } else {
+            response.send(result.recordset); // Send query result as response
+            console.dir(result.recordset);
+        }
+    });
+});
+
+// Start the server on port 3000
+app.listen(3000, () => {
+    console.log("Listening on port 3000...");
+});
