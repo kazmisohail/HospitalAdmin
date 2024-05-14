@@ -61,10 +61,12 @@ function checkActive() {
 
 }
 
+let isChecked = localStorage.getItem('isChecked') === 'false';
 const themeBtn = document.getElementById('flexSwitchCheckDefault');
 
 function updateIsChecked() {
     localStorage.setItem('isChecked', themeBtn.checked);
+    console.log('check status: ' + themeBtn.checked)
 }
 
 themeBtn.addEventListener('change', updateIsChecked);
@@ -74,5 +76,6 @@ window.onload = function () {
     checkActive();
 
     const checkState = localStorage.getItem('isChecked')
-    themeBtn.checked = checkState;
+    themeBtn.checked = checkState === 'true';
+    console.log(themeBtn.checked);
 };

@@ -73,7 +73,7 @@
 .golayi {
     width: 40px;
     height: 40px;
-    border: 2px solid #333;
+    border: 2px solid transparent;
     border-radius: 50%;
     transition: 0.3s ease;
 }

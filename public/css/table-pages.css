@@ -1,0 +1,25 @@
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    margin-top: 20px;
+    border-radius: 5px !important;
+    border-spacing: 10px;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-radius: 5px;
+}
+
+td {
+   box-shadow: 0 0 4px rgb(90, 90, 90);
+}
+
+th {
+    background-color: #383838;
+    color: white;
+
+}
