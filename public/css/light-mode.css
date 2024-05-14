@@ -43,16 +43,16 @@ body {
 }
 
 .tab button {
-    background-color: #bbbbbb;
+    background-color: #707070;
     color: #fff;
 }
 
 .tab button:hover {
-    background-color: #9c9c9c;
+    background-color: #5f5f5f;
 }
 
 .tab button.active {
-    background-color: #4a4a4a;
+    background-color: rgb(60, 60, 60);
     color: #fff;
 }
 

@@ -113,14 +113,14 @@ function toggleControlPanel() {
     var controlPanel = document.getElementById("control-panel");
     var overlay = document.getElementById("overlay");
 
-    if (controlPanel.classList.contains("show")) {
-        controlPanel.classList.remove("show");
-        overlay.classList.remove("show");
-        document.body.style.overflow = "auto"; // Re-enable scrolling
-    } else {
-        controlPanel.classList.add("show");
-        overlay.classList.add("show");
+    if (controlPanel.style.display === "none") {
+        controlPanel.style.display = "block";
+        overlay.style.display = "block";
         document.body.style.overflow = "hidden"; // Disable scrolling
+    } else {
+        controlPanel.style.display = "none";
+        overlay.style.display = "none";
+        document.body.style.overflow = "auto"; // Re-enable scrolling
     }
 }
 
