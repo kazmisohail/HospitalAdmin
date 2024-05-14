@@ -26,9 +26,11 @@ function toggleMenu() {
     if (menuFrame.style.width === "0px" || menuFrame.style.width === "") {
         menuFrame.style.width = "16%";
         localStorage.setItem('menuState', 'open'); // Store menu state
+        console.log("Menu status changed: onn");
     } else {
         menuFrame.style.width = "0px";
         localStorage.setItem('menuState', 'closed'); // Store menu state
+        console.log("Menu status changed: off");
     }
 }
 
@@ -54,7 +56,6 @@ function updateTime() {
 
     const timeElement = document.getElementById('time');
     timeElement.textContent = timeString;
-    console.log("time updated");
 
 }
 
@@ -178,13 +179,14 @@ function closeRemarksPanel() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    console.log("Page Opened");
+window.onload = function () {
+    console.log("Page Khul Gaya");
 
     var menuState = localStorage.getItem('menuState');
     if (menuState === 'open') {
         var menuFrame = document.getElementById("side-menu");
         menuFrame.style.width = "16%";
+        console.log("menu status: onn")
     }
 
     if (viewMode === "1") {
@@ -192,8 +194,4 @@ document.addEventListener('DOMContentLoaded', function () {
         themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
     }
 
-    else {
-        console.log("dark mode status: off")
-    }
-
-});
+};
