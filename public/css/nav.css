@@ -68,6 +68,7 @@
     display: flex;
     justify-content: space-between;
     font-family: Arial, sans-serif;
+    min-width: 60px;
 }
 
 .golayi {
@@ -84,7 +85,9 @@
 }
 
 .bell-icon {
-    height: 35px;
+    width: 40px;
+    height: 40px;
+    min-height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
