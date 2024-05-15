@@ -5,6 +5,7 @@
 
 .dash-menu {
     display: flex;
+    justify-content: flex-start;
     flex-direction: column;/* Adjust the width as needed */
     height: 100vh !important;  /* Adjust the height as needed */
     background: linear-gradient(to bottom, #121212, #262626);
@@ -20,10 +21,13 @@
     margin: 0% !important;
     padding: 2%;
     color: white;
-    font-size: larger;
+    font-size: medium;
     background-color: transparent;
 }
 
+.form-check {
+   margin-left: auto;
+}
 
 .dash-menu button:hover {
     /*     box-shadow: 0px 0px 5px #5b5b5b; */
@@ -38,10 +42,6 @@
 
 .dash-menu button img {
     margin-right: 5%;
-}
-
-.theme-div {
-    margin-left: 25%;
 }
 
 .brand-div {
