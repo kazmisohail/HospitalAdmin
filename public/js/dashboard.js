@@ -194,4 +194,19 @@ window.onload = function () {
         themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
     }
 
+    // Make AJAX request to fetch total number of doctors
+    fetch("/api/doctors/total")
+        .then(response => response.json())
+        .then(data => {
+            console.log("Fetched data: ", data);
+            if (data && data.totalDoctors !== undefined) {
+                document.querySelector(".card.card-2 .card-description").textContent = data.totalDoctors;
+            } else {
+                console.error("Invalid data format:", data);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching total doctors:', error);
+        });
 };
+
