@@ -49,7 +49,7 @@ app.get("/api/issues", async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-// Start the server on port 3001
-// app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-// });
+//Start the server on port 3001
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
