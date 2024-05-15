@@ -208,5 +208,24 @@ window.onload = function () {
         .catch(error => {
             console.error('Error fetching total doctors:', error);
         });
+    // Fetch issues and populate the table
+    $.get("/api/issues", function(data) {
+        var tbody = $(".table1 tbody");
+        tbody.empty(); // Clear existing rows
+
+        data.forEach(function(issue) {
+            var row = `<tr>
+                <td>${issue.IssueID}</td>
+                <td>${issue.DeptID}</td>
+                <td>${issue.EmpID}</td>
+                <td>${issue.CreationDate}</td>
+                <td>${issue.Condition}</td>
+                <td>${issue.Content}</td>
+                <td><button class="btn btn-primary submit-btn" type="button" onclick="toggleResolvepanel()">Submit</button></td>
+            </tr>`;
+            tbody.append(row);
+        });
+    });
 };
+
 

@@ -39,8 +39,17 @@ app.get("/api/doctors/total", async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
-// Start the server on port 3001
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+// Define route for fetching issues
+app.get("/api/issues", async (req, res) => {
+    try {
+        const result = await sql.query("SELECT IssueID, DeptID, EmpID, CreationDate, Condition, Content FROM issue");
+        res.json(result.recordset);
+    } catch (err) {
+        console.error('Query Error', err);
+        res.status(500).send('Internal Server Error');
+    }
 });
+// Start the server on port 3001
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
