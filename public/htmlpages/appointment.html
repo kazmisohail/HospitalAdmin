@@ -138,6 +138,8 @@
                             <th>Diagnosis</th>
                             <th>Date</th>
                             <th>Time</th>
+                            <th>Rating</th>
+                            <th>Comments</th>
                             <th>Actions</th>
                         </tr>
                     </table>
@@ -245,7 +247,7 @@
 
             document.getElementById('appointmentTablePending').innerHTML = '<tr><th>Appointment ID</th><th>Patient Name</th><th>Doctor Name</th><th>Diagnosis</th><th>Date</th><th>Time</th><th>Actions</th></tr>'; // Reset table
             document.getElementById('appointmentTableCompleted').innerHTML = '<tr><th>Appointment ID</th><th>Patient Name</th><th>Doctor Name</th><th>Diagnosis</th><th>Date</th><th>Time</th><th>Rating</th><th>Comments</th><th>Actions</th></tr>'; // Reset table
-            document.getElementById('appointmentTableTodays').innerHTML = '<tr><th>Appointment ID</th><th>Patient Name</th><th>Doctor Name</th><th>Diagnosis</th><th>Date</th><th>Time</th><th>Actions</th></tr>'; // Reset table
+            document.getElementById('appointmentTableTodays').innerHTML = '<tr><th>Appointment ID</th><th>Patient Name</th><th>Doctor Name</th><th>Diagnosis</th><th>Date</th><th>Time</th><th>Rating</th><th>Comments</th><th>Actions</th></tr>'; // Reset table
 
             const today = new Date().toISOString().split('T')[0];
 
