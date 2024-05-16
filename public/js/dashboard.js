@@ -180,36 +180,35 @@ function closeRemarksPanel() {
 }
 
 window.onload = function () {
-    console.log("Page Khul Gaya");
+    console.log("Page Loaded");
 
-    var menuState = localStorage.getItem('menuState');
-    if (menuState === 'open') {
-        var menuFrame = document.getElementById("side-menu");
-        menuFrame.style.width = "16%";
-        console.log("menu status: onn")
-    }
+    // Fetch total number of doctors
+    $.get("/api/doctors/total", function(data) {
+        console.log("Total Doctors Data:", data);
+        $(".card-description.doctor").text(data.totalDoctors);
+    }).fail(function(err) {
+        console.error("Error fetching total doctors:", err);
+    });
 
-    if (viewMode === "1") {
-        console.log("dark mode status : onn")
-        themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
-    }
+    // Fetch total number of patients
+    $.get("/api/patients/total", function(data) {
+        console.log("Total Patients Data:", data);
+        $(".card-description.patient").text(data.totalPatients);
+    }).fail(function(err) {
+        console.error("Error fetching total patients:", err);
+    });
 
-    // Make AJAX request to fetch total number of doctors
-    fetch("/api/doctors/total")
-        .then(response => response.json())
-        .then(data => {
-            console.log("Fetched data: ", data);
-            if (data && data.totalDoctors !== undefined) {
-                document.querySelector(".card.card-2 .card-description").textContent = data.totalDoctors;
-            } else {
-                console.error("Invalid data format:", data);
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching total doctors:', error);
-        });
+    // Fetch total number of appointments
+    $.get("/api/appointments/total", function(data) {
+        console.log("Total Appointments Data:", data);
+        $(".card-description.appointment").text(data.totalAppointments);
+    }).fail(function(err) {
+        console.error("Error fetching total appointments:", err);
+    });
+
     // Fetch issues and populate the table
     $.get("/api/issues", function(data) {
+        console.log("Issues Data:", data);
         var tbody = $(".table1 tbody");
         tbody.empty(); // Clear existing rows
 
@@ -225,7 +224,10 @@ window.onload = function () {
             </tr>`;
             tbody.append(row);
         });
+    }).fail(function(err) {
+        console.error("Error fetching issues:", err);
     });
 };
+
 
 

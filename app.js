@@ -27,6 +27,29 @@ sql.connect(config, err => {
     }
     console.log("Connection Successful!");
 });
+// Define route for fetching total number of patients
+app.get('/api/patients/total', async (req, res) => {
+    try {
+        const pool = await sql.connect(config);
+        const result = await pool.request().query("SELECT COUNT(patientname) AS totalPatients FROM Patient");
+        res.json({ totalPatients: result.recordset[0].totalPatients });
+    } catch (err) {
+        console.error('Query Error', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Define route for fetching total number of appointments
+app.get('/api/appointments/total', async (req, res) => {
+    try {
+        const pool = await sql.connect(config);
+        const result = await pool.request().query("SELECT COUNT(appointmentid) AS totalAppointments FROM Appointment");
+        res.json({ totalAppointments: result.recordset[0].totalAppointments });
+    } catch (err) {
+        console.error('Query Error', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 // Define route for fetching total doctors
 app.get("/api/doctors/total", async (req, res) => {
