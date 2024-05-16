@@ -20,6 +20,21 @@
     <link rel="stylesheet" href="../css/patients.css">
     <link rel="stylesheet" href="../css/table-pages.css">
     <link id="themeStylesheet" rel="stylesheet" href="../css/light-mode.css">
+    <script>
+        (function () {
+            var menuState = localStorage.getItem('menuState');
+            if (menuState === 'open') {
+                document.write('<style>#side-menu { width: 16%; }</style>');
+                console.log("menu status: onn");
+            }
+
+            var viewMode = localStorage.getItem('viewMode');
+            if (viewMode === "1") {
+                console.log("dark mode status : onn")
+                themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
+            }
+        })();
+    </script>
 </head>
 
 <body>
@@ -72,8 +87,10 @@
                     <div class="notification-item">
                         <p>This is a sample notification.</p>
                         <div class="notification-functions">
-                            <button class="read-btn" onclick="markAsRead(this)"><img src="../images/read.png" alt=""></button>
-                            <button class="delete-btn" onclick="deleteNotification(this)"><img src="../images/delete.png" alt=""></button>
+                            <button class="read-btn" onclick="markAsRead(this)"><img src="../images/read.png"
+                                    alt=""></button>
+                            <button class="delete-btn" onclick="deleteNotification(this)"><img
+                                    src="../images/delete.png" alt=""></button>
                             <div class="notification-time">Today, 10:30 am</div>
                         </div>
                     </div>
@@ -156,13 +173,16 @@
                 <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Hospital, Inc</span>
             </div>
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com" target="_blank"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com" target="_blank"><svg
+                            class="bi" width="24" height="24">
                             <use xlink:href="#twitter" />
                         </svg></a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="https://instagram.com" target="_blank"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-body-secondary" href="https://instagram.com" target="_blank"><svg
+                            class="bi" width="24" height="24">
                             <use xlink:href="#instagram" />
                         </svg></a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="https://facebook.com" target="_blank"><svg class="bi" width="24" height="24">
+                <li class="ms-3"><a class="text-body-secondary" href="https://facebook.com" target="_blank"><svg
+                            class="bi" width="24" height="24">
                             <use xlink:href="#facebook" />
                         </svg></a></li>
             </ul>

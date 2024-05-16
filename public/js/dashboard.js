@@ -105,21 +105,6 @@ function toggleAdminProfile() {
     }
 }
 
-function toggleControlPanel() {
-    var controlPanel = document.getElementById("control-panel");
-    var overlay = document.getElementById("overlay");
-
-    if (controlPanel.style.display === "none") {
-        controlPanel.style.display = "block";
-        overlay.style.display = "block";
-        document.body.style.overflow = "hidden"; // Disable scrolling
-    } else {
-        controlPanel.style.display = "none";
-        overlay.style.display = "none";
-        document.body.style.overflow = "auto"; // Re-enable scrolling
-    }
-}
-
 function toggleResolvepanel() {
     var resolvePanel = document.getElementById("resolve-panel");
     var overlay = document.getElementById("overlay");
@@ -177,7 +162,23 @@ function closeRemarksPanel() {
 function togglePanel(panelId) {
     const panel = document.getElementById(panelId);
     const overlay = document.getElementById('overlay');
-    
+    const overlay2 = document.getElementById('overlay2');
+
+    if (panel.classList.contains('show')) {
+        panel.classList.remove('show');
+        overlay.style.display = 'none';
+        overlay2.style.display = 'none';
+    } else {
+        panel.classList.add('show')
+        overlay.style.display = 'block';
+        overlay.addEventListener('click', closeAllPanels, { once: true });
+    }
+}
+
+function toggleLayer2Panel(panelId) {
+    const panel = document.getElementById(panelId);
+    const overlay = document.getElementById('overlay2');
+
     if (panel.classList.toggle('show')) {
         overlay.style.display = 'block';
         overlay.addEventListener('click', closeAllPanels, { once: true });
@@ -188,13 +189,15 @@ function togglePanel(panelId) {
 
 function closeAllPanels() {
     const overlay = document.getElementById('overlay');
-    const panels = document.querySelectorAll('.control-panel.show, .ex-panel.show');
-    
+    const overlay2 = document.getElementById('overlay2');
+    const panels = document.querySelectorAll('.del-admin ,.add-admin, .control-panel.show, .ex-panel.show');
+
     panels.forEach(panel => {
         panel.classList.remove('show');
     });
-    
+
     overlay.style.display = 'none';
+    overlay2.style.display = 'none';
 }
 
 window.onload = function () {

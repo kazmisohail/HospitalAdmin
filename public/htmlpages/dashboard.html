@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../css/table.css">
     <link rel="stylesheet" href="../css/control.css">
     <link rel="stylesheet" href="../css/settings.css">
+    <link rel="stylesheet" href="../css/control-internal.css">
     <link id="themeStylesheet" rel="stylesheet" href="../css/light-mode.css">
     <script>
         (function () {
@@ -295,7 +296,7 @@
 
                 <div id="resolve-panel" class="remarks-panel" style="display: none;">
                     <form action="">
-                        <textarea name="" id="" placeholder="Provide remarks for the issue.."></textarea>
+                        <textarea name="" id="remarks" placeholder="Provide remarks for the issue.."></textarea>
                         <div class="resolve-btn-div">
                             <button class="btn btn-success" type="submit">Resolve</button>
                             <button class="btn btn-danger" type="button" onclick="closeRemarksPanel()">Cancel</button>
@@ -337,24 +338,87 @@
             <div id="overlay" class="overlay"></div>
             <div id="control-panel" class="control-panel">
                 <div class="control-panel-header header-appointment">
-                    <h3>Control Panel</h3>
+                    Control Panel
                 </div>
                 <div class="control-panel-content">
-                    <button class="assign-work" style="background: #e57373;">
-                        Assign Work
-                    </button>
-                    <button class="add-admin" style="background: #81c784;" onclick="loadAddAdminModal()" data-bs-toggle="modal" data-bs-target="#addAdminModal">
-                        Add Admin
-                    </button>
-                    <button class="delete-admin bg-orange">
-                        Delete Admin
-                    </button>
+                    <div class="control-panel-item permanent">
+                        <h4>Assign Work</h4>
+                    </div>
+                    <div class="control-panel-item visiting" onclick="toggleLayer2Panel('addAdminModal')">
+                        <h4>Add Admin</h4>
+                    </div>
+                    <div class="control-panel-item onduty" onclick="toggleLayer2Panel('delAdminModal')">
+                        <h4>Delete Admin</h4>
+                    </div>
                 </div>
             </div>
-            
 
+            <div id="overlay2" class="overlay"></div>
+            <div class="add-admin fade" id="addAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="add-admin-dialog">
+                    <div class="add-admin-content">
+                        <div class="add-admin-header">
+                            Enter Details
+                        </div>
+                        <div class="add-admin-body">
+                            <form action="">
+                                
+                                <input type="text" class="form-control" name="name" placeholder="Enter Name" required="false">
+                                <input type="email" class="form-control" name="email" placeholder="Enter Email" required="false">
+                                <input type="password" class="form-control" name="password" placeholder="Enter Password" required="false">
+                                <input type="tel" class="form-control" name="number" placeholder="Enter Contact" required="false"><br>
+                                <select id="role">
+                                    <option selected>Select Role</option>
+                                    <option value="SuperAdmin">Super Admin</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                                <select id="permission">
+                                    <option selected>Select Permission</option>
+                                    <option value="allAccess">All Access</option>
+                                    <option value="limitedAccess">Limited Access</option>
+                                </select>
+                            </form>
+                        </div>
+                        <div class="add-admin-footer">
+                            <button type="button" class="btn btn-secondary" onclick="togglePanel('addAdminModal')">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Add Admin</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="del-admin fade" id="delAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="del-admin-dialog">
+                    <div class="del-admin-content">
+                        <div class="del-admin-header">
+                            Delete Admin
+                        </div>
+                        <div class="del-admin-body">
+                            <form>
+                                <input type="text" id="" placeholder="Search Admin">
+                                <input type="submit" value="Search">
+                            </form>
+                            <table id="adminTable">
+                                <tr>
+                                    <th>Admin ID</th>
+                                    <th>Name</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Admin Name</td>
+                                    <td><button class="btn btn-danger">Delete</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="del-admin-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
 
 
@@ -406,8 +470,6 @@
     </div>
 
     <div id="modalContainer"></div>
-    <div id="addAdminContainer"></div>
-    <div id="delAdminContainer"></div>
 </body>
 
 </html>

@@ -10,35 +10,36 @@
     backdrop-filter: blur(5px);
 }
 
+#overlay2 {
+    z-index: 1000;
+}
+
 .control-panel {
-    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: none;
     border-radius: 10px;
-    padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     width: 600px;
-    max-width: 90%;
-    height: auto;
-    max-height: 80vh;
+    transform: translate(-50%, -50%) scale(0.95);
     overflow-y: auto;
     z-index: 1000;
     background: white;
     font-family: Arial, sans-serif;
+    max-height: 0;
     opacity: 0;
-    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .control-panel.show {
-    display: block;
     opacity: 1;
+    max-height: 80vh;
 }
 
 .control-panel-header {
-    background: #a1d9b6;
+    background: #a2aee6;
     color: white;
     text-align: center;
     padding: 10px;
@@ -49,46 +50,30 @@
 
 .control-panel-content {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     padding: 20px;
 }
 
-.control-panel-content button {
-    height: 15vh;
-    margin: 1%;
-    min-width: 200px;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 15px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.control-panel-item {
     display: flex;
-    align-self: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 2% 2% 0% 2%;
+    transition: background-color 0.1s ease;
 }
 
-.control-panel-content button:last-child {
-    flex-grow: 1;
+.control-panel-item:last-child {
+    margin-bottom: 0;
 }
 
-.control-panel-content button:hover {
-    box-shadow: 0px 0px 5px #6c757d;
+.control-panel-item h4 {
+    margin: 0 0 10px;
+    font-size: 1.2em;
 }
 
-.control-close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
+.control-panel-item:hover {
     cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.control-close-btn:hover {
-    transform: scale(1.05);
+    background-color: #e1e1e1;
+    transform: scale(1.01);
 }

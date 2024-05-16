@@ -37,7 +37,8 @@ body {
 }
 
 .notification-header {
-    background-color: #656565;;
+    background-color: #656565;
+    ;
     color: white;
     border: none;
 }
@@ -54,6 +55,8 @@ body {
 .ex-panel {
     background-color: #252525;
 }
+
+
 
 .tab {
     border: 1px solid #3e3e3e;
@@ -92,39 +95,25 @@ table {
 .control-panel {
     background-color: #252525;
     border: none;
-    color: rgb(200, 200, 200);
-    box-shadow: 0 0 5px #4f4f4f;
 }
 
-.control-panel-content button {
-    background-color: rgb(53, 53, 53) ;
-    color: #fff;
+.control-panel-item:hover {
+    background-color: #373737;
 }
 
-.assign-work {
-    background-color: #dc3545;
+.add-admin-dialog {
+    background-color: #252525;
 }
 
-.raise-issue {
-    background-color: #17a2b8;
+.add-admin-dialog input,
+.add-admin-dialog input::placeholder, select {
+    background-color: #494949;
+    color: #a4a4a4;
+    border: 1px solid #494949;
 }
 
-.meeting-call {
-    background-color: #ffc107;
-}
-
-.add-admin {
-    background-color: #28a745;
-}
-
-.delete-admin {
-    background-color: #6c757d;
-}
-
-.footer {
-    background-color: #343a40;
-}
-
-.bottom-footer {
-    background-color: #212529;
+.add-admin-dialog input:focus {
+    background-color: #494949;
+    border: none;
+    box-shadow: none;
 }

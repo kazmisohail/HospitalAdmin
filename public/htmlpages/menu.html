@@ -20,12 +20,6 @@
                 document.write('<style>#side-menu { width: 16%; }</style>');
                 console.log("menu status: onn");
             }
-
-            var viewMode = localStorage.getItem('viewMode');
-            if (viewMode === "1") {
-                console.log("dark mode status : onn")
-                themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
-            }
         })();
     </script>
 </head>
