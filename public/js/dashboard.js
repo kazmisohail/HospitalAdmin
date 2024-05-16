@@ -179,8 +179,26 @@ function closeRemarksPanel() {
     }
 }
 
+function toggleDoctorPanel() {
+    const panel = document.getElementById('DoctorStatusPanel');
+    panel.classList.toggle('show');
+}
+
 window.onload = function () {
-    console.log("Page Loaded");
+    console.log("Page Khul Gaya");
+
+    var menuState = localStorage.getItem('menuState');
+    if (menuState === 'open') {
+        var menuFrame = document.getElementById("side-menu");
+        menuFrame.style.width = "16%";
+        console.log("menu status: onn")
+    }
+
+    if (viewMode === "1") {
+        console.log("dark mode status : onn")
+        themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
+    }
+
 
     // Fetch total number of doctors
     $.get("/api/doctors/total", function(data) {

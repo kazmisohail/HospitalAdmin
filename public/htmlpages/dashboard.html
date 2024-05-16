@@ -117,35 +117,86 @@
 
             <div class="card-container">
 
-                <div class="card card-1">
+                <div class="card card-1" onclick="togglePatientPanel()">
                     <div>
                         <p class="card-title">Total Patients</p>
                         <p class="card-description patient">LOADING...</p>
                     </div>
                     <img src="../images/patient.png" alt="" height="64px">
                 </div>
-            
-                <div class="card card-2">
+
+                <div class="ex-panel" style="display: none;" id="patientStatusPanel">
+                    <div class="panel-header">Patients</div>
+                    <div class="panel-content">
+                        <div class="panel-item permanent">
+                            <h4>Permanent</h4>
+                            <p>Details about permanent status.</p>
+                        </div>
+                        <div class="panel-item visiting">
+                            <h4>Visiting</h4>
+                            <p>Details about visiting status.</p>
+                        </div>
+                        <div class="panel-item onduty">
+                            <h4>On Duty</h4>
+                            <p>Details about on duty status.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-2" onclick="toggleDoctorPanel()">
                     <div>
                         <p class="card-title">Total Doctors</p>
                         <p class="card-description doctor">LOADING...</p>
                     </div>
                     <img src="../images/doctor.svg" alt="" height="64px">
                 </div>
-            
-                <!-- Existing HTML for Doctor Card -->
 
+                <div class="ex-panel" style="display: none;" id="DoctorStatusPanel">
+                    <div class="panel-header">Doctors</div>
+                    <div class="panel-content">
+                        <div class="panel-item permanent">
+                            <h4>Permanent</h4>
+                            <p>Details about permanent status.</p>
+                        </div>
+                        <div class="panel-item visiting">
+                            <h4>Visiting</h4>
+                            <p>Details about visiting status.</p>
+                        </div>
+                        <div class="panel-item onduty">
+                            <h4>On Duty</h4>
+                            <p>Details about on duty status.</p>
+                        </div>
+                    </div>
+                </div>
 
-<div class="card card-3">
-    <div>
-        <p class="card-title">Total Appointments</p>
-        <p class="card-description appointment">LOADING...</p>
-    </div>
-    <img src="../images/appointments.svg" alt="" height="64px">
-</div>
+                <div class="card card-3" onclick="toggleAppointmentPanel()">
+                    <div>
+                        <p class="card-title">Total Appointments</p>
+                        <p class="card-description appointment">LOADING...</p>
+                    </div>
+                    <img src="../images/appointments.svg" alt="" height="64px">
+                </div>
+
+                <div class="ex-panel" style="display: none;"  id="statusPanel">
+                    <div class="panel-header">Appointments</div>
+                    <div class="panel-content">
+                        <div class="panel-item permanent">
+                            <h4>Permanent</h4>
+                            <p>Details about permanent status.</p>
+                        </div>
+                        <div class="panel-item visiting">
+                            <h4>Visiting</h4>
+                            <p>Details about visiting status.</p>
+                        </div>
+                        <div class="panel-item onduty">
+                            <h4>On Duty</h4>
+                            <p>Details about on duty status.</p>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-            
+
 
 
 
@@ -284,13 +335,8 @@
                     <button class="assign-work bg-red">
                         Assign Work
                     </button>
-                    <button class="raise-issue bg-blue">
-                        Raise Issue
-                    </button>
-                    <button class="meeting-call bg-yellow">
-                        Meeting Call
-                    </button>
-                    <button class="add-admin bg-green" onclick="loadAddAdminModal()" data-bs-toggle="modal" data-bs-target="#addAdminModal">
+                    <button class="add-admin bg-green" onclick="loadAddAdminModal()" data-bs-toggle="modal"
+                        data-bs-target="#addAdminModal">
                         Add Admin
                     </button>
                     <button class="delete-admin bg-orange">
