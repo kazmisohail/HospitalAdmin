@@ -47,8 +47,12 @@ body {
 }
 
 .card {
-    background-color: rgb(53, 53, 53) !important;
-    color: white !important;
+    background-color: rgb(53, 53, 53);
+    color: white;
+}
+
+.ex-panel {
+    background-color: #252525;
 }
 
 .tab {

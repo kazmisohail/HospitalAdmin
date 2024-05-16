@@ -59,12 +59,7 @@ function updateTime() {
 
 }
 
-function openPanel() {
-    var notificationPanel = document.querySelector(".notification-panel");
-    notificationPanel.style.display = "block";
-}
-
-function togglePanel() {
+function toggleNotificationPanel() {
     var panel = document.getElementById("notification-panel");
     panel.style.display = panel.style.display === "none" ? "block" : "none";
 }
@@ -179,45 +174,63 @@ function closeRemarksPanel() {
     }
 }
 
-function togglePatientPanel() {
-    const panel = document.getElementById('patientStatusPanel');
-    panel.classList.toggle('show');
+function togglePanel(panelId) {
+    const panel = document.getElementById(panelId);
+    const overlay = document.getElementById('overlay');
+    
+    if (panel.classList.toggle('show')) {
+        overlay.style.display = 'block';
+        overlay.addEventListener('click', closeAllPanels, { once: true });
+    } else {
+        overlay.style.display = 'none';
+    }
+}
+
+function closeAllPanels() {
+    const overlay = document.getElementById('overlay');
+    const panels = document.querySelectorAll('.control-panel.show, .ex-panel.show');
+    
+    panels.forEach(panel => {
+        panel.classList.remove('show');
+    });
+    
+    overlay.style.display = 'none';
 }
 
 window.onload = function () {
     console.log("Page Khul Gaya");
 
     // Fetch total number of doctors
-    $.get("/api/doctors/total", function(data) {
+    $.get("/api/doctors/total", function (data) {
         console.log("Total Doctors Data:", data);
         $(".card-description.doctor").text(data.totalDoctors);
-    }).fail(function(err) {
+    }).fail(function (err) {
         console.error("Error fetching total doctors:", err);
     });
 
     // Fetch total number of patients
-    $.get("/api/patients/total", function(data) {
+    $.get("/api/patients/total", function (data) {
         console.log("Total Patients Data:", data);
         $(".card-description.patient").text(data.totalPatients);
-    }).fail(function(err) {
+    }).fail(function (err) {
         console.error("Error fetching total patients:", err);
     });
 
     // Fetch total number of appointments
-    $.get("/api/appointments/total", function(data) {
+    $.get("/api/appointments/total", function (data) {
         console.log("Total Appointments Data:", data);
         $(".card-description.appointment").text(data.totalAppointments);
-    }).fail(function(err) {
+    }).fail(function (err) {
         console.error("Error fetching total appointments:", err);
     });
 
     // Fetch issues and populate the table
-    $.get("/api/issues", function(data) {
+    $.get("/api/issues", function (data) {
         console.log("Issues Data:", data);
         var tbody = $(".table1 tbody");
         tbody.empty(); // Clear existing rows
 
-        data.forEach(function(issue) {
+        data.forEach(function (issue) {
             var row = `<tr>
                 <td>${issue.IssueID}</td>
                 <td>${issue.DeptID}</td>
@@ -229,7 +242,7 @@ window.onload = function () {
             </tr>`;
             tbody.append(row);
         });
-    }).fail(function(err) {
+    }).fail(function (err) {
         console.error("Error fetching issues:", err);
     });
 };

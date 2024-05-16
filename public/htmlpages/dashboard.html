@@ -62,7 +62,7 @@
                             setInterval(updateTime, 10000);
                             updateTime();
                         </script>
-                        <button onclick="togglePanel()" class="bell-icon">
+                        <button onclick="toggleNotificationPanel()" class="bell-icon">
                             <img src="../images/bell2.png" alt="Logo" width="40">
                         </button>
                         <button class="golayi-frame" onclick="toggleAdminProfile()">
@@ -131,80 +131,76 @@
 
             <div class="card-container">
 
-                <div class="card card-1" onclick="togglePatientPanel()">
+                <div class="card card-1" onclick="togglePanel('patientStatusPanel')">
                     <div>
                         <p class="card-title">Total Patients</p>
-                        <p class="card-description patient">LOADING...</p>
+                        <p class="card-description patient">loading..</p>
                     </div>
                     <img src="../images/patient.png" alt="" height="64px">
                 </div>
 
                 <div class="ex-panel" id="patientStatusPanel">
-                    <div class="panel-header">Patients</div>
+                    <div class="panel-header header-patient">Total Patients</div>
                     <div class="panel-content">
                         <div class="panel-item permanent">
-                            <h4>Permanent</h4>
-                            <p>Details about permanent status.</p>
+                            <h4>OPD</h4>
+                            <p>loading..</p>
                         </div>
                         <div class="panel-item visiting">
-                            <h4>Visiting</h4>
-                            <p>Details about visiting status.</p>
+                            <h4>Admitted</h4>
+                            <p>loading..</p>
                         </div>
                         <div class="panel-item onduty">
-                            <h4>On Duty</h4>
-                            <p>Details about on duty status.</p>
+                            <h4>Today</h4>
+                            <p>loading..</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="card card-2" onclick="toggleDoctorPanel()">
+                <div class="card card-2" onclick="togglePanel('DoctorStatusPanel')">
                     <div>
                         <p class="card-title">Total Doctors</p>
-                        <p class="card-description doctor">LOADING...</p>
+                        <p class="card-description doctor">loading..</p>
                     </div>
                     <img src="../images/doctor.svg" alt="" height="64px">
                 </div>
 
-                <div class="ex-panel" style="display: none;" id="DoctorStatusPanel">
-                    <div class="panel-header">Doctors</div>
+                <div class="ex-panel" id="DoctorStatusPanel">
+                    <div class="panel-header header-doctor">Total Doctors</div>
                     <div class="panel-content">
                         <div class="panel-item permanent">
                             <h4>Permanent</h4>
-                            <p>Details about permanent status.</p>
+                            <p>loading..</p>
                         </div>
                         <div class="panel-item visiting">
                             <h4>Visiting</h4>
-                            <p>Details about visiting status.</p>
+                            <p>loading..</p>
                         </div>
                         <div class="panel-item onduty">
                             <h4>On Duty</h4>
-                            <p>Details about on duty status.</p>
+                            <p>loading..</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="card card-3" onclick="toggleAppointmentPanel()">
+                <div class="card card-3" onclick="togglePanel('toggleAppointmentPanel')">
                     <div>
-                        <p class="card-title">Total Appointments</p>
-                        <p class="card-description appointment">LOADING...</p>
+                        <p class="card-title">Today's Appointments</p>
+                        <p class="card-description appointment">loading..</p>
                     </div>
                     <img src="../images/appointments.svg" alt="" height="64px">
                 </div>
 
-                <div class="ex-panel" style="display: none;" id="statusPanel">
-                    <div class="panel-header">Appointments</div>
+                <div class="ex-panel" id="toggleAppointmentPanel">
+                    <div class="panel-header header-appointment">Today's Appointments</div>
                     <div class="panel-content">
                         <div class="panel-item permanent">
-                            <h4>Permanent</h4>
-                            <p>Details about permanent status.</p>
+                            <h4>Completed</h4>
+                            <p>loading..</p>
                         </div>
                         <div class="panel-item visiting">
-                            <h4>Visiting</h4>
-                            <p>Details about visiting status.</p>
-                        </div>
-                        <div class="panel-item onduty">
-                            <h4>On Duty</h4>
-                            <p>Details about on duty status.</p>
+                            <h4>Pending</h4>
+                            <p>loading..</p>
                         </div>
                     </div>
                 </div>
@@ -312,7 +308,7 @@
 
             <div class="card-container">
 
-                <div class="card" onclick="toggleControlPanel()">
+                <div class="card" onclick="togglePanel('control-panel')">
                     <div>
                         <p class="card-title">Control</p>
                         <p class="card-description">Facilitate communication and collaboration among admins</p>
@@ -340,24 +336,22 @@
 
             <div id="overlay" class="overlay"></div>
             <div id="control-panel" class="control-panel">
-                <div class="control-panel-header">
+                <div class="control-panel-header header-appointment">
                     <h3>Control Panel</h3>
-                    <button onclick="toggleControlPanel()" class="control-close-btn"><img src="../images/close.png"
-                            alt="" height="20px"></button>
                 </div>
                 <div class="control-panel-content">
-                    <button class="assign-work bg-red">
+                    <button class="assign-work" style="background: #e57373;">
                         Assign Work
                     </button>
-                    <button class="add-admin bg-green" onclick="loadAddAdminModal()" data-bs-toggle="modal"
-                        data-bs-target="#addAdminModal">
+                    <button class="add-admin" style="background: #81c784;" onclick="loadAddAdminModal()" data-bs-toggle="modal" data-bs-target="#addAdminModal">
                         Add Admin
                     </button>
-                    <button class="delete-admin bg-orange">
+                    <button class="delete-admin" style="background: #ffb74d;">
                         Delete Admin
                     </button>
                 </div>
             </div>
+            
 
         </div>
 
