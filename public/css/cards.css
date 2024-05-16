@@ -96,11 +96,13 @@
     transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
     max-height: 0;
     opacity: 0;
+    display: none;
 }
 
 .ex-panel.show {
     max-height: 500px;
     opacity: 1;
+    display: block;
 }
 
 .panel-header {
