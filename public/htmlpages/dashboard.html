@@ -20,6 +20,21 @@
     <link rel="stylesheet" href="../css/control.css">
     <link rel="stylesheet" href="../css/settings.css">
     <link id="themeStylesheet" rel="stylesheet" href="../css/light-mode.css">
+    <script>
+        (function () {
+            var menuState = localStorage.getItem('menuState');
+            if (menuState === 'open') {
+                document.write('<style>#side-menu { width: 16%; }</style>');
+                console.log("menu status: onn");
+            }
+
+            var viewMode = localStorage.getItem('viewMode');
+            if (viewMode === "1") {
+                console.log("dark mode status : onn")
+                themeStylesheet.setAttribute('href', '../css/dark-mode.css?v=' + new Date().getTime());
+            }
+        })();
+    </script>
 </head>
 
 <body>
@@ -34,7 +49,6 @@
     <div class="dashboard">
 
         <iframe id="side-menu" src="menu.html" frameborder="0" width="0" class="menu-frame"></iframe>
-
         <div class="dash-panels" style="height: 100%;">
 
             <nav class="navbar bg-body-tertiary">
@@ -125,7 +139,7 @@
                     <img src="../images/patient.png" alt="" height="64px">
                 </div>
 
-                <div class="ex-panel" style="display: none;" id="patientStatusPanel">
+                <div class="ex-panel" id="patientStatusPanel">
                     <div class="panel-header">Patients</div>
                     <div class="panel-content">
                         <div class="panel-item permanent">
@@ -177,7 +191,7 @@
                     <img src="../images/appointments.svg" alt="" height="64px">
                 </div>
 
-                <div class="ex-panel" style="display: none;"  id="statusPanel">
+                <div class="ex-panel" style="display: none;" id="statusPanel">
                     <div class="panel-header">Appointments</div>
                     <div class="panel-content">
                         <div class="panel-item permanent">
