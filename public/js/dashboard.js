@@ -231,3 +231,10 @@ window.onload = function () {
 
 
 
+function loadAddAdminModal() {
+    // Load modal content from external file into the parent document
+    parent.$("#addAdminContainer").load("addAdmin-modal.html", function () {
+        // After content is loaded, show the modal
+        parent.$("#addAdminModal").modal("show");
+    });
+}
