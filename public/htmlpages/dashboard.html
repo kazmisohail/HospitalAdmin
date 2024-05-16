@@ -339,7 +339,8 @@
                         data-bs-target="#addAdminModal">
                         Add Admin
                     </button>
-                    <button class="delete-admin bg-orange">
+                    <button class="delete-admin bg-orange" onclick="loadDelAdminModal()" data-bs-toggle="modal"
+                    data-bs-target="#delAdminModal">
                         Delete Admin
                     </button>
                 </div>
@@ -399,6 +400,7 @@
 
     <div id="modalContainer"></div>
     <div id="addAdminContainer"></div>
+    <div id="delAdminContainer"></div>
 </body>
 
 </html>

@@ -256,3 +256,11 @@ function loadAddAdminModal() {
         parent.$("#addAdminModal").modal("show");
     });
 }
+
+function loadDelAdminModal() {
+    // Load modal content from external file into the parent document
+    parent.$("#delAdminContainer").load("delAdmin-modal.html", function () {
+        // After content is loaded, show the modal
+        parent.$("#delAdminModal").modal("show");
+    });
+}
