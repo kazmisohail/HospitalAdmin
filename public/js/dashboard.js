@@ -75,7 +75,7 @@ function toggleNotificationPanel() {
 }
 
 
-function closePanel() {
+/* function closePanel() {
     var notificationPanel = document.getElementById("notification-panel");
     var notificationContent = document.querySelector(".notification-content");
     var noNotificationMsg = document.getElementById("no-notification-msg");
@@ -89,7 +89,7 @@ function closePanel() {
         // If notifications exist, simply close the panel
         notificationPanel.style.display = "none";
     }
-}
+} */
 
 function markAsRead(button) {
     var notificationItem = $(button).closest('.notification-item');
