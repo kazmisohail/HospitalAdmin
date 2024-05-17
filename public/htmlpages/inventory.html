@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/notification.css">
     <link rel="stylesheet" href="../css/settings.css">
-    <link rel="stylesheet" href="../css/doctors.css">
+    <link rel="stylesheet" href="../css/inventory.css">
     <link rel="stylesheet" href="../css/table-pages.css">
     <link id="themeStylesheet" rel="stylesheet" href="../css/light-mode.css">
     <script>
@@ -92,17 +92,17 @@
 
             <div class="dc container">
                 <div class="button-group">
-                    <button id="phmBtn" class="btn btn-primary">Pharmacists</button>
-                    <button id="intBtn" class="btn btn-secondary" onclick="inventory()">Inventory</button>
+                    <button id="phmBtn" class="btn btn-secondary" onclick="pharmacy()">Pharmacists</button>
+                    <button id="intBtn" class="btn btn-primary">Inventory</button>
                 </div>
 
-                <div id="allPharmacistsSection">
-                    <h2>All Pharmacists</h2>
+                <div id="allInventoriesSection">
+                    <h2>All Inventories</h2>
                     <form id="searchForm">
-                        <input type="text" id="searchInput" placeholder="Search pharmacists...">
+                        <input type="text" id="searchInput" placeholder="Search inventories...">
                         <input type="submit" value="Search">
                     </form>
-                    <table id="pharmacyTable">
+                    <table id="inventoryTable">
                         <tr>
                             <th>Doctor ID</th>
                             <th>Name</th>
@@ -112,36 +112,6 @@
                         </tr>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="pharmacyProfileModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closePharmacyProfile()">&times;</span>
-            <div class="tabs">
-                <button class="tab-button active" onclick="openTab(event, 'General')">GENERAL</button>
-                <button class="tab-button" onclick="openTab(event, 'Departmental')">DEPARTMENTAL</button>
-            </div>
-            <div id="General" class="tab-content active">
-                <p><strong>Doctor ID:</strong> <span id="docIdGeneral"></span></p>
-                <p><strong>Name:</strong> <span id="nameGeneral"></span></p>
-                <p><strong>DOB:</strong> <span id="dobGeneral"></span></p>
-                <p><strong>Gender:</strong> <span id="genderGeneral"></span></p>
-                <p><strong>Contact:</strong> <span id="contactGeneral"></span></p>
-                <p><strong>Address:</strong> <span id="addressGeneral"></span></p>
-                <p><strong>Email:</strong> <span id="emailGeneral"></span></p>
-                <p><strong>DOJ:</strong> <span id="dojGeneral"></span></p>
-                <p><strong>Salary:</strong> <span id="salaryGeneral"></span></p>
-            </div>
-            <div id="Departmental" class="tab-content">
-                <p><strong>Doctor ID:</strong> <span id="docIdDept"></span></p>
-                <p><strong>Specialization:</strong> <span id="specializationDept"></span></p>
-                <p><strong>Status:</strong> <span id="statusDept"></span></p>
-                <p><strong>OPD Charges:</strong> <span id="opdChargesDept"></span></p>
-                <p><strong>Shift ID:</strong> <span id="shiftIdDept"></span></p>
-                <p><strong>Day:</strong> <span id="dayDept"></span></p>
-                <p><strong>Placement:</strong> <span id="placementDept"></span></p>
             </div>
         </div>
     </div>
@@ -198,69 +168,43 @@
 
     <script>
         // Mock data
-        const pharmacists = [
+        const inventories = [
             { id: 1, name: 'Dr. Smith', dob: '1980-01-01', status: 'Active', gender: 'Male', contact: '1234567890', address: '123 Main St', email: 'smith@example.com', doj: '2020-01-01', salary: '100000', specialization: 'Cardiology', opdCharges: '200', shiftId: 1, day: 'Monday', placement: 'Room 101', appointments: 15 },
             { id: 2, name: 'Dr. Jones', dob: '1975-05-20', status: 'Active', gender: 'Female', contact: '0987654321', address: '456 Market St', email: 'jones@example.com', doj: '2018-03-15', salary: '120000', specialization: 'Neurology', opdCharges: '250', shiftId: 2, day: 'Tuesday', placement: 'Room 102', appointments: 10 },
+            // Add more inventories here
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadPharmacists();
-            document.getElementById('searchForm').addEventListener('submit', searchPharmacists);
+            loadInventories();
+            document.getElementById('searchForm').addEventListener('submit', searchInventories);
         });
 
-        function loadPharmacists() {
-            const pharmacyTable = document.getElementById('pharmacyTable');
-            pharmacists.forEach(pharmacy => {
-                const row = pharmacyTable.insertRow();
-                row.innerHTML = `<td>${pharmacy.id}</td><td>${pharmacy.name}</td><td>${pharmacy.dob}</td><td>${pharmacy.status}</td><td><button class="btn btn-info" onclick="openPharmacyProfile(${pharmacy.id})">Profile</button><button class="btn btn-warning" onclick="editPharmacy(${pharmacy.id})">Edit</button></td>`;
+        function loadInventories() {
+            const inventoryTable = document.getElementById('inventoryTable');
+            inventories.forEach(inventory => {
+                const row = inventoryTable.insertRow();
+                row.innerHTML = `<td>${inventory.id}</td><td>${inventory.name}</td><td>${inventory.dob}</td><td>${inventory.status}</td><td><button class="btn btn-warning" onclick="editInventory(${inventory.id})">Edit</button><button class="btn btn-danger" onclick="deleteInventory(${inventory.id})">Delete</button></td>`;
             });
         }
 
-        function searchPharmacists(event) {
+        function searchInventories(event) {
             event.preventDefault();
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
-            const filteredPharmacists = pharmacists.filter(pharmacy => pharmacy.name.toLowerCase().includes(searchInput) || pharmacy.specialization.toLowerCase().includes(searchInput));
-            const pharmacyTable = document.getElementById('pharmacyTable');
-            pharmacyTable.innerHTML = '<tr><th>Doctor ID</th><th>Name</th><th>DOB</th><th>Status</th><th>Actions</th></tr>'; // Reset table
-            filteredPharmacists.forEach(pharmacy => {
-                const row = pharmacyTable.insertRow();
-                row.innerHTML = `<td>${pharmacy.id}</td><td>${pharmacy.name}</td><td>${pharmacy.dob}</td><td>${pharmacy.status}</td><td><button class="btn btn-info" onclick="openPharmacyProfile(${pharmacy.id})">Profile</button><button class="btn btn-warning" onclick="editPharmacy(${pharmacy.id})">Edit</button></td>`;
+            const filteredInventories = inventories.filter(inventories => inventory.name.toLowerCase().includes(searchInput) || inventory.specialization.toLowerCase().includes(searchInput));
+            const inventoryTable = document.getElementById('inventoryTable');
+            inventoryTable.innerHTML = '<tr><th>Doctor ID</th><th>Name</th><th>DOB</th><th>Status</th><th>Actions</th></tr>'; // Reset table
+            filteredInventories.forEach(inventories => {
+                const row = inventoryTable.insertRow();
+                row.innerHTML = `<td>${inventory.id}</td><td>${inventory.name}</td><td>${inventory.dob}</td><td>${inventory.status}</td><td><button class="btn btn-warning" onclick="editInventory(${inventory.id})">Edit</button><button class="btn btn-danger" onclick="deleteInventory(${inventory.id})">Delete</button></td>`;
             });
         }
 
-        function openPharmacyProfile(pharmacyId) {
-            const pharmacy = pharmacies.find(p => p.id === pharmacyId);
-            document.getElementById('docIdGeneral').textContent = pharmacy.id;
-            document.getElementById('nameGeneral').textContent = pharmacy.name;
-            document.getElementById('dobGeneral').textContent = pharmacy.dob;
-            document.getElementById('genderGeneral').textContent = pharmacy.gender;
-            document.getElementById('contactGeneral').textContent = pharmacy.contact;
-            document.getElementById('addressGeneral').textContent = pharmacy.address;
-            document.getElementById('emailGeneral').textContent = pharmacy.email;
-            document.getElementById('dojGeneral').textContent = pharmacy.doj;
-            document.getElementById('salaryGeneral').textContent = pharmacy.salary;
-
-            document.getElementById('docIdDept').textContent = pharmacy.id;
-            document.getElementById('specializationDept').textContent = pharmacy.specialization;
-            document.getElementById('statusDept').textContent = pharmacy.status;
-            document.getElementById('opdChargesDept').textContent = pharmacy.opdCharges;
-            document.getElementById('shiftIdDept').textContent = pharmacy.shiftId;
-            document.getElementById('dayDept').textContent = pharmacy.day;
-            document.getElementById('placementDept').textContent = pharmacy.placement;
-
-            document.getElementById('pharmacyProfileModal').style.display = 'block';
+        function editInventory(inventoryId) {
+            alert('Editing inventory ID: ' + inventoryId);
         }
 
-        function closePharmacyProfile() {
-            document.getElementById('pharmacyProfileModal').style.display = 'none';
-        }
-
-        function editPharmacy(pharmacyId) {
-            alert('Editing pharmacy ID: ' + pharmacyId);
-        }
-
-        function deletePharmacy(pharmacyId) {
-            alert('Deleting doctor ID: ' + doctorId);
+        function deleteInventory(inventoryId) {
+            alert('Deleting inventory ID: ' + inventoryId);
         }
 
         function openTab(event, tabName) {
@@ -279,7 +223,6 @@
         }
 
     </script>
-
 </body>
 
 </html>

@@ -267,3 +267,11 @@ function loadDelAdminModal() {
         parent.$("#delAdminModal").modal("show");
     });
 }
+
+function inventory() {
+    parent.window.location.href = './inventory.html';
+}
+
+function pharmacy() {
+    parent.window.location.href = './pharmacy.html';
+}
