@@ -80,7 +80,7 @@ function closePanel() {
     }
 }
 
-function markAsRead(button) {
+function markAsRead(button){
     var notificationItem = $(button).closest('.notification-item');
     notificationItem.addClass('read');
 }
@@ -95,7 +95,6 @@ function deleteNotification(button) {
         closePanel(); // If no notifications left, close the panel
     }
 }
-
 
 function toggleAdminProfile() {
     var adminProfile = document.getElementById("admin-profile");
@@ -219,9 +218,12 @@ window.onload = function () {
         console.error("Error fetching issues:", err);
     });
 
-    const adminID = 7; // Example admin ID
+    /* const adminID = 7; // Example admin ID
     $.get(`http://localhost:3002/getNotifications/${adminID}`, function (notifications) {
         const notificationContent = $('.notification-content');
+
+
+
         notificationContent.empty(); // Clear existing content
 
         if (notifications.length === 0) {
@@ -244,8 +246,9 @@ window.onload = function () {
     }).fail(function (error) {
         console.error('Error fetching notifications:', error);
     });
-};
+ */
 
+};
 
 function loadAddAdminModal() {
     // Load modal content from external file into the parent document
