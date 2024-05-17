@@ -66,34 +66,9 @@ body {
 .table2 td {
     /* border: 1px solid rgb(235, 235, 235); */
     color: rgb(47, 47, 47);
-    background-color: #e7e7e7;
+    background-color: #ffffff;
 }
 
-.control-panel {
-    background-color: #fff;
-}
-
-.control-panel-content button {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.assign-work {
-    background-color: #dc3545;
-}
-
-.raise-issue {
-    background-color: #17a2b8;
-}
-
-.meeting-call {
-    background-color: #ffc107;
-}
-
-.add-admin {
-    background-color: #28a745;
-}
-
-.delete-admin {
-    background-color: #6c757d;
+.add-doctor .panel-content {
+    background-color: white;
 }

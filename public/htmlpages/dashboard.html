@@ -210,9 +210,6 @@
 
             </div>
 
-
-
-
             <div class="table-container">
                 <div class="tab">
                     <button class="tablinks active" onclick="openTab(event, 'task_inc')" id="defaultOpen">To Do</button>
@@ -296,12 +293,12 @@
                     </table>
                 </div>
 
-                <div id="resolve-panel" class="remarks-panel" style="display: none;">
+                <div id="resolve-panel" class="remarks-panel">
                     <form action="">
                         <textarea name="" id="remarks" placeholder="Provide remarks for the issue.."></textarea>
                         <div class="resolve-btn-div">
                             <button class="btn btn-success" type="submit">Resolve</button>
-                            <button class="btn btn-danger" type="button" onclick="closeRemarksPanel()">Cancel</button>
+                            <button class="btn btn-danger" type="submit">Reject</button>
                         </div>
                     </form>
                 </div>
@@ -321,10 +318,10 @@
                 </div>
 
                 <div id="control-panel" class="control-panel"> <!-- control card pe khulega -->
-                    <div class="control-panel-header header-appointment">
+                    <div class="panel-header header-control">
                         Control Panel
                     </div>
-                    <div class="control-panel-content">
+                    <div class="panel-content">
                         <div class="control-panel-item permanent">
                             <h4>Assign Work</h4>
                         </div>
@@ -337,12 +334,43 @@
                     </div>
                 </div>
 
+<<<<<<< HEAD
                 <div class="card" onclick="report()">
+=======
+                <div class="card" onclick="togglePanel('reportModal')">
+>>>>>>> ed705e4558d3cf4c936859f00dc323c84605a89e
                     <div>
                         <p class="card-title">Report</p>
                         <p class="card-description">Access and analyze departmental monthly performance</p>
                     </div>
                     <img src="../images/report.png" alt="" height="64px">
+                </div>
+
+                <div class="reportModal" id="reportModal"> <!-- report card pe yeh panel khulegha -->
+                    <div class="panel-content">
+                        <div class="panel-header header-report">
+                            Enter Module Details for Report
+                        </div>
+                        <div class="panel-body">
+                            <form action="">
+                                <select id="moduleReport">
+                                    <option selected>Select Module</option>
+                                    <option value="doctor">Doctor</option>
+                                    <option value="patient">Patient</option>
+                                    <option value="pharmacy">Pharmacy</option>
+                                    <option value="lab">Lab</option>
+                                </select>
+                                <input type="month" name="monthReport" id="monthReport">
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                onclick="togglePanel('reportModal')">Cancel</button>
+                            <a href="./report.html" target="_blank" type="button" class="btn btn-primary">Generate
+                                Report</a>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="card" onclick="togglePanel('add-account-panel')">
@@ -359,40 +387,64 @@
                         <div class="account-panel-item permanent" onclick="toggleLayer2Panel('addDoctor')">
                             <h4>Doctor</h4>
                         </div>
-                        <div class="account-panel-item panel-item visiting" onclick="toggleLayer2Panel('addPharmacist')">
+                        <div class="account-panel-item panel-item visiting"
+                            onclick="toggleLayer2Panel('addPharmacist')">
                             <h4>Pharmacist</h4>
                         </div>
                     </div>
                 </div>
 
-                <div class="add-doctor" id="addDoctor"> <!-- yeh add doctor pe khulega add account ke andar -->
-                    <div class="panel-header header-add-account">Add Doctor</div>
+                <div class="add-doctor" id="addPharmacist">
+                    <!-- yeh add pharmacist pe khulega add account ke andar -->
+                    <div class="panel-header header-doctor">Add Pharmacist</div>
                     <div class="panel-content">
-                        <form id="doctorForm">
-                            <input type="text" id="adminName" name="adminName" placeholder="Admin Name" required>        
-                            <input type="email" id="email" name="email" placeholder="Email" required>   
-                            <input type="password" id="password" name="password" placeholder="Password" required> 
-                            <input type="text" id="contact" name="contact" placeholder="Contact" required>  
-                            <input type="text" id="role" name="role" placeholder="Role" required>
-                            <input type="text" id="permission" name="permission" placeholder="Permission" required>
-                            <button type="submit">Submit</button>
-                            <button type="button" onclick="toggleLayer2Panel('addDoctor')">Cancel</button>
+                        <form id="pharmacistForm">
+                            <input type="text" id="PharmacistEmpName" name="EmpName" placeholder="Employee Name" required>
+                            <input type="text" id="PharmacistDOB" name="DOB" placeholder="Date of Birth" required>
+                            <input type="text" id="PharmacistGender" name="Gender" placeholder="Gender" required>
+                            <input type="text" id="PharmacistContact" name="Contact" placeholder="Contact" required>
+                            <input type="text" id="PharmacistAddress" name="Address" placeholder="Address" required>
+                            <input type="text" id="PharmacistJobTitle" name="JobTitle" placeholder="Job Title" required>
+                            <input type="text" id="PharmacistDeptID" name="DeptID" placeholder="Department ID" required>
+                            <input type="email" id="PharmacistEmail" name="Email" placeholder="Email" required>
+                            <input type="password" id="PharmacistPassword" name="Password" placeholder="Password" required>
+                            <input type="text" id="PharmacistDOJ" name="DOJ" placeholder="Date of Joining" required>
+                            <input type="text" id="PharmacistSalary" name="Salary" placeholder="Salary" required>
+                            <input type="text" id="PharmacistStatus" name="Status" placeholder="Status" required>
+                            <input type="text" id="PharmacistExperienceLevel" name="ExperienceLevel" placeholder="Experience Level" required>
+                            <button type="submit">Add</button>
+                            <button type="button" onclick="toggleLayer2Panel('addPharmacist')">Cancel</button>
                         </form>
                     </div>
                 </div>
-
-                <div class="add-doctor" id="addPharmacist"> <!-- yeh add pharmacist pe khulega add account ke andar -->
-                    <div class="panel-header header-add-account">Add Pharmacist</div>
+                
+                <div class="add-doctor" id="addDoctor">
+                    <!-- yeh add doctor pe khulega add account ke andar -->
+                    <div class="panel-header header-patient">Add Doctor</div>
                     <div class="panel-content">
                         <form id="doctorForm">
-                            <input type="text" id="adminName" name="adminName" placeholder="Admin Name" required>        
-                            <input type="email" id="email" name="email" placeholder="Email" required>   
-                            <input type="password" id="password" name="password" placeholder="Password" required> 
-                            <input type="text" id="contact" name="contact" placeholder="Contact" required>  
-                            <input type="text" id="role" name="role" placeholder="Role" required>
-                            <input type="text" id="permission" name="permission" placeholder="Permission" required>
-                            <button type="submit">Submit</button>
-                            <button type="button" onclick="toggleLayer2Panel('addPharmacist')">Cancel</button>
+                            <input type="text" id="DoctorEmpName" name="EmpName" placeholder="Employee Name" required>
+                            <input type="text" id="DoctorDOB" name="DOB" placeholder="Date of Birth" required>
+                            <input type="text" id="DoctorGender" name="Gender" placeholder="Gender" required>
+                            <input type="text" id="DoctorContact" name="Contact" placeholder="Contact" required>
+                            <input type="text" id="DoctorAddress" name="Address" placeholder="Address" required>
+                            <input type="text" id="DoctorJobTitle" name="JobTitle" placeholder="Job Title" required>
+                            <input type="text" id="DoctorDeptID" name="DeptID" placeholder="Department ID" required>
+                            <input type="email" id="DoctorEmail" name="Email" placeholder="Email" required>
+                            <input type="password" id="DoctorPassword" name="Password" placeholder="Password" required>
+                            <input type="text" id="DoctorDOJ" name="DOJ" placeholder="Date of Joining" required>
+                            <input type="text" id="DoctorSalary" name="Salary" placeholder="Salary" required>
+                            <input type="text" id="DoctorStatus" name="Status" placeholder="Status" required>
+                            <input type="text" id="DoctorSpecialization" name="Specialization" placeholder="Specialization" required>
+                            <input type="text" id="DoctorOPDcharges" name="OPDcharges" placeholder="OPD Charges" required>
+                            <input type="time" id="DoctorStartTime" name="StartTime" placeholder="Start Time" required>
+                            <input type="time" id="DoctorEndTime" name="EndTime" placeholder="End Time" required>
+                            <input type="text" id="DoctorDay" name="Day" placeholder="Day" required>
+                            <input type="text" id="DoctorRoomNo" name="RoomNo" placeholder="Room No" required>
+                            <input type="text" id="DoctorPlacement" name="Placement" placeholder="Placement" required>
+                            <input type="text" id="DoctorAppointmentsLimit" name="AppointmentsLimit" placeholder="Appointments Limit" required>
+                            <button type="submit">Add</button>
+                            <button type="button" onclick="toggleLayer2Panel('addDoctor')">Cancel</button>
                         </form>
                     </div>
                 </div>
@@ -527,6 +579,12 @@
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> ed705e4558d3cf4c936859f00dc323c84605a89e
     <script src="../js/report.js"></script>
 </body>
 
