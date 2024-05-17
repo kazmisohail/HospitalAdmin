@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3001;
 var config = {
     user: "sa",
     password: "1234",
-    server: "KAZMI",
+    server: "Arham_laptop",
     database: "HospitalManagementSystem",
     options: {
         encrypt: false // Disable encryption
@@ -38,7 +38,22 @@ app.get('/api/patients/total', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+app.get('/api/doctors/status', async (req, res) => {
+    try {
+        const permanent = await sql.query('SELECT COUNT(*) AS total FROM Employees WHERE   Status = \'Permanent\' AND DeptID = 1');
+        const visiting = await sql.query('SELECT COUNT(*) AS total FROM Employees WHERE   Status = \'Visiting\' AND DeptID = 1');
+        const onDuty = await sql.query('SELECT COUNT(*) AS total FROM Employees WHERE  Status = \'On Duty\' AND DeptID = 1');
 
+        res.json({
+            permanent: permanent.recordset[0].total,
+            visiting: visiting.recordset[0].total,
+            onDuty: onDuty.recordset[0].total,
+        });
+    } catch (err) {
+        console.error('Error fetching doctor status counts:', err);
+        res.status(500).send('Server error');
+    }
+});
 // Define route for fetching total number of appointments
 app.get('/api/appointments/total', async (req, res) => {
     try {
@@ -73,20 +88,20 @@ app.get("/api/issues", async (req, res) => {
     }
 });
 
-// Endpoint to get notifications
-app.get('/getNotifications/:adminID', (req, res) => {
-    const adminID = req.params.adminID;
-    const request = new sql.Request();
-    request.input('AdminID', sql.Int, adminID);
-    request.query('SELECT * FROM Control WHERE AdminID = @AdminID AND Details IS NULL', (err, result) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        } else {
-            res.json(result.recordset);
-        }
-    });
-});
+// // Endpoint to get notifications
+// app.get('/getNotifications/:adminID', (req, res) => {
+//     const adminID = req.params.adminID;
+//     const request = new sql.Request();
+//     request.input('AdminID', sql.Int, adminID);
+//     request.query('SELECT * FROM Control WHERE AdminID = @AdminID AND Details IS NULL', (err, result) => {
+//         if (err) {
+//             console.log(err);
+//             res.status(500).send('Internal Server Error');
+//         } else {
+//             res.json(result.recordset);
+//         }
+//     });
+// });
 
 //Start the server on port 3001
 app.listen(PORT, () => {
