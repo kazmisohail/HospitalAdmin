@@ -122,3 +122,16 @@ table {
 .add-doctor {
     background-color: #252525;
 }
+
+.reportModal {
+    background-color: #252525;
+    color: white;
+}
+
+.reportModal .modal-header {
+    border-bottom: 1px solid rgb(63, 63, 63);
+} 
+
+.reportModal .modal-footer {
+    border-top: 1px solid rgb(63, 63, 63);
+}

@@ -74,8 +74,7 @@ th {
     color: rgb(39, 39, 39);
 }
 
-.add-admin-body,
-.del-admin-body {
+.add-admin-body{
     padding: 20px;
 }
 
