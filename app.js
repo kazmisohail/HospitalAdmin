@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3001;
 var config = {
     user: "sa",
     password: "1234",
-    server: "Arham_laptop",
+    server: "KAZMI",
     database: "HospitalManagementSystem",
     options: {
         encrypt: false // Disable encryption
