@@ -105,22 +105,6 @@ function toggleAdminProfile() {
     }
 }
 
-function toggleResolvepanel() {
-    var resolvePanel = document.getElementById("resolve-panel");
-    var overlay = document.getElementById("overlay");
-
-    if (resolvePanel.style.display === "none") {
-        resolvePanel.style.display = "block";
-        overlay.style.display = "block";
-        document.body.style.overflow = "hidden"; // Disable scrolling
-    } else {
-        resolvePanel.style.display = "none";
-        overlay.style.display = "none";
-        document.body.style.overflow = "auto"; // Re-enable scrolling
-    }
-}
-
-
 function toggleTheme() {
 
     const parentDocument = window.parent.document;
@@ -142,21 +126,6 @@ function toggleTheme() {
 
     localStorage.setItem('viewMode', viewMode);
 
-}
-
-function closeRemarksPanel() {
-    var remarksPanel = document.querySelector('.remarks-panel');
-    var overlay = document.getElementById("overlay");
-
-    if (remarksPanel.style.display === "none") {
-        remarksPanel.style.display = "block";
-        overlay.style.display = "block";
-        document.body.style.overflow = "hidden"; // Disable scrolling
-    } else {
-        remarksPanel.style.display = "none";
-        overlay.style.display = "none";
-        document.body.style.overflow = "auto"; // Re-enable scrolling
-    }
 }
 
 function togglePanel(panelId) {
@@ -190,7 +159,7 @@ function toggleLayer2Panel(panelId) {
 function closeAllPanels() {
     const overlay = document.getElementById('overlay');
     const overlay2 = document.getElementById('overlay2');
-    const panels = document.querySelectorAll('.add-doctor, .del-admin ,.add-admin, .control-panel.show, .ex-panel.show');
+    const panels = document.querySelectorAll('.remarks-panel ,.reportModal, .add-doctor, .del-admin ,.add-admin, .control-panel.show, .ex-panel.show');
 
     panels.forEach(panel => {
         panel.classList.remove('show');
@@ -241,7 +210,7 @@ window.onload = function () {
                 <td>${issue.CreationDate}</td>
                 <td>${issue.Condition}</td>
                 <td>${issue.Content}</td>
-                <td><button class="btn btn-primary submit-btn" type="button" onclick="toggleResolvepanel()">Submit</button></td>
+                <td><button class="btn btn-primary submit-btn" type="button" onclick="togglePanel('resolve-panel')">Submit</button></td>
             </tr>`;
             tbody.append(row);
         });

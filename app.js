@@ -6,13 +6,13 @@ app.use(express.static('./public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 // SQL Server configuration
 var config = {
-    /* user: "sa",
-    password: "1234", */
-    server: "DESKTOP-TONH6GQ\\Hussain",
+    user: "sa",
+    password: "1234",
+    server: "DESKTOP-TONH6GQ",
     database: "HospitalManagementSystem",
     options: {
         encrypt: false // Disable encryption

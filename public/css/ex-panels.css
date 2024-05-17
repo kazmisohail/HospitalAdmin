@@ -172,38 +172,12 @@
     z-index: 1000;
     top: 50%;
     left: 50%;
+    visibility: hidden;
+    padding: 0 !important;
 }
 
 .reportModal.show {
     max-height: 100%;
     opacity: 1;
-}
-
-.header-report {
-    background: #fd5f5c;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 1.5em;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-}
-
-.reportModal .modal-body {
-    padding: 20px;
-}
-
-.reportModal .modal-body select,
-.reportModal .modal-body input[type="month"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.reportModal .modal-footer {
-    padding: 10px;
-    text-align: center;
+    visibility: visible;
 }
