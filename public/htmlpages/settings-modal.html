@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .modal-content {
+            background-color: rgb(225, 225, 225);
+        }
+    </style>
 </head>
+
 <body>
     <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -22,7 +29,7 @@
                     <form action="">
                         <h3>Change Details</h3>
                         <span>Select profile picture</span>
-                        <input type="file" src=""><br>
+                        <input type="file" src="" id="profilePictureInput" onchange="saveProfilePicture()"><br>
                         <input type="tel" class="form-control" name="number" placeholder="Enter New Contact"
                             required="false">
                         <hr>
@@ -42,5 +49,24 @@
             </div>
         </div>
     </div>
+    <!-- <script>
+        function saveProfilePicture() {
+            const fileInput = document.getElementById('profilePictureInput');
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const imageDataUrl = e.target.result;
+                localStorage.setItem('profilePicture', imageDataUrl);
+                alert('Profile picture saved! Go to the other page to see the update.');
+                console.log(imageDataUrl);
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script> -->
 </body>
+
 </html>
