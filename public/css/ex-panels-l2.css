@@ -10,6 +10,7 @@
     background-color: white;
     border-radius: 10px;
     visibility: hidden;
+    overflow: auto;
 }
 
 
@@ -108,15 +109,18 @@ select {
     position: fixed;
     top: 50%;
     left: 50%;
-    max-width: 350px;
+    height: auto;
+    max-height: 90vh; 
+    max-width: 40vw;
     border-radius: 10px;
-    background-color: #f9f9f9;
+    background-color: transparent;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
     visibility: hidden;
     opacity: 0;
     z-index: 1001;
     transition: opacity 0.3s ease-out, visibility 0.3s ease-out; /* Include visibility in transition */
+    overflow: auto;
 }
 
 .add-doctor.show  {
@@ -157,10 +161,11 @@ select {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    border: none !important;
 }
 
 .add-doctor button[type="submit"] {
-    background-color: #4caf50;
+    background-color: #49b54f;
     color: white;
 }
 
@@ -184,4 +189,31 @@ select {
 
 .add-doctor button[type="button"]:hover {
     background-color: #bbb;
+}
+
+#doctorForm, #pharmacistForm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: auto;
+}
+
+#doctorForm input, #doctorForm button, #pharmacistForm input, #pharmacistForm button {
+    flex-basis: calc(50% - 10px); /* Adjust as needed */
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#doctorForm button, #pharmacistForm button {
+    flex-basis: 100%;
+}
+
+/* Clearfix for button alignment */
+#doctorForm::after, #pharmacistForm::after {
+    content: "";
+    display: table;
+    clear: both;
 }

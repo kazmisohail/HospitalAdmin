@@ -10,9 +10,9 @@ const PORT = process.env.PORT || 3001;
 
 // SQL Server configuration
 var config = {
-    user: "sa",
-    password: "1234",
-    server: "KAZMI",
+    /* user: "sa",
+    password: "1234", */
+    server: "DESKTOP-TONH6GQ\\Hussain",
     database: "HospitalManagementSystem",
     options: {
         encrypt: false // Disable encryption
