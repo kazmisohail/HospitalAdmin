@@ -6,13 +6,13 @@ app.use(express.static('./public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3001;
 
 // SQL Server configuration
 var config = {
     user: "sa",
     password: "1234",
-    server: "DESKTOP-TONH6GQ",
+    server: "KAZMI",
     database: "HospitalManagementSystem",
     options: {
         encrypt: false // Disable encryption
@@ -74,7 +74,7 @@ app.get("/api/issues", async (req, res) => {
 });
 
 // Endpoint to get notifications
-/* app.get('/getNotifications/:adminID', (req, res) => {
+app.get('/getNotifications/:adminID', (req, res) => {
     const adminID = req.params.adminID;
     const request = new sql.Request();
     request.input('AdminID', sql.Int, adminID);
@@ -86,7 +86,7 @@ app.get("/api/issues", async (req, res) => {
             res.json(result.recordset);
         }
     });
-}); */
+});
 
 //Start the server on port 3001
 app.listen(PORT, () => {
