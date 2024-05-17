@@ -2,25 +2,45 @@
     margin-top: 150px;
 }
 
-/* For report modal css */
-.reportModal {
-    /* Report modal ka dialog box h ya
-    css wagera yahaa add kr denaa */
+.rBtnDiv {
+    margin-top: 30px;
+    padding: 25px;
+    background-color: antiquewhite;
 }
 
-.reportModal .modal-header {
-    /* Report modal ka header yahaa sa edit hoga
-    styling font wagera yaha set krnaa */
+.saveBtn {
+    text-align: right;
 }
 
-.reportModal .modal-body {
-    /* Report modal ka header yahaa sa edit hoga
-    contents wagera yaha set krnaa */
+.reportPage {
+    background-color: beige;
+    margin-top: 25px;
+    box-shadow: 0 0 3px #000;
+    height: auto;
+    margin-bottom: 50px;
 }
 
-.reportModal .modal-footer {
-    /* Report modal ka footer yahaa sa edit hoga
-    buttons wagera yaha set krnaa */
+.reportPage h1 {
+    text-align: center;
+    padding: 10px;
 }
 
-/* end report modal css */
+/* Bar Chart */
+.chart {
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0 0 3px #000;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+  }
+
+  .bar {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 5px;
+  }
+
+  /* Pie Chart */
