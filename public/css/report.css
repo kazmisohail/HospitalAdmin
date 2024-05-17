@@ -1,0 +1,26 @@
+#reportModal {
+    margin-top: 150px;
+}
+
+/* For report modal css */
+.reportModal {
+    /* Report modal ka dialog box h ya
+    css wagera yahaa add kr denaa */
+}
+
+.reportModal .modal-header {
+    /* Report modal ka header yahaa sa edit hoga
+    styling font wagera yaha set krnaa */
+}
+
+.reportModal .modal-body {
+    /* Report modal ka header yahaa sa edit hoga
+    contents wagera yaha set krnaa */
+}
+
+.reportModal .modal-footer {
+    /* Report modal ka footer yahaa sa edit hoga
+    buttons wagera yaha set krnaa */
+}
+
+/* end report modal css */

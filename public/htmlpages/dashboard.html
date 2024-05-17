@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../css/settings.css">
     <link rel="stylesheet" href="../css/control-internal.css">
     <link id="themeStylesheet" rel="stylesheet" href="../css/light-mode.css">
+    <link rel="stylesheet" href="../css/report.css">
     <script>
         (function () {
             var menuState = localStorage.getItem('menuState');
@@ -317,7 +318,7 @@
                     <img src="../images/control-icon.png" alt="" height="64px">
                 </div>
 
-                <div class="card">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#reportModal">
                     <div>
                         <p class="card-title">Report</p>
                         <p class="card-description">Access and analyze departmental monthly performance</p>
@@ -469,6 +470,39 @@
     </div>
 
     <div id="modalContainer"></div>
+
+
+    <!-- Report Modal -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="reportModal modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5 text-center" id="exampleModalLabel">Enter Module Details for Report</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <select id="moduleReport">
+                            <option selected>Select Module</option>
+                            <option value="doctor">Doctor</option>
+                            <option value="patient">Patient</option>
+                            <option value="pharmacy">Pharmacy</option>
+                            <option value="lab">Lab</option>
+                        </select>
+                        <input type="month" name="monthReport" id="monthReport">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="./report.html" target="_blank" type="button" class="btn btn-primary">Generate Report</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="../js/report.js"></script>
 </body>
 
 </html>
