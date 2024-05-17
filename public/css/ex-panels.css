@@ -1,0 +1,86 @@
+.ex-panel {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    max-height: 0;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+}
+
+.ex-panel.show {
+    max-height: 100%;
+    opacity: 1;
+}
+
+.panel-header {
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.5em;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.header-patient {
+    background: #91b5cd;
+}
+
+.header-doctor {
+    background: #bcbfa2;
+}
+
+.header-appointment {
+    background: #a1d9b6;
+}
+
+.header-add-account {
+    background: #80bfbe
+    ;
+}
+
+.panel-content {
+    padding: 20px;
+}
+
+.panel-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.panel-item:last-child {
+    margin-bottom: 0;
+}
+
+.panel-item h4 {
+    margin: 0 0 10px;
+    font-size: 1.2em;
+}
+
+.permanent {
+    border-left: 5px solid #91b5cd;
+    padding-left: 10px;
+}
+
+.visiting {
+    border-left: 5px solid #bcbfa2;
+    padding-left: 10px;
+}
+
+.onduty {
+    border-left: 5px solid #a1d9b6;
+    padding-left: 10px;
+}
+
+.panel-item p {
+    color: #555;
+    margin: 0;
+}

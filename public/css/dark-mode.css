@@ -97,23 +97,28 @@ table {
     border: none;
 }
 
-.control-panel-item:hover {
+.control-panel-item:hover, .account-panel-item:hover {
     background-color: #373737;
 }
 
-.add-admin-dialog {
+.add-admin-dialog, .del-admin-dialog {
     background-color: #252525;
 }
 
-.add-admin-dialog input,
-.add-admin-dialog input::placeholder, select {
+.add-admin-dialog input, .add-doctor input,
+.add-admin-dialog input::placeholder, select,
+.del-admin-dialog input, .del-admin-dialog table {
     background-color: #494949;
     color: #a4a4a4;
-    border: 1px solid #494949;
+    border: 1px solid #494949 !important;
 }
 
-.add-admin-dialog input:focus {
-    background-color: #494949;
-    border: none;
-    box-shadow: none;
+.add-admin-dialog input:focus, .add-doctor input:focus{
+    background-color: #494949 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.add-doctor {
+    background-color: #252525;
 }

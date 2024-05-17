@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="../css/table.css">
     <link rel="stylesheet" href="../css/control.css">
     <link rel="stylesheet" href="../css/settings.css">
-    <link rel="stylesheet" href="../css/control-internal.css">
+    <link rel="stylesheet" href="../css/ex-panels.css">
+    <link rel="stylesheet" href="../css/ex-panels-l2.css">
     <link id="themeStylesheet" rel="stylesheet" href="../css/light-mode.css">
     <link rel="stylesheet" href="../css/report.css">
     <script>
@@ -309,6 +310,7 @@
 
 
             <div class="card-container">
+                <div id="overlay" class="overlay"></div> <!-- overlay for layer 1 panels -->
 
                 <div class="card" onclick="togglePanel('control-panel')">
                     <div>
@@ -316,6 +318,23 @@
                         <p class="card-description">Facilitate communication and collaboration among admins</p>
                     </div>
                     <img src="../images/control-icon.png" alt="" height="64px">
+                </div>
+
+                <div id="control-panel" class="control-panel"> <!-- control card pe khulega -->
+                    <div class="control-panel-header header-appointment">
+                        Control Panel
+                    </div>
+                    <div class="control-panel-content">
+                        <div class="control-panel-item permanent">
+                            <h4>Assign Work</h4>
+                        </div>
+                        <div class="control-panel-item visiting" onclick="toggleLayer2Panel('addAdminModal')">
+                            <h4>Add Admin</h4>
+                        </div>
+                        <div class="control-panel-item onduty" onclick="toggleLayer2Panel('delAdminModal')">
+                            <h4>Delete Admin</h4>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card" data-bs-toggle="modal" data-bs-target="#reportModal">
@@ -326,7 +345,7 @@
                     <img src="../images/report.png" alt="" height="64px">
                 </div>
 
-                <div class="card">
+                <div class="card" onclick="togglePanel('add-account-panel')">
                     <div>
                         <p class="card-title">Add Account</p>
                         <p class="card-description">Seamlessly add new employees to the system</p>
@@ -334,96 +353,129 @@
                     <img src="../images/add-account.png" alt="" height="64px">
                 </div>
 
+                <div class="ex-panel" id="add-account-panel"> <!-- add account pe khulega -->
+                    <div class="panel-header header-add-account">Add Account</div>
+                    <div class="panel-content">
+                        <div class="account-panel-item permanent" onclick="toggleLayer2Panel('addDoctor')">
+                            <h4>Doctor</h4>
+                        </div>
+                        <div class="account-panel-item panel-item visiting" onclick="toggleLayer2Panel('addPharmacist')">
+                            <h4>Pharmacist</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="add-doctor" id="addDoctor"> <!-- yeh add doctor pe khulega add account ke andar -->
+                    <div class="panel-header header-add-account">Add Doctor</div>
+                    <div class="panel-content">
+                        <form id="doctorForm">
+                            <input type="text" id="adminName" name="adminName" placeholder="Admin Name" required>        
+                            <input type="email" id="email" name="email" placeholder="Email" required>   
+                            <input type="password" id="password" name="password" placeholder="Password" required> 
+                            <input type="text" id="contact" name="contact" placeholder="Contact" required>  
+                            <input type="text" id="role" name="role" placeholder="Role" required>
+                            <input type="text" id="permission" name="permission" placeholder="Permission" required>
+                            <button type="submit">Submit</button>
+                            <button type="button" onclick="toggleLayer2Panel('addDoctor')">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="add-doctor" id="addPharmacist"> <!-- yeh add pharmacist pe khulega add account ke andar -->
+                    <div class="panel-header header-add-account">Add Pharmacist</div>
+                    <div class="panel-content">
+                        <form id="doctorForm">
+                            <input type="text" id="adminName" name="adminName" placeholder="Admin Name" required>        
+                            <input type="email" id="email" name="email" placeholder="Email" required>   
+                            <input type="password" id="password" name="password" placeholder="Password" required> 
+                            <input type="text" id="contact" name="contact" placeholder="Contact" required>  
+                            <input type="text" id="role" name="role" placeholder="Role" required>
+                            <input type="text" id="permission" name="permission" placeholder="Permission" required>
+                            <button type="submit">Submit</button>
+                            <button type="button" onclick="toggleLayer2Panel('addPharmacist')">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="overlay2" class="overlay"></div> <!-- overlay for layer 2 panels -->
+                <div class="add-admin fade" id="addAdminModal" tabindex="-1" aria-hidden="true">
+                    <!-- layer 2 panel jo control panel ke andar add admin pe khulega -->
+                    <div class="add-admin-dialog">
+                        <div class="add-admin-content">
+                            <div class="add-admin-header">
+                                Enter Details
+                            </div>
+                            <div class="add-admin-body">
+                                <form action="">
+                                    <input type="text" class="form-control" name="name" placeholder="Enter Name"
+                                        required="false">
+                                    <input type="email" class="form-control" name="email" placeholder="Enter Email"
+                                        required="false">
+                                    <input type="password" class="form-control" name="password"
+                                        placeholder="Enter Password" required="false">
+                                    <input type="tel" class="form-control" name="number" placeholder="Enter Contact"
+                                        required="false"><br>
+                                    <select id="role">
+                                        <option selected>Select Role</option>
+                                        <option value="SuperAdmin">Super Admin</option>
+                                        <option value="Admin">Admin</option>
+                                    </select>
+                                    <select id="permission">
+                                        <option selected>Select Permission</option>
+                                        <option value="allAccess">All Access</option>
+                                        <option value="limitedAccess">Limited Access</option>
+                                    </select>
+                                </form>
+                            </div>
+                            <div class="add-admin-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="toggleLayer2Panel('addAdminModal')">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Add Admin</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="del-admin fade" id="delAdminModal" tabindex="-1" aria-hidden="true">
+                    <!-- layer 2 panel jo control panel ke andar add admin pe khulega -->
+                    <div class="del-admin-dialog">
+                        <div class="del-admin-content">
+                            <div class="del-admin-header">
+                                Delete Admin
+                            </div>
+                            <div class="del-admin-body">
+                                <form>
+                                    <input type="text" id="" placeholder="Search Admin">
+                                    <input type="submit" value="Search">
+                                </form>
+                                <table id="adminTable">
+                                    <tr>
+                                        <th>Admin ID</th>
+                                        <th>Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Admin Name</td>
+                                        <td><button class="btn btn-danger">Delete</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="del-admin-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="toggleLayer2Panel('delAdminModal')">Cancel</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div id="overlay" class="overlay"></div>
-            <div id="control-panel" class="control-panel">
-                <div class="control-panel-header header-appointment">
-                    Control Panel
-                </div>
-                <div class="control-panel-content">
-                    <div class="control-panel-item permanent">
-                        <h4>Assign Work</h4>
-                    </div>
-                    <div class="control-panel-item visiting" onclick="toggleLayer2Panel('addAdminModal')">
-                        <h4>Add Admin</h4>
-                    </div>
-                    <div class="control-panel-item onduty" onclick="toggleLayer2Panel('delAdminModal')">
-                        <h4>Delete Admin</h4>
-                    </div>
-                </div>
-            </div>
-
-            <div id="overlay2" class="overlay"></div>
-            <div class="add-admin fade" id="addAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="add-admin-dialog">
-                    <div class="add-admin-content">
-                        <div class="add-admin-header">
-                            Enter Details
-                        </div>
-                        <div class="add-admin-body">
-                            <form action="">
-                                
-                                <input type="text" class="form-control" name="name" placeholder="Enter Name" required="false">
-                                <input type="email" class="form-control" name="email" placeholder="Enter Email" required="false">
-                                <input type="password" class="form-control" name="password" placeholder="Enter Password" required="false">
-                                <input type="tel" class="form-control" name="number" placeholder="Enter Contact" required="false"><br>
-                                <select id="role">
-                                    <option selected>Select Role</option>
-                                    <option value="SuperAdmin">Super Admin</option>
-                                    <option value="Admin">Admin</option>
-                                </select>
-                                <select id="permission">
-                                    <option selected>Select Permission</option>
-                                    <option value="allAccess">All Access</option>
-                                    <option value="limitedAccess">Limited Access</option>
-                                </select>
-                            </form>
-                        </div>
-                        <div class="add-admin-footer">
-                            <button type="button" class="btn btn-secondary" onclick="togglePanel('addAdminModal')">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Add Admin</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="del-admin fade" id="delAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="del-admin-dialog">
-                    <div class="del-admin-content">
-                        <div class="del-admin-header">
-                            Delete Admin
-                        </div>
-                        <div class="del-admin-body">
-                            <form>
-                                <input type="text" id="" placeholder="Search Admin">
-                                <input type="submit" value="Search">
-                            </form>
-                            <table id="adminTable">
-                                <tr>
-                                    <th>Admin ID</th>
-                                    <th>Name</th>
-                                    <th>Action</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Admin Name</td>
-                                    <td><button class="btn btn-danger">Delete</button></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="del-admin-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
 
-    <!-- Footer -->
+    <!-- Footer code start-->
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="bootstrap" viewBox="0 0 118 94">
             <title>Bootstrap</title>
@@ -469,8 +521,10 @@
             </ul>
         </footer>
     </div>
+    <!-- Footer ends here-->
 
-    <div id="modalContainer"></div>
+    <div id="modalContainer"></div> <!-- settings ko bahar se kholne ke liye -->
+
 
 
     <!-- Report Modal -->
@@ -500,8 +554,6 @@
             </div>
         </div>
     </div>
-
-
 
     <script src="../js/report.js"></script>
 </body>

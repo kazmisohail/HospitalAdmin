@@ -1,0 +1,188 @@
+.add-admin-dialog,
+.del-admin-dialog {
+    transform: translate(-50%, -50%) scale(0.95);
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out !important;
+    max-height: 0;
+    opacity: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: white;
+    border-radius: 10px;
+    visibility: hidden;
+}
+
+
+.add-admin.show .add-admin-dialog,
+.del-admin.show .del-admin-dialog {
+    transform: translate(-50%, -50%) scale(1);
+    max-height: 80vh;
+    opacity: 1;
+    z-index: 1001;
+    visibility: visible;
+}
+
+.add-admin-content,
+.del-admin-content {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-admin-header,
+.del-admin-header {
+    background: #bcbfa2;
+    color: white;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.del-admin-header {
+    background-color: #a1d9b6 !important;
+}
+
+.del-admin form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.del-admin form input {
+    width: 100%;
+    height: 40px;
+    margin: 1%;
+    padding: 1%;
+    border: 1px solid rgb(214, 214, 214);
+    border-radius: 5px;
+}
+
+.del-admin form input:last-child {
+    width: 20%;
+    background-color: #dbdbdb;
+}
+
+
+.del-admin table {
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.del-admin table td,
+th {
+    width: 100%;
+    color: rgb(39, 39, 39);
+}
+
+.add-admin-body,
+.del-admin-body {
+    padding: 20px;
+}
+
+.add-admin-footer,
+.del-admin-footer {
+    padding: 10px;
+    text-align: center;
+}
+
+.form-control {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#delAdminModal .del-admin-dialog {
+    width: 50vw;
+}
+
+.add-doctor {
+    transform: translate(-50%, -50%) scale(0.95);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: 350px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1001;
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out; /* Include visibility in transition */
+}
+
+.add-doctor.show  {
+    visibility: visible;
+    opacity: 1;
+}
+
+.add-doctor h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.add-doctor label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 14px;
+}
+
+.add-doctor input[type="text"],
+.add-doctor input[type="email"],
+.add-doctor input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.add-doctor button {
+    width: 48%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.add-doctor button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+}
+
+.add-doctor button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.add-doctor button[type="submit"]:focus {
+    outline: none;
+}
+
+.add-doctor button[type="submit"]:active {
+    transform: translateY(1px);
+}
+
+.add-doctor button[type="button"] {
+    background-color: #ccc;
+    color: #333;
+    float: right;
+}
+
+.add-doctor button[type="button"]:hover {
+    background-color: #bbb;
+}
