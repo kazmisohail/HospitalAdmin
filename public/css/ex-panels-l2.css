@@ -34,7 +34,41 @@
     font-size: 1.5em;
 }
 
-.add-admin-body, .del-admin-header {
+.del-admin-header {
+    background-color: #a1d9b6 !important;
+}
+
+.del-admin form {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+}
+
+.del-admin form input {
+    width: 100%;
+    height: 40px;
+    margin: 1%;
+    padding: 1%;
+    border: 1px solid rgb(214, 214, 214);
+    border-radius: 5px;
+}
+
+.del-admin form input:last-child {
+    width: 20%;
+    background-color: #dbdbdb;
+}
+
+
+.del-admin table {
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.del-admin table td,th {
+    width: 100%;
+    color: rgb(39, 39, 39);
+}
+.add-admin-body, .del-admin-body {
     padding: 20px;
 }
 
@@ -61,3 +95,5 @@ select {
 #delAdminModal .del-admin-dialog {
     width: 50vw;
 }
+
+

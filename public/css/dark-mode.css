@@ -97,7 +97,7 @@ table {
     border: none;
 }
 
-.control-panel-item:hover {
+.control-panel-item:hover, .account-panel-item:hover {
     background-color: #373737;
 }
 

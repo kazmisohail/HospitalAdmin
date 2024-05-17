@@ -190,7 +190,7 @@ function toggleLayer2Panel(panelId) {
 function closeAllPanels() {
     const overlay = document.getElementById('overlay');
     const overlay2 = document.getElementById('overlay2');
-    const panels = document.querySelectorAll('.del-admin ,.add-admin, .control-panel.show, .ex-panel.show');
+    const panels = document.querySelectorAll('.add-doctor, .del-admin ,.add-admin, .control-panel.show, .ex-panel.show');
 
     panels.forEach(panel => {
         panel.classList.remove('show');

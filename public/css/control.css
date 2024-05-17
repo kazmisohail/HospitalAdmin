@@ -54,7 +54,7 @@
     padding: 20px;
 }
 
-.control-panel-item {
+.control-panel-item, .account-panel-item {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -63,16 +63,16 @@
     transition: background-color 0.1s ease;
 }
 
-.control-panel-item:last-child {
+.control-panel-item:last-child, .account-panel-item:last-child {
     margin-bottom: 0;
 }
 
-.control-panel-item h4 {
+.control-panel-item h4, .account-panel-item h4 {
     margin: 0 0 10px;
     font-size: 1.2em;
 }
 
-.control-panel-item:hover {
+.control-panel-item:hover, .account-panel-item:hover {
     cursor: pointer;
     background-color: #e1e1e1;
     transform: scale(1.01);
