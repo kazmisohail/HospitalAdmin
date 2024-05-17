@@ -15,7 +15,7 @@
 }
 
 .ex-panel.show {
-    max-height: 500px;
+    max-height: 100%;
     opacity: 1;
 }
 
@@ -24,6 +24,8 @@
     text-align: center;
     padding: 10px 0;
     font-size: 1.5em;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
 .header-patient {

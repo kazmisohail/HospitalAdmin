@@ -356,12 +356,44 @@
                 <div class="ex-panel" id="add-account-panel"> <!-- add account pe khulega -->
                     <div class="panel-header header-add-account">Add Account</div>
                     <div class="panel-content">
-                        <div class="account-panel-item permanent" onclick="toggleLayer2Panel('add-doctor')">
+                        <div class="account-panel-item permanent" onclick="toggleLayer2Panel('addDoctor')">
                             <h4>Doctor</h4>
                         </div>
-                        <div class="account-panel-item panel-item visiting">
+                        <div class="account-panel-item panel-item visiting" onclick="toggleLayer2Panel('addPharmacist')">
                             <h4>Pharmacist</h4>
                         </div>
+                    </div>
+                </div>
+
+                <div class="add-doctor" id="addDoctor"> <!-- yeh add doctor pe khulega add account ke andar -->
+                    <div class="panel-header header-add-account">Add Doctor</div>
+                    <div class="panel-content">
+                        <form id="doctorForm">
+                            <input type="text" id="adminName" name="adminName" placeholder="Admin Name" required>        
+                            <input type="email" id="email" name="email" placeholder="Email" required>   
+                            <input type="password" id="password" name="password" placeholder="Password" required> 
+                            <input type="text" id="contact" name="contact" placeholder="Contact" required>  
+                            <input type="text" id="role" name="role" placeholder="Role" required>
+                            <input type="text" id="permission" name="permission" placeholder="Permission" required>
+                            <button type="submit">Submit</button>
+                            <button type="button" onclick="toggleLayer2Panel('addDoctor')">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="add-doctor" id="addPharmacist"> <!-- yeh add pharmacist pe khulega add account ke andar -->
+                    <div class="panel-header header-add-account">Add Pharmacist</div>
+                    <div class="panel-content">
+                        <form id="doctorForm">
+                            <input type="text" id="adminName" name="adminName" placeholder="Admin Name" required>        
+                            <input type="email" id="email" name="email" placeholder="Email" required>   
+                            <input type="password" id="password" name="password" placeholder="Password" required> 
+                            <input type="text" id="contact" name="contact" placeholder="Contact" required>  
+                            <input type="text" id="role" name="role" placeholder="Role" required>
+                            <input type="text" id="permission" name="permission" placeholder="Permission" required>
+                            <button type="submit">Submit</button>
+                            <button type="button" onclick="toggleLayer2Panel('addPharmacist')">Cancel</button>
+                        </form>
                     </div>
                 </div>
 
