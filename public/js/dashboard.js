@@ -81,20 +81,21 @@ function closePanel() {
 }
 
 function markAsRead(button) {
-    var notificationItem = button.closest('.notification-item');
-    notificationItem.classList.add('read');
+    var notificationItem = $(button).closest('.notification-item');
+    notificationItem.addClass('read');
 }
 
 function deleteNotification(button) {
-    var notificationItem = button.closest(".notification-item");
+    var notificationItem = $(button).closest('.notification-item');
     notificationItem.remove(); // Remove the notification item
 
     // Check if there are any remaining notifications
-    var remainingNotifications = document.querySelectorAll(".notification-item");
+    var remainingNotifications = $('.notification-item');
     if (remainingNotifications.length === 0) {
         closePanel(); // If no notifications left, close the panel
     }
 }
+
 
 function toggleAdminProfile() {
     var adminProfile = document.getElementById("admin-profile");
@@ -104,22 +105,6 @@ function toggleAdminProfile() {
         adminProfile.style.display = "none";
     }
 }
-
-function toggleResolvepanel() {
-    var resolvePanel = document.getElementById("resolve-panel");
-    var overlay = document.getElementById("overlay");
-
-    if (resolvePanel.style.display === "none") {
-        resolvePanel.style.display = "block";
-        overlay.style.display = "block";
-        document.body.style.overflow = "hidden"; // Disable scrolling
-    } else {
-        resolvePanel.style.display = "none";
-        overlay.style.display = "none";
-        document.body.style.overflow = "auto"; // Re-enable scrolling
-    }
-}
-
 
 function toggleTheme() {
 
@@ -142,21 +127,6 @@ function toggleTheme() {
 
     localStorage.setItem('viewMode', viewMode);
 
-}
-
-function closeRemarksPanel() {
-    var remarksPanel = document.querySelector('.remarks-panel');
-    var overlay = document.getElementById("overlay");
-
-    if (remarksPanel.style.display === "none") {
-        remarksPanel.style.display = "block";
-        overlay.style.display = "block";
-        document.body.style.overflow = "hidden"; // Disable scrolling
-    } else {
-        remarksPanel.style.display = "none";
-        overlay.style.display = "none";
-        document.body.style.overflow = "auto"; // Re-enable scrolling
-    }
 }
 
 function togglePanel(panelId) {
@@ -190,7 +160,7 @@ function toggleLayer2Panel(panelId) {
 function closeAllPanels() {
     const overlay = document.getElementById('overlay');
     const overlay2 = document.getElementById('overlay2');
-    const panels = document.querySelectorAll('.add-doctor, .del-admin ,.add-admin, .control-panel.show, .ex-panel.show');
+    const panels = document.querySelectorAll('.remarks-panel ,.reportModal, .add-doctor, .del-admin ,.add-admin, .control-panel.show, .ex-panel.show');
 
     panels.forEach(panel => {
         panel.classList.remove('show');
@@ -241,15 +211,40 @@ window.onload = function () {
                 <td>${issue.CreationDate}</td>
                 <td>${issue.Condition}</td>
                 <td>${issue.Content}</td>
-                <td><button class="btn btn-primary submit-btn" type="button" onclick="toggleResolvepanel()">Submit</button></td>
+                <td><button class="btn btn-primary submit-btn" type="button" onclick="togglePanel('resolve-panel')">Submit</button></td>
             </tr>`;
             tbody.append(row);
         });
     }).fail(function (err) {
         console.error("Error fetching issues:", err);
     });
-};
 
+    const adminID = 7; // Example admin ID
+    $.get(`http://localhost:3002/getNotifications/${adminID}`, function (notifications) {
+        const notificationContent = $('.notification-content');
+        notificationContent.empty(); // Clear existing content
+
+        if (notifications.length === 0) {
+            $('#no-notification-msg').css('display', 'block');
+        } else {
+            $('#no-notification-msg').css('display', 'none');
+            notifications.forEach(notification => {
+                const notificationItem = $('<div class="notification-item"></div>');
+                notificationItem.html(`
+                    <p>${notification.Description}</p>
+                    <div class="notification-functions">
+                        <button class="read-btn" onclick="markAsRead(${notificationItem})"><img src="../images/read.png" alt=""></button>
+                        <button class="delete-btn" onclick="deleteNotification(${notificationItem})"><img src="../images/delete.png" alt=""></button>
+                        <div class="notification-time">${new Date(notification.Timestamp).toLocaleString()}</div>
+                    </div>
+                `);
+                notificationContent.append(notificationItem);
+            });
+        }
+    }).fail(function (error) {
+        console.error('Error fetching notifications:', error);
+    });
+};
 
 
 function loadAddAdminModal() {

@@ -21,6 +21,21 @@
                 console.log("menu status: onn");
             }
         })();
+
+        /* function loadProfilePicture() {
+            const profileImage = document.getElementById('display-picture');
+            const imageDataUrl = localStorage.getItem('profilePicture');
+
+            if (imageDataUrl) {
+                console.log(imageDataUrl);
+                profileImage.src = imageDataUrl;
+            } else {
+                profileImage.src = '../images/default.png'; // Fallback image
+            }
+        }
+
+        // Call the function to load the profile picture when the page loads
+        window.onload = loadProfilePicture; */
     </script>
 </head>
 
@@ -56,7 +71,7 @@
                 src="../images/appointments.svg" alt="" height="20px">Appointment</button>
         <button onclick="pharmacy()" class="menu-btn" data-function="pharmacy"><img src="../images/pharmacy.png" alt=""
                 height="20px">Pharmacy</button>
-        <button class="" onclick="loadSettingsModal()" data-bs-toggle="modal" data-bs-target="#settingModal">
+        <button class="" onclick="loadSettingsModal()">
             <img src="../images/settings.png" alt="" height="20px">Settings
         </button>
         <button>
