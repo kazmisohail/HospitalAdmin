@@ -60,9 +60,20 @@ function updateTime() {
 }
 
 function toggleNotificationPanel() {
+    const bellIcon = document.getElementById('bell-icon');
     var panel = document.getElementById("notification-panel");
-    panel.style.display = panel.style.display === "none" ? "block" : "none";
+
+    if (panel.classList.contains('show')) {
+        panel.classList.remove('show');
+    } else {
+        const bellIconRect = bellIcon.getBoundingClientRect();
+
+        panel.style.top = bellIconRect.bottom + 'px';
+        panel.style.right = (window.innerWidth - bellIconRect.right) + 'px';
+        panel.classList.add('show');
+    }
 }
+
 
 function closePanel() {
     var notificationPanel = document.getElementById("notification-panel");
@@ -80,7 +91,7 @@ function closePanel() {
     }
 }
 
-function markAsRead(button){
+function markAsRead(button) {
     var notificationItem = $(button).closest('.notification-item');
     notificationItem.addClass('read');
 }

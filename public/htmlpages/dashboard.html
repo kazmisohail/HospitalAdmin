@@ -64,7 +64,7 @@
                             setInterval(updateTime, 10000);
                             updateTime();
                         </script>
-                        <button onclick="toggleNotificationPanel()" class="bell-icon">
+                        <button onclick="toggleNotificationPanel()" class="bell-icon" id="bell-icon">
                             <img src="../images/bell2.png" alt="Logo" width="40">
                         </button>
                         <button class="golayi-frame" onclick="toggleAdminProfile()">
@@ -93,7 +93,6 @@
 
                 <div class="notification-content">
                     <p id="no-notification-msg" style="display: none;">There are no notifications.</p>
-                    <!-- Notification items will be added here -->
                 </div>
                 <div class="notification-content">
                     <div class="notification-item">
