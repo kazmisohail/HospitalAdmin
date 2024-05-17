@@ -81,20 +81,21 @@ function closePanel() {
 }
 
 function markAsRead(button) {
-    var notificationItem = button.closest('.notification-item');
-    notificationItem.classList.add('read');
+    var notificationItem = $(button).closest('.notification-item');
+    notificationItem.addClass('read');
 }
 
 function deleteNotification(button) {
-    var notificationItem = button.closest(".notification-item");
+    var notificationItem = $(button).closest('.notification-item');
     notificationItem.remove(); // Remove the notification item
 
     // Check if there are any remaining notifications
-    var remainingNotifications = document.querySelectorAll(".notification-item");
+    var remainingNotifications = $('.notification-item');
     if (remainingNotifications.length === 0) {
         closePanel(); // If no notifications left, close the panel
     }
 }
+
 
 function toggleAdminProfile() {
     var adminProfile = document.getElementById("admin-profile");
@@ -217,8 +218,33 @@ window.onload = function () {
     }).fail(function (err) {
         console.error("Error fetching issues:", err);
     });
-};
 
+    const adminID = 7; // Example admin ID
+    $.get(`http://localhost:3002/getNotifications/${adminID}`, function (notifications) {
+        const notificationContent = $('.notification-content');
+        notificationContent.empty(); // Clear existing content
+
+        if (notifications.length === 0) {
+            $('#no-notification-msg').css('display', 'block');
+        } else {
+            $('#no-notification-msg').css('display', 'none');
+            notifications.forEach(notification => {
+                const notificationItem = $('<div class="notification-item"></div>');
+                notificationItem.html(`
+                    <p>${notification.Description}</p>
+                    <div class="notification-functions">
+                        <button class="read-btn" onclick="markAsRead(${notificationItem})"><img src="../images/read.png" alt=""></button>
+                        <button class="delete-btn" onclick="deleteNotification(${notificationItem})"><img src="../images/delete.png" alt=""></button>
+                        <div class="notification-time">${new Date(notification.Timestamp).toLocaleString()}</div>
+                    </div>
+                `);
+                notificationContent.append(notificationItem);
+            });
+        }
+    }).fail(function (error) {
+        console.error('Error fetching notifications:', error);
+    });
+};
 
 
 function loadAddAdminModal() {

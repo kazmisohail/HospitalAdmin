@@ -72,6 +72,22 @@ app.get("/api/issues", async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+// Endpoint to get notifications
+app.get('/getNotifications/:adminID', (req, res) => {
+    const adminID = req.params.adminID;
+    const request = new sql.Request();
+    request.input('AdminID', sql.Int, adminID);
+    request.query('SELECT * FROM Control WHERE AdminID = @AdminID AND Details IS NULL', (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        } else {
+            res.json(result.recordset);
+        }
+    });
+});
+
 //Start the server on port 3001
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
