@@ -1,8 +1,5 @@
 .notification-panel {
-  display: none;
   position: absolute;
-  top: 60px;
-  right: 50px;
   width: 300px;
   background-color: transparent;
   border: 1px solid #ccc;
@@ -12,7 +9,16 @@
   max-height: 300px;
   overflow-y: scroll;
   transition: 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
 }
+
+.notification-panel.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+
 
 #no-notification-msg {
   padding: 10px;
