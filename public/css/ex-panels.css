@@ -73,17 +73,17 @@
     font-size: 1.2em;
 }
 
-.permanent {
+.item-1 {
     border-left: 5px solid #91b5cd;
     padding-left: 10px;
 }
 
-.visiting {
+.item-2 {
     border-left: 5px solid #bcbfa2;
     padding-left: 10px;
 }
 
-.onduty {
+.item-3 {
     border-left: 5px solid #a1d9b6;
     padding-left: 10px;
 }
@@ -91,6 +91,8 @@
 .panel-item p {
     color: #555;
     margin: 0;
+    font-weight: 500;
+    font-size: large;
 }
 
 .overlay {

@@ -69,6 +69,6 @@ body {
     background-color: #ffffff;
 }
 
-.add-doctor .panel-content {
-    background-color: white;
+.add-doctor .panel-content, .assign-work {
+    background-color: white !important;
 }

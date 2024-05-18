@@ -143,15 +143,15 @@
                 <div class="ex-panel" id="patientStatusPanel">
                     <div class="panel-header header-patient">Total Patients</div>
                     <div class="panel-content">
-                        <div class="panel-item opd">
+                        <div class="panel-item item-1 opd">
                             <h4>OPD</h4>
                             <p>loading..</p>
                         </div>
-                        <div class="panel-item admitted">
+                        <div class="panel-item item-2 admitted">
                             <h4>Admitted</h4>
                             <p>loading..</p>
                         </div>
-                        <div class="panel-item today">
+                        <div class="panel-item item-3 today">
                             <h4>Today</h4>
                             <p>loading..</p>
                         </div>
@@ -169,15 +169,15 @@
                 <div class="ex-panel" id="DoctorStatusPanel">
                     <div class="panel-header header-doctor">Total Doctors</div>
                     <div class="panel-content">
-                        <div class="panel-item permanent">
+                        <div class="panel-item item-1 permanent">
                             <h4>Permanent</h4>
                             <p>loading..</p>
                         </div>
-                        <div class="panel-item visiting">
+                        <div class="panel-item item-2 visiting">
                             <h4>Visiting</h4>
                             <p>loading..</p>
                         </div>
-                        <div class="panel-item onduty">
+                        <div class="panel-item item-3 onduty">
                             <h4>On Duty</h4>
                             <p>loading..</p>
                         </div>
@@ -195,11 +195,11 @@
                 <div class="ex-panel" id="toggleAppointmentPanel">
                     <div class="panel-header header-appointment">Today's Appointments</div>
                     <div class="panel-content">
-                        <div class="panel-item completed">
+                        <div class="panel-item item-1 completed">
                             <h4>Completed</h4>
                             <p>loading..</p>
                         </div>
-                        <div class="panel-item pending">
+                        <div class="panel-item item-2 pending">
                             <h4>Pending</h4>
                             <p>loading..</p>
                         </div>
@@ -320,13 +320,13 @@
                         Control Panel
                     </div>
                     <div class="panel-content">
-                        <div class="control-panel-item permanent">
+                        <div class="control-panel-item item-1" onclick="toggleLayer2Panel('assignWorkPanel')">
                             <h4>Assign Work</h4>
                         </div>
-                        <div class="control-panel-item visiting" onclick="toggleLayer2Panel('addAdminModal')">
+                        <div class="control-panel-item item-2" onclick="toggleLayer2Panel('addAdminModal')">
                             <h4>Add Admin</h4>
                         </div>
-                        <div class="control-panel-item onduty" onclick="toggleLayer2Panel('delAdminModal')">
+                        <div class="control-panel-item item-3" onclick="toggleLayer2Panel('delAdminModal')">
                             <h4>Delete Admin</h4>
                         </div>
                     </div>
@@ -351,10 +351,10 @@
                 <div class="ex-panel" id="add-account-panel"> <!-- add account pe khulega -->
                     <div class="panel-header header-add-account">Add Account</div>
                     <div class="panel-content">
-                        <div class="account-panel-item permanent" onclick="toggleLayer2Panel('addDoctor')">
+                        <div class="account-panel-item item-1 permanent" onclick="toggleLayer2Panel('addDoctor')">
                             <h4>Doctor</h4>
                         </div>
-                        <div class="account-panel-item panel-item visiting"
+                        <div class="account-panel-item item-2 panel-item visiting"
                             onclick="toggleLayer2Panel('addPharmacist')">
                             <h4>Pharmacist</h4>
                         </div>
@@ -423,6 +423,21 @@
                 </div>
 
                 <div id="overlay2" class="overlay"></div> <!-- overlay for layer 2 panels -->
+
+                <div class="assign-work" id="assignWorkPanel">
+                    <!-- yeh add assign work pe khulega control panel ke andar -->
+                    <div class="panel-header header-patient">Assign Work</div>
+                    <div class="panel-content">
+                        <form id="assignWorkForm">
+                                <input type="text" id="AdminID" name="AdminID" placeholder="Admin ID" required>
+                                <input type="text" id="ActionType" name="ActionType" placeholder="Action Type" required>
+                                <textarea id="Description" name="Description" placeholder="Description" rows="4"
+                                    required></textarea>
+                                <button type="submit">Submit</button>
+                                <button type="button" onclick="toggleLayer2Panel('assignWorkPanel')">Cancel</button>
+                        </form>
+                    </div>
+                </div>
 
                 <div class="add-admin fade" id="addAdminModal" tabindex="-1" aria-hidden="true">
                     <!-- layer 2 panel jo control panel ke andar add admin pe khulega -->

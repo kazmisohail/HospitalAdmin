@@ -104,7 +104,7 @@ select {
     width: 50vw;
 }
 
-.add-doctor {
+.add-doctor, .assign-work {
     transform: translate(-50%, -50%) scale(0.95);
     position: fixed;
     top: 50%;
@@ -123,7 +123,7 @@ select {
     overflow: auto;
 }
 
-.add-doctor.show  {
+.add-doctor.show, .assign-work.show  {
     visibility: visible;
     opacity: 1;
 }
@@ -134,16 +134,11 @@ select {
     color: #333;
 }
 
-.add-doctor label {
-    display: block;
-    margin-bottom: 8px;
-    color: #555;
-    font-size: 14px;
-}
-
 .add-doctor input[type="text"],
 .add-doctor input[type="email"],
-.add-doctor input[type="password"] {
+.add-doctor input[type="password"],
+.assign-work input[type="text"],
+.assign-work textarea{ 
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -151,9 +146,12 @@ select {
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 14px;
+    resize: none;
+    text-overflow: ellipsis;
 }
 
-.add-doctor button {
+.add-doctor button,
+.assign-work button {
     width: 48%;
     padding: 12px;
     border: none;
@@ -164,30 +162,36 @@ select {
     border: none !important;
 }
 
-.add-doctor button[type="submit"] {
+.add-doctor button[type="submit"], 
+.assign-work button[type="submit"] {
     background-color: #49b54f;
     color: white;
 }
 
-.add-doctor button[type="submit"]:hover {
+.add-doctor button[type="submit"]:hover,
+.assign-work button[type="submit"]:hover {
     background-color: #45a049;
 }
 
-.add-doctor button[type="submit"]:focus {
+.add-doctor button[type="submit"]:focus,
+.assign-work button[type="submit"]:focus {
     outline: none;
 }
 
-.add-doctor button[type="submit"]:active {
+.add-doctor button[type="submit"]:active, 
+.assign-work button[type="submit"]:active {
     transform: translateY(1px);
 }
 
-.add-doctor button[type="button"] {
+.add-doctor button[type="button"], 
+.assign-work button[type="button"] {
     background-color: #ccc;
     color: #333;
     float: right;
 }
 
-.add-doctor button[type="button"]:hover {
+.add-doctor button[type="button"]:hover, 
+.assign-work button[type="button"]:hover {
     background-color: #bbb;
 }
 

@@ -53,9 +53,12 @@ body {
 
 .ex-panel {
     background-color: #252525;
+    color: #dbdbdb;
 }
 
-
+.panel-item p {
+    color: #c2c2c2;
+}
 
 .tab {
     border: 1px solid #3e3e3e;
@@ -106,19 +109,21 @@ table {
 
 .add-admin-dialog input, .add-doctor input,
 .add-admin-dialog input::placeholder, select,
-.del-admin-dialog input, .del-admin-dialog table {
+.del-admin-dialog input, .del-admin-dialog table,
+.assign-work input, .assign-work textarea {
     background-color: #494949;
     color: #a4a4a4;
     border: 1px solid #494949 !important;
 }
 
-.add-admin-dialog input:focus, .add-doctor input:focus{
+.add-admin-dialog input:focus, .add-doctor input:focus,
+.assign-work input:focus, .assign-work textarea:focus{
     background-color: #494949 !important;
     border: none !important;
     box-shadow: none !important;
 }
 
-.add-doctor {
+.add-doctor, .assign-work {
     background-color: #252525;
 }
 

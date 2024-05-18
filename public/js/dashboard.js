@@ -153,7 +153,7 @@ function toggleLayer2Panel(panelId) {
 function closeAllPanels() {
     const overlay = document.getElementById('overlay');
     const overlay2 = document.getElementById('overlay2');
-    const panels = document.querySelectorAll('.remarks-panel ,.reportModal, .add-doctor, .del-admin ,.add-admin, .control-panel.show, .ex-panel.show');
+    const panels = document.querySelectorAll('.assign-work ,.remarks-panel ,.reportModal, .add-doctor, .del-admin ,.add-admin, .control-panel.show, .ex-panel.show');
 
     panels.forEach(panel => {
         panel.classList.remove('show');
@@ -178,10 +178,10 @@ function togglePanel(panelId) {
         if (panelId === 'DoctorStatusPanel') {
             fetchDoctorStatus();
         }
-        else if(panelId=='patientStatusPanel'){
+        else if (panelId == 'patientStatusPanel') {
             fetchPatientStatus();
         }
-        else if(panelId=='toggleAppointmentPanel'){
+        else if (panelId == 'toggleAppointmentPanel') {
             fetchAppointmentStatus();
         }
     }
@@ -207,7 +207,8 @@ async function fetchAppointmentStatus() {
         //document.querySelector('.panel-item.onduty p').textContent = data.onDuty;
     } catch (error) {
         console.error('Error fetching doctor status:', error);
-    }}
+    }
+}
 async function fetchDoctorStatus() {
     try {
         const response = await fetch('/api/doctors/status');
@@ -300,23 +301,77 @@ window.onload = function () {
     });
  */
 
+    // client-side code for assigning work to an admin
+    document.getElementById('assignWorkForm').addEventListener('submit', async function () {
+
+        const adminID = document.getElementById('AdminID').value;
+        const actionType = document.getElementById('ActionType').value;
+        const description = document.getElementById('Description').value;
+
+        const data = {
+            AdminID: adminID,
+            ActionType: actionType,
+            Description: description
+        };
+
+        try {
+            const response = await fetch('/api/assign-work', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log('Work assigned successfully:', result);
+
+        } catch (error) {
+            console.error('Error assigning work:', error);
+        }
+    });
+
 };
 
-function loadAddAdminModal() {
-    // Load modal content from external file into the parent document
-    parent.$("#addAdminContainer").load("addAdmin-modal.html", function () {
-        // After content is loaded, show the modal
-        parent.$("#addAdminModal").modal("show");
-    });
-}
+/* async function assignWork() {
+    preventDefault();
+    
+    const adminID = document.getElementById('AdminID').value;
+    const actionType = document.getElementById('ActionType').value;
+    const description = document.getElementById('Description').value;
 
-function loadDelAdminModal() {
-    // Load modal content from external file into the parent document
-    parent.$("#delAdminContainer").load("delAdmin-modal.html", function () {
-        // After content is loaded, show the modal
-        parent.$("#delAdminModal").modal("show");
-    });
-}
+    const data = {
+        AdminID: adminID,
+        ActionType: actionType,
+        Description: description
+    };
+
+    try {
+        const response = await fetch('/api/assign-work', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log('Work assigned successfully:', result);
+
+        // Optionally, refresh the table or provide user feedback
+        // You can call a function to refresh your data table here
+    } catch (error) {
+        console.error('Error assigning work:', error);
+    }
+} */
 
 function inventory() {
     parent.window.location.href = './inventory.html';
