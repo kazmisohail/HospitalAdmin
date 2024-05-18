@@ -5,7 +5,7 @@
 .rBtnDiv {
     margin-top: 30px;
     padding: 25px;
-    background-color: antiquewhite;
+    /* background-color: ; */
 }
 
 .saveBtn {
@@ -13,7 +13,7 @@
 }
 
 .reportPage {
-    background-color: beige;
+    background-color: #fff;
     margin-top: 25px;
     box-shadow: 0 0 3px #000;
     height: auto;
@@ -25,6 +25,16 @@
     padding: 10px;
 }
 
+#moduleReport {
+    width: 150px;
+    height: 30px;
+}
+
+#monthReport {
+    margin-top: 30px;
+    margin-left: 450px;
+}
+
 /* Bar Chart */
 .barChart {
     justify-content: center;
@@ -33,13 +43,27 @@
     width: 100%;
     max-width: 1000px;
     margin: 20px auto;
+    height: 500px;
   }
 
   .bar {
-    background-color: #007bff;
+    background-color: #4caf50;
     color: #fff;
     text-align: center;
-    padding: 10px 0;
+    margin-bottom: 5px;
+  }
+
+  .bar1 {
+    background-color: #2196f3;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  .bar2 {
+    background-color: pink;
+    color: #fff;
+    text-align: center;
     margin-bottom: 5px;
   }
 
@@ -55,6 +79,7 @@
     width: 100%;
     max-width: 1000px;
     margin: 20px auto;
+    height: 500px;
   }
 
 #pChart-msg {
@@ -62,8 +87,8 @@
 }
 
 .pie-chart {
-    margin-top: 25px;
-    margin-left: 385px;
+    margin-top: 100px;
+    margin-left: 220px;
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -86,7 +111,8 @@
 }
 
 .legend {
-    margin-top: 20px;
+    margin-top: 60px;
+    margin-left: 130px;
 }
 
 .legend span {
@@ -106,4 +132,8 @@
 
 .legend .orange {
     background: #ff9800;
+}
+
+.legend div {
+    margin-left: 15px;
 }
