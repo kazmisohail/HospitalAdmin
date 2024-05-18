@@ -39,16 +39,51 @@ app.get('/api/patients/total', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+app.get('/api/appointments/status', async (req, res) => {
+    try {
+        const completedResult = await sql.query('select count(*) from dbo.TodayscompletedAppointment');
+        const pendingResult = await sql.query('select count(*) from dbo.TodayspendingAppointment');
+        console.log("Completed Result:", completedResult);
+        console.log("Pending Result:", pendingResult);
+        const completedCount = parseInt(completedResult.recordset[0]['']);
+        const pendingCount = parseInt(pendingResult.recordset[0]['']);
+
+        res.json({
+            completed: completedCount,
+            pending: pendingCount
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+
+app.get('/api/patients/status', async (req, res) => {
+    try {
+        const opd = await sql.query('select count(patientname) as total from dbo.opd_View');
+        const admitted = await sql.query('SELECT COUNT(patientname) as total FROM dbo.admitted_view ');
+        const today = await sql.query('SELECT COUNT(totalpatients) as total FROM dbo.todayspatients ');
+
+        res.json({
+            opd: opd.recordset[0].total,
+            admitted: admitted.recordset[0].total,
+            today: today.recordset[0].total
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
 app.get('/api/doctors/status', async (req, res) => {
     try {
-        const permanent = await sql.query('SELECT COUNT(*) AS total FROM Employees WHERE   Status = \'Permanent\' AND DeptID = 1');
-        const visiting = await sql.query('SELECT COUNT(*) AS total FROM Employees WHERE   Status = \'Visiting\' AND DeptID = 1');
-        const onDuty = await sql.query('SELECT COUNT(*) AS total FROM Employees WHERE  Status = \'On Duty\' AND DeptID = 1');
+        const permanent = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE   Status = \'Permanent\' AND DeptID = 1');
+        const visiting = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE   Status = \'Visiting\' AND DeptID = 1');
+       // const onDuty = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE  Status = \'On Duty\' AND DeptID = 1');
 
         res.json({
             permanent: permanent.recordset[0].total,
             visiting: visiting.recordset[0].total,
-            onDuty: onDuty.recordset[0].total,
+            //onDuty: onDuty.recordset[0].total,
         });
     } catch (err) {
         console.error('Error fetching doctor status counts:', err);
@@ -71,7 +106,7 @@ app.get('/api/appointments/total', async (req, res) => {
 app.get("/api/doctors/total", async (req, res) => {
     try {
         const pool = await sql.connect(config);
-        const result = await pool.request().query("SELECT COUNT(EmpName) AS totalDoctors FROM employee");
+        const result = await pool.request().query("SELECT COUNT(EmpName) AS totalDoctors FROM employee where deptid=1");
         res.json({ totalDoctors: result.recordset[0].totalDoctors });
     } catch (err) {
         console.error('Query Error', err);
