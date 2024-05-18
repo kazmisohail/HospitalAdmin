@@ -64,8 +64,23 @@ h2 {
 /* Tables */
 #pharmacyTable {
     /* Background Color for testing, change krna h bd ma */
-    background-color: antiquewhite;
+    background-color: #fff;
     box-shadow: 0 0 15px #4CAF50;
+    width: 100%;
+    border-collapse: separate;
+    margin-top: 20px;
+    border-radius: 5px !important;
+    border-spacing: 10px;
+    border: none;
+}
+
+#pharmacyTable .pTHead {
+    background-color: lightgray;
+    color: #000;
+}
+
+#pharmacyTable tr {
+    box-shadow: 0 0 1px #000;
 }
 
 .scrollDiv {
@@ -87,6 +102,7 @@ h2 {
 #pharmacyTable th,
 #pharmacyTable td {
     text-align: center;
+    padding: 8px;
 }
 
 #pharmacyTable td {
