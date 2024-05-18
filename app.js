@@ -70,11 +70,13 @@ app.get('/api/patients/status', async (req, res) => {
         const opd = await sql.query('select count(patientname) as total from dbo.opd_View');
         const admitted = await sql.query('SELECT COUNT(patientname) as total FROM dbo.admitted_view ');
         const today = await sql.query('SELECT COUNT(totalpatients) as total FROM dbo.todayspatients ');
+        const emergency = await sql.query('SELECT COUNT(*) as emergency FROM Emergency_View; ');
 
         res.json({
             opd: opd.recordset[0].total,
             admitted: admitted.recordset[0].total,
-            today: today.recordset[0].total
+            today: today.recordset[0].total,
+            emergency: emergency.recordset[0].total
         });
     } catch (err) {
         console.error(err);
