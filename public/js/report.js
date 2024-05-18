@@ -13,10 +13,46 @@ function report() {
 
 function generateReport() {
     module = document.getElementById('moduleReport').value
-    document.getElementById('moduleName').innerHTML = module.toUpperCase()
-
     month = document.getElementById('monthReport').value
-    document.getElementById('monthName').innerHTML = month
+
+    if (month == "") {
+        alert("Please select module and month")
+    }
+    else {
+        if(module == "doctor") {
+            document.getElementById('moduleName').innerHTML = module.toUpperCase()
+            document.getElementById('monthName').innerHTML = month
+            document.getElementById('bChart-msg').innerHTML = "Doctor Module Bar Chart, message will generate by using backend"
+            document.getElementById('pChart-msg').innerHTML = "Patient Module Pie Chart, message will generate by using backend"
+        }
+        else if(module == "patient") {
+            document.getElementById('moduleName').innerHTML = module.toUpperCase()
+            document.getElementById('monthName').innerHTML = month
+            document.getElementById('bChart-msg').innerHTML = "Patient Module Bar Chart, message will generate by using backend"
+            document.getElementById('pChart-msg').innerHTML = "Patient Module Pie Chart, message will generate by using backend"
+        }
+        else if(module == "emergency") {
+            document.getElementById('moduleName').innerHTML = module.toUpperCase()
+            document.getElementById('monthName').innerHTML = month
+            document.getElementById('bChart-msg').innerHTML = "Emergency Module Bar Chart, message will generate by using backend"
+            document.getElementById('pChart-msg').innerHTML = "Emergency Module Pie Chart, message will generate by using backend"
+        }
+        else if(module == "pharmacy") {
+            document.getElementById('moduleName').innerHTML = module.toUpperCase()
+            document.getElementById('monthName').innerHTML = month
+            document.getElementById('bChart-msg').innerHTML = "Pharmacy Module Bar Chart, message will generate by using backend"
+            document.getElementById('pChart-msg').innerHTML = "Pharmacy Module Pie Chart, message will generate by using backend"
+        }
+        else if(module == "lab") {
+            document.getElementById('moduleName').innerHTML = module.toUpperCase()
+            document.getElementById('monthName').innerHTML = month
+            document.getElementById('bChart-msg').innerHTML = "Lab Module Bar Chart, message will generate by using backend"
+            document.getElementById('pChart-msg').innerHTML = "Lab Module Pie Chart, message will generate by using backend"
+        }
+        else {
+            alert("Please select module")
+        }
+    }
 
     // Create a new Date object
     var currentDate = new Date();
