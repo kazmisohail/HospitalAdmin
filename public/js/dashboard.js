@@ -335,6 +335,46 @@ window.onload = function () {
         }
     });
 
+    document.getElementById('adminForm').addEventListener('submit', async function (event) {
+    
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const contact = document.getElementById('number').value;
+        const role = document.getElementById('role').value;
+        const permission = document.getElementById('permission').value;
+    
+        const data = {
+            AdminName: name,
+            Email: email,
+            Password: password,
+            Contact: contact,
+            Role: role,
+            Permission: permission
+        };
+    
+        try {
+            const response = await fetch('/api/add-admin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const result = await response.json();
+            console.log('Admin details inserted successfully:', result);
+    
+        } catch (error) {
+            console.error('Error inserting admin details:', error);
+        }
+    });
+    
+
 };
 
 /* async function assignWork() {

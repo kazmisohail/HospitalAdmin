@@ -135,14 +135,36 @@ app.post('/api/assign-work', async (req, res) => {
     try {
         const query = "exec assignWork @AdminID, @ActionType, @Description;";
 
-    const request = new sql.Request();
-    request.input('AdminID', sql.NVarChar, AdminID);
-    request.input('ActionType', sql.NVarChar, ActionType);
-    request.input('Description', sql.NVarChar, Description);
+        const request = new sql.Request();
+        request.input('AdminID', sql.NVarChar, AdminID);
+        request.input('ActionType', sql.NVarChar, ActionType);
+        request.input('Description', sql.NVarChar, Description);
 
-    await request.query(query);
+        await request.query(query);
 
-    console.log("Work Assigned Successfully");
+        console.log("Work Assigned Successfully");
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.post('/api/add-admin', async (req, res) => {
+    const { AdminName, Email, Password, Contact, Role, Permission } = req.body;
+    try {
+
+        const query = "EXEC InsertAdminDetails @AdminName, @Email, @Password, @Contact, @Role, @Permission;";
+
+        const request = new sql.Request();
+        request.input('AdminName', sql.NVarChar, AdminName);
+        request.input('Email', sql.NVarChar, Email);
+        request.input('Password', sql.NVarChar, Password);
+        request.input('Contact', sql.NVarChar, Contact);
+        request.input('Role', sql.NVarChar, Role);
+        request.input('Permission', sql.NVarChar, Permission);
+
+        await request.query(query);
+        
+        console.log("Admin Added Successfully");
     } catch (error) {
         console.log(error);
     }

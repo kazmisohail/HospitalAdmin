@@ -447,15 +447,11 @@
                                 Enter Details
                             </div>
                             <div class="add-admin-body">
-                                <form action="">
-                                    <input type="text" class="form-control" name="name" placeholder="Enter Name"
-                                        required="false">
-                                    <input type="email" class="form-control" name="email" placeholder="Enter Email"
-                                        required="false">
-                                    <input type="password" class="form-control" name="password"
-                                        placeholder="Enter Password" required="false">
-                                    <input type="tel" class="form-control" name="number" placeholder="Enter Contact"
-                                        required="false"><br>
+                                <form action="" id="adminForm">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required="false">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required="false">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required="false">
+                                    <input type="tel" class="form-control" id="number" name="number" placeholder="Enter Contact" required="false"><br>
                                     <select id="role">
                                         <option selected>Select Role</option>
                                         <option value="SuperAdmin">Super Admin</option>
@@ -466,12 +462,14 @@
                                         <option value="allAccess">All Access</option>
                                         <option value="limitedAccess">Limited Access</option>
                                     </select>
+                                    <button type="submit" class="btn btn-primary">Add Admin</button>
                                 </form>
+                                
                             </div>
                             <div class="add-admin-footer">
                                 <button type="button" class="btn btn-secondary"
                                     onclick="toggleLayer2Panel('addAdminModal')">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Add Admin</button>
+                                
                             </div>
                         </div>
                     </div>
