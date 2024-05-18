@@ -46,3 +46,73 @@ h2 {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.phSearch:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #4CAF50 !important;
+}
+
+/* Tables */
+#pharmacyTable {
+    /* Background Color for testing, change krna h bd ma */
+    background-color: antiquewhite;
+    box-shadow: 0 0 15px #4CAF50;
+}
+
+#pharmacyTable th,
+#pharmacyTable td {
+    text-align: center;
+}
+
+#pharmacyTable td {
+    font-size: 14px;
+}
+
+#pharmacyTable #empIDP {
+    width: 65px;
+}
+
+#pharmacyTable #pName {
+    width: 200px;
+}
+
+#pharmacyTable #pEmail {
+    width: 200px;
+}
+
+#pharmacyTable #pSal {
+    width: 60px;
+}
+
+#pharmacyTable #pActions {
+    width: 100px;
+}
+
+#pActions button {
+    width: 75px;
+    text-align: center;
+}
+
+/* Modal */
+#pharmacyProfileModal input {
+    margin-top: 10px;
+}
+
+#pharmacyProfileModal .modal-header {
+    justify-content: center;
+    background-color: #4CAF50;
+}
+
+#pharmacyProfileModal .modal-header h1 {
+    font-size: 30px;
+}
+
+#pharmacyProfileModal .modal-body {
+    background-color: antiquewhite;
+}
+
+#pharmacyProfileModal .modal-footer {
+    justify-content: center;
+    background-color: #4CAF50;
+}
