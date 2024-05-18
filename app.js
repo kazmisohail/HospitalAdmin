@@ -57,8 +57,8 @@ app.get("/api/doctors/total", async (req, res) => {
 app.get('/api/appointments/total', async (req, res) => {
     try {
         const pool = await sql.connect(config);
-        const result = await pool.request().query("SELECT COUNT(appointmentid) AS totalAppointments FROM Appointment");
-        res.json({ totalAppointments: result.recordset[0].totalAppointments });
+        const result = await pool.request().query("SELECT count(*) as total FROM TodaysAppointment;");
+        res.json({ totalAppointments: result.recordset[0].total });
     } catch (err) {
         console.error('Query Error', err);
         res.status(500).send('Internal Server Error');
@@ -76,7 +76,7 @@ app.get('/api/patients/status', async (req, res) => {
             opd: opd.recordset[0].total,
             admitted: admitted.recordset[0].total,
             today: today.recordset[0].total,
-            emergency: emergency.recordset[0].total
+            emergency: emergency.recordset[0].emergency
         });
     } catch (err) {
         console.error(err);
@@ -88,7 +88,7 @@ app.get('/api/doctors/status', async (req, res) => {
     try {
         const permanent = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE Status = \'Permanent\' AND DeptID = 1');
         const visiting = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE Status = \'Visiting\' AND DeptID = 1');
-        const onDuty = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE Status = \'OnDuty\' AND DeptID = 1');
+        const onDuty = await sql.query('SELECT count(*) as total FROM OnDutyDoctors;');
 
         res.json({
             permanent: permanent.recordset[0].total,
@@ -103,16 +103,12 @@ app.get('/api/doctors/status', async (req, res) => {
 
 app.get('/api/appointments/status', async (req, res) => {
     try {
-        const completedResult = await sql.query('select count(*) from dbo.TodayscompletedAppointment');
-        const pendingResult = await sql.query('select count(*) from dbo.TodayspendingAppointment');
-        console.log("Completed Result:", completedResult);
-        console.log("Pending Result:", pendingResult);
-        const completedCount = parseInt(completedResult.recordset[0]['']);
-        const pendingCount = parseInt(pendingResult.recordset[0]['']);
+        const completed = await sql.query('select count(*) as total from dbo.TodayscompletedAppointment');
+        const pending = await sql.query('select count(*) as total from dbo.TodayspendingAppointment');
 
         res.json({
-            completed: completedCount,
-            pending: pendingCount
+            completed: completed.recordset[0].total,
+            pending: pending.recordset[0].total
         });
     } catch (err) {
         console.error(err);

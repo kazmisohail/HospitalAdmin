@@ -194,6 +194,7 @@ async function fetchPatientStatus() {
         $(".panel-item.admitted p").text(data.admitted);
         $(".panel-item.today p").text(data.today);
         $(".panel-item.emergency p").text(data.emergency);
+
         //document.querySelector('.panel-item.onduty p').textContent = data.onDuty;
     } catch (error) {
         console.error('Error fetching doctor status:', error);
