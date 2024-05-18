@@ -162,6 +162,63 @@ function closeAllPanels() {
     overlay.style.display = 'none';
     overlay2.style.display = 'none';
 }
+function togglePanel(panelId) {
+    const panel = document.getElementById(panelId);
+    const overlay = document.getElementById('overlay');
+
+    if (panel.classList.contains('show')) {
+        panel.classList.remove('show');
+        overlay.style.display = 'none';
+    } else {
+        panel.classList.add('show');
+        overlay.style.display = 'block';
+        overlay.addEventListener('click', closeAllPanels, { once: true });
+
+        // Fetch the relevant data for the panel if it's being opened
+        if (panelId === 'DoctorStatusPanel') {
+            fetchDoctorStatus();
+        }
+        else if(panelId=='patientStatusPanel'){
+            fetchPatientStatus();
+        }
+        else if(panelId=='toggleAppointmentPanel'){
+            fetchAppointmentStatus();
+        }
+    }
+}
+async function fetchPatientStatus() {
+    try {
+        const response = await fetch('/api/patients/status');
+        const data = await response.json();
+        $(".panel-item.opd p").text(data.opd);
+        $(".panel-item.admitted p").text(data.admitted);
+        $(".panel-item.today p").text(data.today);
+        //document.querySelector('.panel-item.onduty p').textContent = data.onDuty;
+    } catch (error) {
+        console.error('Error fetching doctor status:', error);
+    }
+}
+async function fetchAppointmentStatus() {
+    try {
+        const response = await fetch('/api/appointments/status');
+        const data = await response.json();
+        $(".panel-item.completed p").text(data.completed);
+        $(".panel-item.pending p").text(data.pending);
+        //document.querySelector('.panel-item.onduty p').textContent = data.onDuty;
+    } catch (error) {
+        console.error('Error fetching doctor status:', error);
+    }}
+async function fetchDoctorStatus() {
+    try {
+        const response = await fetch('/api/doctors/status');
+        const data = await response.json();
+        $(".panel-item.permanent p").text(data.permanent);
+        $(".panel-item.visiting p").text(data.visiting);
+        //document.querySelector('.panel-item.onduty p').textContent = data.onDuty;
+    } catch (error) {
+        console.error('Error fetching doctor status:', error);
+    }
+}
 
 window.onload = function () {
     console.log("Page Khul Gaya");

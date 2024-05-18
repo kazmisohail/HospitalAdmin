@@ -90,7 +90,7 @@
                 <h1>Pharmacy Management System</h1>
             </header>
 
-            <div class="dc container">
+            <div class="in container">
                 <div class="button-group">
                     <button id="phmBtn" class="btn btn-secondary" onclick="pharmacy()">Pharmacists</button>
                     <button id="intBtn" class="btn btn-primary">Inventory</button>
@@ -99,18 +99,110 @@
                 <div id="allInventoriesSection">
                     <h2>All Inventories</h2>
                     <form id="searchForm">
-                        <input type="text" id="searchInput" placeholder="Search inventories...">
+                        <input type="text" class="inSearch" id="searchInput" placeholder="Search inventories...">
                         <input type="submit" value="Search">
                     </form>
-                    <table id="inventoryTable">
-                        <tr>
-                            <th>Doctor ID</th>
-                            <th>Name</th>
-                            <th>DOB</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </table>
+                    <div class="scrollDiv">
+                        <table id="inventoryTable">
+                            <tr>
+                                <th>Med ID</th>
+                                <th>Medicine</th>
+                                <th>Category</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr>
+                                <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
+                                <td id="medID">1</td>
+                                <td id="mName">Aspirin</td>
+                                <td id="cat">Pain Relief</td>
+                                <td id="quan">5000</td>
+                                <td id="price">100</td>
+                                <td id="pActions">
+                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#medModal">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="medID">1</td>
+                                <td id="mName">Diazepam</td>
+                                <td id="cat">Anxiety</td>
+                                <td id="quan">1000</td>
+                                <td id="price">150</td>
+                                <td id="pActions">
+                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#medModal">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="medID">1</td>
+                                <td id="mName">Diazepam</td>
+                                <td id="cat">Anxiety</td>
+                                <td id="quan">1000</td>
+                                <td id="price">150</td>
+                                <td id="pActions">
+                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#medModal">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="medID">1</td>
+                                <td id="mName">Diazepam</td>
+                                <td id="cat">Anxiety</td>
+                                <td id="quan">1000</td>
+                                <td id="price">150</td>
+                                <td id="pActions">
+                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#medModal">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="medID">1</td>
+                                <td id="mName">Diazepam</td>
+                                <td id="cat">Anxiety</td>
+                                <td id="quan">1000</td>
+                                <td id="price">150</td>
+                                <td id="pActions">
+                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#medModal">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="medID">1</td>
+                                <td id="mName">Diazepam</td>
+                                <td id="cat">Anxiety</td>
+                                <td id="quan">1000</td>
+                                <td id="price">150</td>
+                                <td id="pActions">
+                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#medModal">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="medID">1</td>
+                                <td id="mName">Diazepam</td>
+                                <td id="cat">Anxiety</td>
+                                <td id="quan">1000</td>
+                                <td id="price">150</td>
+                                <td id="pActions">
+                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#medModal">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="medID">1</td>
+                                <td id="mName">Diazepam</td>
+                                <td id="cat">Anxiety</td>
+                                <td id="quan">1000</td>
+                                <td id="price">150</td>
+                                <td id="pActions">
+                                    <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#medModal">Edit</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -164,65 +256,52 @@
         </footer>
     </div>
 
+    <!-- Inventory Modal -->
+    <div class="modal fade" id="medModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 id="exampleModalLabel"><span id="pName">Aspirin</span>'s Information</h1>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Med ID: </strong><span id="medID">1</span></p>
+                    <p><strong>Medicine Name: </strong><span id="mName">Aspirin</span></p>
+                    <p><strong>Category: </strong><span id="cat">Pain Relief</span></p>
+                    <p><strong>Quantity: </strong><span id="quan">1000</span></p>
+                    <p><strong>Price per unit: </strong><span id="price">100</span></p>
+                    <p><strong>Manufacture Date: </strong><span id="manDate">2024-12-27</span></p>
+                    <p><strong>Expiry Date: </strong><span id="expDate">2025-12-27</span></p>
+                    <p><strong>Manufacturer Name: </strong><span id="manName">ABC Pharmaceuticals</span></p>
+                    <p><strong>Supplier Name: </strong><span id="supName">MediSupply</span></p>
+                    <hr>
+                    <form action="">
+                        <h3>Update Details</h3>
+                        <input type="number" class="form-control" placeholder="Enter New Quantity"
+                            required="false">
+                        <input type="number" class="form-control" placeholder="Enter New Price"
+                            required="false">
+                        <input type="date" class="form-control" id="umanDate" required="false">
+                        <label for="umanDate">Enter New Manufacture Date</label>
+                        <input type="date" class="form-control" id="uexpDate" required="false">
+                        <label for="uexpDate">Enter New Expiry Date</label>
+                        <input type="text" class="form-control" placeholder="Enter New Manufacturer Name"
+                            required="false">
+                        <input type="text" class="form-control" placeholder="Enter New Supplier Name"
+                            required="false">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Close -->
+
     <div id="modalContainer"></div>
 
-    <script>
-        // Mock data
-        const inventories = [
-            { id: 1, name: 'Dr. Smith', dob: '1980-01-01', status: 'Active', gender: 'Male', contact: '1234567890', address: '123 Main St', email: 'smith@example.com', doj: '2020-01-01', salary: '100000', specialization: 'Cardiology', opdCharges: '200', shiftId: 1, day: 'Monday', placement: 'Room 101', appointments: 15 },
-            { id: 2, name: 'Dr. Jones', dob: '1975-05-20', status: 'Active', gender: 'Female', contact: '0987654321', address: '456 Market St', email: 'jones@example.com', doj: '2018-03-15', salary: '120000', specialization: 'Neurology', opdCharges: '250', shiftId: 2, day: 'Tuesday', placement: 'Room 102', appointments: 10 },
-            // Add more inventories here
-        ];
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadInventories();
-            document.getElementById('searchForm').addEventListener('submit', searchInventories);
-        });
-
-        function loadInventories() {
-            const inventoryTable = document.getElementById('inventoryTable');
-            inventories.forEach(inventory => {
-                const row = inventoryTable.insertRow();
-                row.innerHTML = `<td>${inventory.id}</td><td>${inventory.name}</td><td>${inventory.dob}</td><td>${inventory.status}</td><td><button class="btn btn-warning" onclick="editInventory(${inventory.id})">Edit</button><button class="btn btn-danger" onclick="deleteInventory(${inventory.id})">Delete</button></td>`;
-            });
-        }
-
-        function searchInventories(event) {
-            event.preventDefault();
-            const searchInput = document.getElementById('searchInput').value.toLowerCase();
-            const filteredInventories = inventories.filter(inventories => inventory.name.toLowerCase().includes(searchInput) || inventory.specialization.toLowerCase().includes(searchInput));
-            const inventoryTable = document.getElementById('inventoryTable');
-            inventoryTable.innerHTML = '<tr><th>Doctor ID</th><th>Name</th><th>DOB</th><th>Status</th><th>Actions</th></tr>'; // Reset table
-            filteredInventories.forEach(inventories => {
-                const row = inventoryTable.insertRow();
-                row.innerHTML = `<td>${inventory.id}</td><td>${inventory.name}</td><td>${inventory.dob}</td><td>${inventory.status}</td><td><button class="btn btn-warning" onclick="editInventory(${inventory.id})">Edit</button><button class="btn btn-danger" onclick="deleteInventory(${inventory.id})">Delete</button></td>`;
-            });
-        }
-
-        function editInventory(inventoryId) {
-            alert('Editing inventory ID: ' + inventoryId);
-        }
-
-        function deleteInventory(inventoryId) {
-            alert('Deleting inventory ID: ' + inventoryId);
-        }
-
-        function openTab(event, tabName) {
-            const tabContents = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].style.display = 'none';
-            }
-
-            const tabButtons = document.getElementsByClassName('tab-button');
-            for (let i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].className = tabButtons[i].className.replace(' active', '');
-            }
-
-            document.getElementById(tabName).style.display = 'block';
-            event.currentTarget.className += ' active';
-        }
-
-    </script>
 </body>
 
 </html>

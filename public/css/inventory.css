@@ -4,34 +4,48 @@
     margin: 0;
     padding: 0;
 }
+
 header {
     background-color: #333;
     color: #fff;
     padding: 20px;
     text-align: center;
 }
+
 .container {
     margin: 20px auto;
-    max-width: 800px;
-    padding: 0 20px;
+    padding: 20px 50px;
+    /* Set the background image */
+    background-image: url('../images/invBg.jpg');
+    /* Adjust background properties */
+    background-size:  cover; /* Cover the entire viewport */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    /* Optional: Set background color if image is transparent or not fully covering */
+    background-color: #f0f0f0; /* Light gray */
+    height: 750px;
 }
+
 h2 {
     margin-top: 30px;
 }
-.dc form {
+
+.in form {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.dc input[type="text"] {
+
+.in input[type="text"] {
     width: 70%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
-.dc input[type="submit"] {
+
+.in input[type="submit"] {
     width: 25%;
     padding: 8px;
     background-color: #4CAF50;
@@ -40,20 +54,93 @@ h2 {
     border-radius: 4px;
     cursor: pointer;
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+
+.inSearch:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #4CAF50 !important;
 }
-th, td {
-/*     border: 1px solid #ddd; */
-    padding: 8px;
-    text-align: left;
+
+/* Tables */
+#inventoryTable {
+    /* Background Color for testing, change krna h bd ma */
+    background-color: antiquewhite;
+    box-shadow: 0 0 15px #4CAF50;
 }
-th {
+
+.scrollDiv {
+    margin: 10px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.scrollDiv::-webkit-scrollbar-track {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.scrollDiv::-webkit-scrollbar-thumb {
     background-color: #4CAF50;
-    color: white;
 }
 
-/* css */
+#inventoryTable th,
+#inventoryTable td {
+    text-align: center;
+}
 
+#inventoryTable td {
+    font-size: 14px;
+}
+
+#inventoryTable #medID {
+    width: 60px;
+}
+
+#inventoryTable #mName {
+    width: 150px;
+}
+
+#inventoryTable #cat {
+    width: 150px;
+}
+
+#inventoryTable #quan {
+    width: 50px;
+}
+
+#inventoryTable #price {
+    width: 50px;
+}
+
+#inventoryTable #pActions {
+    width: 100px;
+}
+
+#pActions button {
+    width: 75px;
+    text-align: center;
+}
+
+/* Modal */
+#medModal input {
+    margin-top: 10px;
+}
+
+#medModal .modal-header {
+    justify-content: center;
+    background-color: #4CAF50;
+}
+
+#medModal .modal-header h1 {
+    font-size: 30px;
+}
+
+#medModal .modal-body {
+    background-color: antiquewhite;
+}
+
+#medModal .modal-footer {
+    justify-content: center;
+    background-color: #4CAF50;
+}
