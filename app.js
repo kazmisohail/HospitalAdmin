@@ -28,6 +28,7 @@ sql.connect(config, err => {
     }
     console.log("Connection Successful!");
 });
+
 // Define route for fetching total number of patients
 app.get('/api/patients/total', async (req, res) => {
     try {
@@ -39,22 +40,28 @@ app.get('/api/patients/total', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.get('/api/appointments/status', async (req, res) => {
-    try {
-        const completedResult = await sql.query('select count(*) from dbo.TodayscompletedAppointment');
-        const pendingResult = await sql.query('select count(*) from dbo.TodayspendingAppointment');
-        console.log("Completed Result:", completedResult);
-        console.log("Pending Result:", pendingResult);
-        const completedCount = parseInt(completedResult.recordset[0]['']);
-        const pendingCount = parseInt(pendingResult.recordset[0]['']);
 
-        res.json({
-            completed: completedCount,
-            pending: pendingCount
-        });
+// Define route for fetching total doctors
+app.get("/api/doctors/total", async (req, res) => {
+    try {
+        const pool = await sql.connect(config);
+        const result = await pool.request().query("SELECT COUNT(EmpName) AS totalDoctors FROM employee where deptid=1");
+        res.json({ totalDoctors: result.recordset[0].totalDoctors });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Database error' });
+        console.error('Query Error', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Define route for fetching total number of appointments
+app.get('/api/appointments/total', async (req, res) => {
+    try {
+        const pool = await sql.connect(config);
+        const result = await pool.request().query("SELECT COUNT(appointmentid) AS totalAppointments FROM Appointment");
+        res.json({ totalAppointments: result.recordset[0].totalAppointments });
+    } catch (err) {
+        console.error('Query Error', err);
+        res.status(500).send('Internal Server Error');
     }
 });
 
@@ -74,45 +81,43 @@ app.get('/api/patients/status', async (req, res) => {
         res.status(500).json({ error: 'Database error' });
     }
 });
+
 app.get('/api/doctors/status', async (req, res) => {
     try {
-        const permanent = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE   Status = \'Permanent\' AND DeptID = 1');
-        const visiting = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE   Status = \'Visiting\' AND DeptID = 1');
-       // const onDuty = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE  Status = \'On Duty\' AND DeptID = 1');
+        const permanent = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE Status = \'Permanent\' AND DeptID = 1');
+        const visiting = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE Status = \'Visiting\' AND DeptID = 1');
+        const onDuty = await sql.query('SELECT COUNT(Empname) AS total FROM Employee WHERE Status = \'OnDuty\' AND DeptID = 1');
 
         res.json({
             permanent: permanent.recordset[0].total,
             visiting: visiting.recordset[0].total,
-            //onDuty: onDuty.recordset[0].total,
+            onDuty: onDuty.recordset[0].total,
         });
     } catch (err) {
         console.error('Error fetching doctor status counts:', err);
         res.status(500).send('Server error');
     }
 });
-// Define route for fetching total number of appointments
-app.get('/api/appointments/total', async (req, res) => {
+
+app.get('/api/appointments/status', async (req, res) => {
     try {
-        const pool = await sql.connect(config);
-        const result = await pool.request().query("SELECT COUNT(appointmentid) AS totalAppointments FROM Appointment");
-        res.json({ totalAppointments: result.recordset[0].totalAppointments });
+        const completedResult = await sql.query('select count(*) from dbo.TodayscompletedAppointment');
+        const pendingResult = await sql.query('select count(*) from dbo.TodayspendingAppointment');
+        console.log("Completed Result:", completedResult);
+        console.log("Pending Result:", pendingResult);
+        const completedCount = parseInt(completedResult.recordset[0]['']);
+        const pendingCount = parseInt(pendingResult.recordset[0]['']);
+
+        res.json({
+            completed: completedCount,
+            pending: pendingCount
+        });
     } catch (err) {
-        console.error('Query Error', err);
-        res.status(500).send('Internal Server Error');
+        console.error(err);
+        res.status(500).json({ error: 'Database error' });
     }
 });
 
-// Define route for fetching total doctors
-app.get("/api/doctors/total", async (req, res) => {
-    try {
-        const pool = await sql.connect(config);
-        const result = await pool.request().query("SELECT COUNT(EmpName) AS totalDoctors FROM employee where deptid=1");
-        res.json({ totalDoctors: result.recordset[0].totalDoctors });
-    } catch (err) {
-        console.error('Query Error', err);
-        res.status(500).send('Internal Server Error');
-    }
-});
 // Define route for fetching issues
 app.get("/api/issues", async (req, res) => {
     try {

@@ -214,6 +214,7 @@ async function fetchDoctorStatus() {
         const data = await response.json();
         $(".panel-item.permanent p").text(data.permanent);
         $(".panel-item.visiting p").text(data.visiting);
+        $(".panel-item.onduty p").text(data.onDuty);
         //document.querySelector('.panel-item.onduty p').textContent = data.onDuty;
     } catch (error) {
         console.error('Error fetching doctor status:', error);
