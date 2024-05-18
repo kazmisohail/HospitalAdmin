@@ -74,23 +74,6 @@ function toggleNotificationPanel() {
     }
 }
 
-
-/* function closePanel() {
-    var notificationPanel = document.getElementById("notification-panel");
-    var notificationContent = document.querySelector(".notification-content");
-    var noNotificationMsg = document.getElementById("no-notification-msg");
-
-    var notificationItems = document.querySelectorAll(".notification-item");
-    if (notificationItems.length === 0) {
-        // If no notifications, display message and close panel
-        noNotificationMsg.style.display = "block";
-        notificationPanel.style.display = "none";
-    } else {
-        // If notifications exist, simply close the panel
-        notificationPanel.style.display = "none";
-    }
-} */
-
 function markAsRead(button) {
     var notificationItem = $(button).closest('.notification-item');
     notificationItem.addClass('read');
