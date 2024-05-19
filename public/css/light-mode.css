@@ -72,3 +72,7 @@ body {
 .add-doctor .panel-content, .assign-work {
     background-color: white !important;
 }
+
+.del-admin table th {
+    background-color: white;
+}

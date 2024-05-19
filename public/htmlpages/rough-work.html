@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <style>
+
+        body {
+            background-color: #bcbfa2;
+        }
+        .add-admin-dialog,
+        .del-admin-dialog {
+            transform: translate(-50%, -50%) scale(0.95);
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out !important;
+            max-height: 0;
+            opacity: 0;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            background-color: white;
+            border-radius: 10px;
+            visibility: hidden;
+            overflow: auto;
+        }
+
+
+        .add-admin.show .add-admin-dialog,
+        .del-admin.show .del-admin-dialog {
+            transform: translate(-50%, -50%) scale(1);
+            max-height: 80vh;
+            opacity: 1;
+            z-index: 1001;
+            visibility: visible;
+        }
+
+        .add-admin-content,
+        .del-admin-content {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-admin-header,
+        .del-admin-header {
+            background: #bcbfa2;
+            color: white;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .del-admin-header {
+            background-color: #a1d9b6 !important;
+        }
+
+        .del-admin form {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .del-admin form input {
+            width: 100%;
+            height: 40px;
+            margin: 1%;
+            padding: 1%;
+            border: 1px solid rgb(214, 214, 214);
+            border-radius: 5px;
+        }
+
+        .del-admin form input:last-child {
+            width: 20%;
+            background-color: #dbdbdb;
+        }
+
+
+        .del-admin table {
+            background-color: #ffffff;
+            width: 100%;
+        }
+
+        .del-admin table td,
+        th {
+            width: 100%;
+            color: rgb(39, 39, 39);
+        }
+
+        .add-admin-body, .del-admin-body {
+            padding: 20px;
+        }
+
+        .add-admin-footer,
+        .del-admin-footer {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .form-control {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #delAdminModal .del-admin-dialog {
+            width: 50vw;
+        }
+
+        .add-doctor,
+        .assign-work {
+            transform: translate(-50%, -50%) scale(0.95);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            height: auto;
+            max-height: 90vh;
+            max-width: 40vw;
+            border-radius: 10px;
+            background-color: transparent;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 1001;
+            transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+            /* Include visibility in transition */
+            overflow: auto;
+        }
+
+        .add-doctor.show,
+        .assign-work.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .add-doctor h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .add-doctor input[type="text"],
+        .add-doctor input[type="email"],
+        .add-doctor input[type="password"],
+        .assign-work input[type="text"],
+        .assign-work textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            resize: none;
+            text-overflow: ellipsis;
+        }
+
+        .add-doctor button,
+        .assign-work button {
+            width: 48%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            border: none !important;
+        }
+
+        .add-doctor button[type="submit"],
+        .assign-work button[type="submit"] {
+            background-color: #49b54f;
+            color: white;
+        }
+
+        .add-doctor button[type="submit"]:hover,
+        .assign-work button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .add-doctor button[type="submit"]:focus,
+        .assign-work button[type="submit"]:focus {
+            outline: none;
+        }
+
+        .add-doctor button[type="submit"]:active,
+        .assign-work button[type="submit"]:active {
+            transform: translateY(1px);
+        }
+
+        .add-doctor button[type="button"],
+        .assign-work button[type="button"] {
+            background-color: #ccc;
+            color: #333;
+            float: right;
+        }
+
+        .add-doctor button[type="button"]:hover,
+        .assign-work button[type="button"]:hover {
+            background-color: #bbb;
+        }
+
+        #doctorForm,
+        #pharmacistForm {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            overflow: auto;
+        }
+
+        #doctorForm input,
+        #doctorForm button,
+        #pharmacistForm input,
+        #pharmacistForm button {
+            flex-basis: calc(50% - 10px);
+            /* Adjust as needed */
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #doctorForm button,
+        #pharmacistForm button {
+            flex-basis: 100%;
+        }
+
+        /* Clearfix for button alignment */
+        #doctorForm::after,
+        #pharmacistForm::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        #adminTable {
+            table-layout: auto;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        #adminTable th,td {
+            width: 100%;
+            text-wrap: nowrap;
+            padding: 10px 10px;
+            border-bottom: 1px solid rgb(199, 199, 199);
+        }
+
+        #adminTable th {
+            background-color: #e3e3e3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="del-admin show fade" id="delAdminModal" tabindex="-1" aria-hidden="true">
+        <!-- layer 2 panel jo control panel ke andar add admin pe khulega -->
+        <div class="del-admin-dialog">
+            <div class="del-admin-content">
+                <div class="del-admin-header">
+                    Delete Admin
+                </div>
+                <div class="del-admin-body">
+                    <form>
+                        <input type="text" id="" placeholder="Search Admin">
+                        <input type="submit" value="Search">
+                    </form>
+                    <table id="adminTable">
+                        <tr>
+                            <th>Admin ID</th>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Admin Name</td>
+                            <td><button class="btn btn-danger">Delete</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="del-admin-footer">
+                    <button type="button" class="btn btn-secondary"
+                        onclick="toggleLayer2Panel('delAdminModal')">Cancel</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

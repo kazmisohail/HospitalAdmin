@@ -20,7 +20,14 @@ body {
 }
 
 .admin-profile {
-    background-color: #fff;
+    background-color: #252525;
+    border: none;
+    box-shadow: 0 0 1px grey;
+}
+
+.admin-profile p,
+.admin-profile strong {
+    color: #e9e9e9 !important;
 }
 
 .profile-panel {
@@ -99,31 +106,40 @@ table {
     border: none;
 }
 
-.control-panel-item:hover, .account-panel-item:hover {
+.control-panel-item:hover,
+.account-panel-item:hover {
     background-color: #373737;
 }
 
-.add-admin-dialog, .del-admin-dialog {
+.add-admin-dialog,
+.del-admin-dialog {
     background-color: #252525;
 }
 
-.add-admin-dialog input, .add-doctor input,
-.add-admin-dialog input::placeholder, select,
-.del-admin-dialog input, .del-admin-dialog table,
-.assign-work input, .assign-work textarea {
+.add-admin-dialog input,
+.add-doctor input,
+.add-admin-dialog input::placeholder,
+select,
+.del-admin-dialog input,
+.del-admin-dialog table,
+.assign-work input,
+.assign-work textarea {
     background-color: #494949;
     color: #a4a4a4;
     border: 1px solid #494949 !important;
 }
 
-.add-admin-dialog input:focus, .add-doctor input:focus,
-.assign-work input:focus, .assign-work textarea:focus{
+.add-admin-dialog input:focus,
+.add-doctor input:focus,
+.assign-work input:focus,
+.assign-work textarea:focus {
     background-color: #494949 !important;
     border: none !important;
     box-shadow: none !important;
 }
 
-.add-doctor, .assign-work {
+.add-doctor,
+.assign-work {
     background-color: #252525;
 }
 
@@ -134,16 +150,34 @@ table {
 
 .reportModal .modal-header {
     border-bottom: 1px solid rgb(63, 63, 63);
-} 
+}
 
 .reportModal .modal-footer {
     border-top: 1px solid rgb(63, 63, 63);
 }
 
 .remarks-panel {
-    background-color: #252525 ;
+    background-color: #252525;
 }
 
 .remarks-panel textarea {
+    background-color: #464646;
+}
+
+#adminTable {
+    table-layout: auto;
+    margin-top: 10px;
+    border-collapse: collapse;
+    background-color: #252525;
+    border: none !important;
+}
+
+#adminTable th,
+td {
+    border-bottom: 1px solid rgb(199, 199, 199);
+    color: #c2c2c2 !important;
+}
+
+#adminTable th {
     background-color: #464646;
 }
