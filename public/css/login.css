@@ -1,8 +1,21 @@
+.login-body {
+    background: linear-gradient(135deg, #033d20, rgb(2, 48, 79)); /* TBD */
+    height: 100vh;
+    width: 100vw;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: lightskyblue;
+}
+
 .my-container {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.105);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgb(195, 195, 195);
+ /*    box-shadow: 0px 0px 10px rgb(195, 195, 195); */
     width: 400px;
     position: fixed;
     top: 50%;
@@ -18,29 +31,31 @@
 .my-container form h3 {
     margin-bottom: 20px;
     text-align: center;
+    color: white;
 }
 
 .my-container form input[type="text"],
-.my-container form input[type="number"],
-.my-container form input[type="email"],
-.my-container form input[type="date"],
-.my-container form select,
 .my-container form input[type="password"] {
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 5px;
     font-size: 16px;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+}
+
+.my-container form input[type="text"]::placeholder,
+.my-container form input[type="password"]::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .my-container form input[type="text"]:focus,
-.my-container form input[type="number"]:focus,
-.my-container form input[type="email"]:focus,
-.my-container form input[type="date"]:focus,
-.my-container form select:focus,
 .my-container form input[type="password"]:focus {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: none;
     outline: none;
-    border-color: #1b4d7d;
 }
 
 .my-container form button {
@@ -57,4 +72,24 @@
 
 .my-container form button:hover {
     background-color: #1b4d7d;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container .eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 11px;
+    cursor: pointer;
+    font-size: 15px;
+    user-select: none;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.password-container input[type="password"] {
+    width: calc(100% - 30px); /* Adjust width to accommodate eye icon */
 }
