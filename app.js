@@ -13,7 +13,8 @@ var config = {
     user: "sa",
     password: "1234",
     //server: "KAZMI",
-    server: "DESKTOP-TONH6GQ",
+    //server: "DESKTOP-TONH6GQ",
+    server: "Arham_laptop",
     database: "HospitalManagementSystem",
     options: {
         encrypt: false // Disable encryption
@@ -40,6 +41,52 @@ app.get('/api/patients/total', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+//is function sey login horaha
+app.post('/api/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const pool = await sql.connect(config)
+        const result = await pool.request()
+            .input('Email', sql.NVarChar, email)
+            .input('Password', sql.NVarChar, password)
+            .query('SELECT * FROM Admin WHERE Email = @Email AND Password = @Password');
+
+        if (result.recordset.length > 0) {
+            res.json({ message: 'Login successful' });
+        } else {
+            res.status(401).json({ error: 'Invalid email or password' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+// app.post('/api/admins/create', async (req, res) => {
+//     const { EmpName,Email, Password, Contact,Role,Permission } = req.body;
+
+//     if (!EmpName  || !Email || !Password || !Contact||Role||Permission) {
+//         return res.status(400).json({ error: 'All fields are required' });
+//     }
+
+//     try {
+//         const pool = await sql.connect(dbConfig);
+//         const result = await pool.request()
+//             .input('EmpName', sql.NVarChar, EmpName)
+//            // .input('DOB', sql.Date, DOB)
+//             .input('Email', sql.NVarChar, Email)
+//             .input('Password', sql.NVarChar, Password) // Make sure to hash the password in a real application
+//             .input('Contact', sql.NVarChar, Contact)
+//             .input('Role', sql.NVarChar, Role)
+//             .input('Permission', sql.NVarChar, Permission)
+//             await request.execute('InsertAdminDetails');
+//         res.json({ message: 'Admin created successfully' });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).json({ error: 'Database error' });
+//     }
+// });
 
 // Define route for fetching total doctors
 app.get("/api/doctors/total", async (req, res) => {
