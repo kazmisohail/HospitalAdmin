@@ -1,11 +1,11 @@
-#reportModal {
-    margin-top: 150px;
-}
-
-.rBtnDiv {
-    margin-top: 30px;
-    padding: 25px;
-    /* background-color: ; */
+.reportHeader {
+    background: #91b5cd;
+    color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1.5em;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
 }
 
 .saveBtn {
@@ -25,14 +25,11 @@
     padding: 10px;
 }
 
-#moduleReport {
+#moduleReport,
+#monthReport {
     width: 150px;
     height: 30px;
-}
-
-#monthReport {
-    margin-top: 30px;
-    margin-left: 450px;
+    margin-left: 40px;
 }
 
 /* Bar Chart */
@@ -42,7 +39,7 @@
     box-shadow: 0 0 3px #000;
     width: 100%;
     max-width: 1000px;
-    margin: 20px auto;
+    margin: 15px auto;
     height: 500px;
   }
 
@@ -61,7 +58,7 @@
   }
 
   .bar2 {
-    background-color: pink;
+    background-color: #ff9800;
     color: #fff;
     text-align: center;
     margin-bottom: 5px;
@@ -78,7 +75,7 @@
     box-shadow: 0 0 3px #000;
     width: 100%;
     max-width: 1000px;
-    margin: 20px auto;
+    margin: 15px auto;
     height: 500px;
   }
 
@@ -136,4 +133,13 @@
 
 .legend div {
     margin-left: 15px;
+}
+
+
+.cls button {
+    margin-left: 50px;
+}
+
+#generateBtn {
+    margin-left: 50px;
 }

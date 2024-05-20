@@ -1,14 +1,10 @@
-// function valueReturn() {
-//     module = document.getElementById('monthReport').value
-//     document.getElementById('moduleName').innerHTML = module
-//     return module
-// }
-
-// module = document.getElementById('monthReport').value
-
 function report() {
     var newTab = window.open('', '_blank');
     newTab.location.href = './report.html';
+}
+
+function close() {
+    parent.window.location.href = './dashboard.html';
 }
 
 function generateReport() {

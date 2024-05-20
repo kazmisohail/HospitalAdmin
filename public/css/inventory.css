@@ -19,7 +19,12 @@ header {
     height: 750px;
 }
 
+.button-group {
+    margin-left: 25px;
+}
+
 h2 {
+    margin-left: 25px;
     margin-top: 30px;
 }
 
@@ -36,6 +41,8 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    margin-left: 25px;
+    margin-right: 35px;
 }
 
 .in input[type="submit"] {
@@ -46,6 +53,8 @@ h2 {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-right: 25px;
+    margin-left: 35px;
 }
 
 .inSearch:focus {
@@ -129,27 +138,4 @@ h2 {
 #pActions button {
     width: 75px;
     text-align: center;
-}
-
-/* Modal */
-#medModal input {
-    margin-top: 10px;
-}
-
-#medModal .modal-header {
-    justify-content: center;
-    background-color: #4CAF50;
-}
-
-#medModal .modal-header h1 {
-    font-size: 30px;
-}
-
-#medModal .modal-body {
-    background-color: antiquewhite;
-}
-
-#medModal .modal-footer {
-    justify-content: center;
-    background-color: #4CAF50;
 }
