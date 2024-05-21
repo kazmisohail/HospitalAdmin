@@ -5,11 +5,11 @@ body {
 .reportHeader {
     background: #91b5cd;
     color: white;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 1.5em;
-            border-top-right-radius: 10px;
-            border-top-left-radius: 10px;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.5em;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
 .saveBtn {
@@ -34,6 +34,21 @@ body {
     width: 150px;
     height: 30px;
     margin-left: 40px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #91b5cd;
+    font-size: 18px;
+    color: white;
+    height: 40px;
+}
+
+::-webkit-calendar-picker-indicator {
+    background-color: #ffffff;
+    margin-right: 2px;
+    padding: 2px;
+    cursor: pointer;
+    border-radius: 3px;
 }
 
 /* Bar Chart */
@@ -44,30 +59,30 @@ body {
     max-width: 1000px;
     margin: 15px auto;
     height: 500px;
-  }
+}
 
-  .bar {
+.bar {
     background-color: #4caf50;
     color: #fff;
     text-align: center;
     margin-bottom: 5px;
-  }
+}
 
-  .bar1 {
+.bar1 {
     background-color: #2196f3;
     color: #fff;
     text-align: center;
     margin-bottom: 5px;
-  }
+}
 
-  .bar2 {
+.bar2 {
     background-color: #ff9800;
     color: #fff;
     text-align: center;
     margin-bottom: 5px;
-  }
+}
 
-  #bChart-msg {
+#bChart-msg {
     margin-left: 150px;
 }
 
@@ -85,7 +100,7 @@ body {
     max-width: 1000px;
     margin: 15px auto;
     height: 500px;
-  }
+}
 
 #pChart-msg {
     margin-left: 150px;
@@ -150,4 +165,5 @@ body {
 
 #generateBtn {
     margin-left: 50px;
+    height: 40px;
 }
