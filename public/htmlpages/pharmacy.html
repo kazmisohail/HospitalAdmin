@@ -42,6 +42,7 @@
     <script src="../js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="../js/dashboard.js"></script>
+    <script src="../js/pharmacy.js"></script>
 
     <div class="dashboard">
         <iframe id="side-menu" src="menu.html" frameborder="0" width="0" class="menu-frame"></iframe>
@@ -96,8 +97,10 @@
                                 <th>Salary</th>
                                 <th>Actions</th>
                             </tr>
-                            <tr>
-                                <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
+                            <tbody id="pharmacyTableBody">
+                                <!-- Data will be populated here -->
+                              </tbody>
+                            <!-- <tr>
                                 <td id="empIDP">1</td>
                                 <td id="pName">Smith</td>
                                 <td id="pEmail">smith@pharmacy.net</td>
@@ -107,7 +110,7 @@
                                     <button class="btn btn-info" type="button" data-bs-toggle="modal"
                                         data-bs-target="#pharmacyProfileModal">Profile</button>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </table>
                     </div>
                 </div>

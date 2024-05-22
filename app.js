@@ -208,7 +208,7 @@ app.post('/api/add-admin', async (req, res) => {
         request.input('Permission', sql.NVarChar, Permission);
 
         await request.query(query);
-        
+
         console.log("Admin Added Successfully");
     } catch (error) {
         console.log(error);
@@ -233,4 +233,48 @@ app.post('/api/add-admin', async (req, res) => {
 //Start the server on port 3001
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+});
+
+
+
+// Pharmacy
+// Define API endpoint to fetch pharmacists data
+app.get('/api/pharmacists', (req, res) => {
+    const query = 'SELECT * FROM AllPharmacists';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Inventory
+// Define API endpoint to fetch inventories data
+app.get('/api/inventories', (req, res) => {
+    const query = 'SELECT * FROM AllItems';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Patient
+// Define API endpoint to fetch patient data
+app.get('/api/patientsTable', (req, res) => {
+    const query = 'SELECT * FROM AllPatients';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
 });
