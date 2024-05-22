@@ -3,7 +3,11 @@ function report() {
 
     if(module == "doctor"){
         var newTab = window.open('', '_blank');
-        newTab.location.href = './doctorReport.html';    
+        newTab.location.href = './doctorReport.html';
+    }
+    else if(module == "appointment"){
+        var newTab = window.open('', '_blank');
+        newTab.location.href = './appointmentReport.html';
     }
     else if(module == "patient"){
         var newTab = window.open('', '_blank');
