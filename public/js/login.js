@@ -20,7 +20,7 @@ async function logIn() {
         // Handle successful login
         alert('Login successful');
         // Redirect or perform other actions
-         window.location.href = './dashboard.html'; // Example redirection
+         window.location.href = '/dashboard.html'; // Example redirection
        
     } else {
         // Handle login error
