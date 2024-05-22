@@ -15,10 +15,7 @@
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/notification.css">
-    <link rel="stylesheet" href="../css/control.css">
-    <link rel="stylesheet" href="../css/settings.css">
     <link rel="stylesheet" href="../css/patients.css">
-    <link rel="stylesheet" href="../css/table-pages.css">
     <link id="themeStylesheet" rel="stylesheet" href="../css/light-mode.css">
     <script>
         (function () {
@@ -101,11 +98,11 @@
             <div class="pt container">
                 <h2>All Patients</h2>
                 <form id="searchForm">
-                    <input type="text" id="searchInput" placeholder="Search patients...">
+                    <input type="text" class="pSearch" id="searchInput" placeholder="Search patients...">
                     <input type="submit" value="Search">
                 </form>
                 <table id="patientTable">
-                    <tr>
+                    <tr class="pTHead">
                         <th>Patient ID</th>
                         <th>Name</th>
                         <th>Gender</th>

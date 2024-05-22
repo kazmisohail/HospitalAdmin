@@ -15,9 +15,7 @@
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/notification.css">
-    <link rel="stylesheet" href="../css/settings.css">
     <link rel="stylesheet" href="../css/doctors.css">
-    <link rel="stylesheet" href="../css/table-pages.css">
     <link id="themeStylesheet" rel="stylesheet" href="../css/light-mode.css">
     <script>
         (function () {
@@ -95,11 +93,11 @@
                 <div id="allDoctorsSection">
                     <h2>All Doctors</h2>
                     <form id="searchForm">
-                        <input type="text" id="searchInput" placeholder="Search doctors...">
+                        <input type="text" class="dSearch" id="searchInput" placeholder="Search doctors...">
                         <input type="submit" value="Search">
                     </form>
                     <table id="doctorTable">
-                        <tr>
+                        <tr class="dTHead">
                             <th>Doctor ID</th>
                             <th>Name</th>
                             <th>DOB</th>
@@ -112,7 +110,7 @@
                 <div id="topDoctorsSection" style="display: none;">
                     <h2>Top Doctors</h2>
                     <table id="topDoctorsTable">
-                        <tr>
+                        <tr class="dTHead">
                             <th>Doctor ID</th>
                             <th>Name</th>
                             <th>DOB</th>

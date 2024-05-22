@@ -4,26 +4,35 @@
     margin: 0;
     padding: 0;
 }
+
 header {
     background-color: #333;
     color: #fff;
     padding: 20px;
     text-align: center;
 }
+
 .container {
     margin: 20px auto;
-    max-width: 800px;
-    padding: 0 20px;
+    padding: 20px 50px;
+    height: 750px;
+    background-color: #f0f0f0; /* Light gray */
+    background-image: url('../images/invBg.jpg');
+    background-size: cover; /* Adjust the size of the background image */
+    background-position: center; /* Position the background image */
 }
+
 h2 {
     margin-top: 30px;
 }
+
 .dc form {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .dc input[type="text"] {
     width: 70%;
     padding: 8px;
@@ -31,6 +40,7 @@ h2 {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
 .dc input[type="submit"] {
     width: 25%;
     padding: 8px;
@@ -40,17 +50,47 @@ h2 {
     border-radius: 4px;
     cursor: pointer;
 }
-table {
+
+.dSearch:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #4CAF50 !important;
+}
+
+/* Tables */
+#topDoctorsTable,
+#doctorTable {
+    /* Background Color for testing, change krna h bd ma */
+    background-color: #fff;
+    box-shadow: 0 0 5px rgb(197, 197, 197);
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
     margin-top: 20px;
+    border-radius: 5px !important;
+    border-spacing: 10px;
+    border: none;
 }
-th, td {
-/*     border: 1px solid #ddd; */
+
+#topDoctorsTable .dTHead,
+#doctorTable .dTHead {
+    background-color: lightgray;
+    color: #000;
+}
+
+#topDoctorsTable tr,
+#doctorTable tr {
+    box-shadow: 0 0 1px #000;
+}
+
+#topDoctorsTable th,
+#topDoctorsTable td,
+#doctorTable th,
+#doctorTable td {
+    text-align: center;
     padding: 8px;
-    text-align: left;
 }
-th {
-    background-color: #4CAF50;
-    color: white;
+
+#topDoctorsTable td,
+#doctorTable td {
+    font-size: 14px;
 }
