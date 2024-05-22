@@ -1,6 +1,31 @@
 function report() {
-    var newTab = window.open('', '_blank');
-    newTab.location.href = './report.html';
+    var module = document.getElementById('moduleReport1').value
+
+    if(module == "doctor"){
+        var newTab = window.open('', '_blank');
+        newTab.location.href = './doctorReport.html';    
+    }
+    else if(module == "patient"){
+        var newTab = window.open('', '_blank');
+        newTab.location.href = './patientReport.html';
+    }
+    else if(module == "emergency"){
+        var newTab = window.open('', '_blank');
+        newTab.location.href = './emergencyReport.html';
+    }
+    else if(module == "lab"){
+        var newTab = window.open('', '_blank');
+        newTab.location.href = './labReport.html';
+    }
+    else if(module == "pharmacy"){
+        var newTab = window.open('', '_blank');
+        newTab.location.href = './pharmacyReport.html';
+    }
+    else {
+        alert("Please select module")
+    }
+
+
 }
 
 function close() {
@@ -12,36 +37,21 @@ function generateReport() {
     month = document.getElementById('monthReport').value
 
     if (month == "") {
-        alert("Please select module and month")
+        alert("Please select month")
     }
     else {
         if(module == "doctor") {
-            document.getElementById('moduleName').innerHTML = module.toUpperCase()
-            document.getElementById('bChart-msg').innerHTML = "Doctor Module Bar Chart, message will generate by using backend"
-            document.getElementById('pChart-msg').innerHTML = "Doctor Module Pie Chart, message will generate by using backend"
         }
         else if(module == "patient") {
-            document.getElementById('moduleName').innerHTML = module.toUpperCase()
-            document.getElementById('bChart-msg').innerHTML = "Patient Module Bar Chart, message will generate by using backend"
-            document.getElementById('pChart-msg').innerHTML = "Patient Module Pie Chart, message will generate by using backend"
         }
         else if(module == "emergency") {
-            document.getElementById('moduleName').innerHTML = module.toUpperCase()
-            document.getElementById('bChart-msg').innerHTML = "Emergency Module Bar Chart, message will generate by using backend"
-            document.getElementById('pChart-msg').innerHTML = "Emergency Module Pie Chart, message will generate by using backend"
         }
         else if(module == "pharmacy") {
-            document.getElementById('moduleName').innerHTML = module.toUpperCase()
-            document.getElementById('bChart-msg').innerHTML = "Pharmacy Module Bar Chart, message will generate by using backend"
-            document.getElementById('pChart-msg').innerHTML = "Pharmacy Module Pie Chart, message will generate by using backend"
         }
         else if(module == "lab") {
-            document.getElementById('moduleName').innerHTML = module.toUpperCase()
-            document.getElementById('bChart-msg').innerHTML = "Lab Module Bar Chart, message will generate by using backend"
-            document.getElementById('pChart-msg').innerHTML = "Lab Module Pie Chart, message will generate by using backend"
         }
         else {
-            alert("Please select module")
+            alert("Please select week")
         }
     }
 

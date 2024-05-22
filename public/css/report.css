@@ -159,3 +159,51 @@
     margin-left: 50px;
     height: 40px;
 }
+
+.btnss {
+    margin-top: 25px;
+}
+
+/* Tables */
+#pharmacyTable {
+    /* Background Color for testing, change krna h bd ma */
+    background-color: #fff;
+    box-shadow: 0 0 5px rgb(197, 197, 197);
+    width: 100%;
+    border-collapse: separate;
+    margin-top: 20px;
+    border-radius: 5px !important;
+    border-spacing: 10px;
+    border: none;
+}
+
+#pharmacyTable .pTHead {
+    background-color: lightgray;
+    color: #000;
+}
+
+#pharmacyTable tr {
+    box-shadow: 0 0 1px #000;
+}
+
+#pharmacyTable th,
+#pharmacyTable td {
+    text-align: center;
+    padding: 8px;
+}
+
+#pharmacyTable td {
+    font-size: 14px;
+}
+
+#pharmacyTable #day {
+    width: 100px;
+}
+
+#pharmacyTable #vPat {
+    width: 150px;
+}
+
+#pharmacyTable #aPat {
+    width: 150px;
+}
