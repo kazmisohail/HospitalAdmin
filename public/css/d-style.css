@@ -76,3 +76,6 @@ body {
     color: #aaa;
 }
 
+.product-img img {
+    margin: 50px !important;
+}

@@ -1,0 +1,125 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.reportPage {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.reportHeader h1 {
+    font-size: 2.5rem;
+    color: #343a40;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.barChart, .pieChart {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.barChart span {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.bar {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    text-align: right;
+}
+
+.bar1 {
+    background-color: #6c757d;
+}
+
+.bar2 {
+    background-color: #28a745;
+}
+
+.pie-chart {
+    width: 100%;
+    height: 300px;
+    background: conic-gradient(
+        #28a745 0% 25%,
+        #007bff 25% 50%,
+        #ffc107 50% 100%
+    );
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.legend {
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.legend div {
+    font-weight: bold;
+}
+
+.legend .green {
+    background-color: #28a745;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.legend .blue {
+    background-color: #007bff;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.legend .orange {
+    background-color: #ffc107;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.cls, .rBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cls button, .rBtn button {
+    width: 100%;
+}
+
+#moduleReport, #monthReport {
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    .cls, .rBtn {
+        flex-direction: column;
+    }
+
+    #moduleReport, #monthReport {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    .rBtn button {
+        width: 100%;
+    }
+}
