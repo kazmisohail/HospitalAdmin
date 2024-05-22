@@ -12,9 +12,9 @@ const PORT = process.env.PORT || 3001;
 var config = {
     user: "sa",
     password: "1234",
-    server: "KAZMI",
+    //server: "KAZMI",
     // server: "DESKTOP-TONH6GQ",
-    //server: "Arham_laptop",
+    server: "Arham_laptop",
     database: "HospitalManagementSystem",
     options: {
         encrypt: false // Disable encryption
@@ -145,6 +145,25 @@ app.get('/api/doctors/status', async (req, res) => {
     } catch (err) {
         console.error('Error fetching doctor status counts:', err);
         res.status(500).send('Server error');
+    }
+});
+
+// Add endpoint for fetching doctor report data
+app.get('/api/reports/doctor', async (req, res) => {
+    const { year, month, weekOfMonth } = req.query;
+
+    try {
+        const pool = await sql.connect(config);
+        const result = await pool.request()
+            .input('Year', sql.Int, year)
+            .input('Month', sql.Int, month)
+            .input('WeekOfMonth', sql.Int, weekOfMonth)
+            .execute('GetAppointmentStatusByWeekOfMonth');
+
+        res.json(result.recordset);
+    } catch (err) {
+        console.error('Error fetching doctor report data:', err);
+        res.status(500).json({ error: 'Database error' });
     }
 });
 

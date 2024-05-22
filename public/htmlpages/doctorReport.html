@@ -21,17 +21,15 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <h2>Monthly Patients Treated</h2>
-                <table id="pharmacyTable">
+                <h2>Weekly Appointment Status</h2>
+                <table id="appointmentTable">
                     <tr class="pTHead">
-                        <th>Visiting Patient</th>
-                        <th>Admitted Patient</th>
+                        <th>Day</th>
+                        <th>Completed</th>
+                        <th>Pending</th>
+                        <th>Cancelled</th>
                     </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="vPat">Smith</td>
-                        <td id="aPat">smith@pharmacy.net</td>
-                    </tr>
+                    <!-- Data will be inserted here dynamically -->
                 </table>
             </div>
         </div>
@@ -40,46 +38,14 @@
                 <button type="button" class="btn btn-danger" onclick="window.close()">Close</button>
             </div>
             <div class="col-lg-6 py-2 rBtn">
-                <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
-                    
-                </form>
-            </div>
-        </div>
-        <br><br>
-        <div class="row">
-            <div class="col-lg-12">
-                <h2>Monthly Revenue of Doctors Department</h2>
-                <table id="pharmacyTable">
-                    <tr class="pTHead">
-                        <th>Week</th>
-                        <th>Revenue</th>
-                    </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="day" style="width: 150px;">1</td>
-                        <td id="aPat" style="width: 150px;">smith@pharmacy.net</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="row btnss">
-            <div class="col-lg-6 py-2 cls">
-                <button type="button" class="btn btn-danger" onclick="window.close()">Close</button>
-            </div>
-            <div class="col-lg-6 py-2 rBtn">
-                <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
-                    
+                <form id="reportForm">
+                    <input type="month" name="monthReport" id="monthReport" required>
+                    <input type="number" name="weekReport" id="weekReport" placeholder="Week Number" required>
+                    <button type="submit" class="btn btn-primary" id="generateBtn">Generate Report</button>
                 </form>
             </div>
         </div>
     </div>
-
-
-
 
     <!-- JS -->
     <script src="../js/report.js"></script>
