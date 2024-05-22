@@ -1,5 +1,5 @@
 .login-body {
-    background: linear-gradient(135deg, #033d20, rgb(2, 48, 79)); /* TBD */
+    background: linear-gradient(to right, #51a0d4, #989898); /* TBD */
     height: 100vh;
     width: 100vw;
 }
