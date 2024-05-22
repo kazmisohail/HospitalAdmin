@@ -1,5 +1,5 @@
-/* CSS styles for the layout */
-body {
+ /* CSS styles for the layout */
+ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -14,8 +14,12 @@ header {
 
 .container {
     margin: 20px auto;
-    max-width: 800px;
-    padding: 0 20px;
+    padding: 20px 50px;
+    height: 750px;
+    background-color: #f0f0f0; /* Light gray */
+    background-image: url('../images/invBg.jpg');
+    background-size: cover; /* Adjust the size of the background image */
+    background-position: center; /* Position the background image */
 }
 
 h2 {
@@ -45,4 +49,42 @@ h2 {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.pSearch:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #4CAF50 !important;
+}
+
+/* Tables */
+#patientTable {
+    /* Background Color for testing, change krna h bd ma */
+    background-color: #fff;
+    box-shadow: 0 0 5px rgb(197, 197, 197);
+    width: 100%;
+    border-collapse: separate;
+    margin-top: 20px;
+    border-radius: 5px !important;
+    border-spacing: 10px;
+    border: none;
+}
+
+#patientTable .pTHead {
+    background-color: lightgray;
+    color: #000;
+}
+
+#patientTable tr {
+    box-shadow: 0 0 1px #000;
+}
+
+#patientTable th,
+#patientTable td {
+    text-align: center;
+    padding: 8px;
+}
+
+#patientTable td {
+    font-size: 14px;
 }
