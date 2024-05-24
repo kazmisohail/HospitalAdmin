@@ -56,7 +56,7 @@
                             setInterval(updateTime, 1000);
                             updateTime();
                         </script>
-                       <!--  <button onclick="togglePanel()" class="bell-icon">
+                        <!--  <button onclick="togglePanel()" class="bell-icon">
                             <img src="../images/bell2.png" alt="Logo">
                         </button> -->
                         <button class="golayi-frame" onclick="toggleAdminProfile()">
@@ -73,27 +73,6 @@
                     </div>
                 </div>
             </nav>
-
-            <div id="notification-panel" class="notification-panel">
-                <div class="notification-header">
-                    <h5>Notifications</h5>
-                    <button class="close-btn" onclick="closePanel()">Close</button>
-                </div>
-                <div class="notification-content">
-                    <p id="no-notification-msg" style="display: none;">There are no notifications.</p>
-                    <div class="notification-item">
-                        <p>This is a sample notification.</p>
-                        <div class="notification-functions">
-                            <button class="read-btn" onclick="markAsRead(this)"><img src="../images/read.png"
-                                    alt=""></button>
-                            <button class="delete-btn" onclick="deleteNotification(this)"><img
-                                    src="../images/delete.png" alt=""></button>
-                            <div class="notification-time">Today, 10:30 am</div>
-                        </div>
-                    </div>
-                    <!-- Additional notifications here -->
-                </div>
-            </div>
 
             <div class="apt container">
                 <div class="button-group">
@@ -389,7 +368,7 @@
         }
     </script>
 
-    <style>
+    <!-- <style>
         #appointmentProfileModal .modal {
             display: none;
             position: fixed;
@@ -457,7 +436,7 @@
         #appointmentProfileModal .tab-content.active {
             display: block;
         }
-    </style>
+    </style> -->
 </body>
 
 </html>

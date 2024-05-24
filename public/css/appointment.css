@@ -16,10 +16,6 @@ header {
     margin: 20px auto;
     padding: 20px 50px;
     height: 750px;
-    background-color: #f0f0f0; /* Light gray */
-    background-image: url('../images/invBg.jpg');
-    background-size: cover; /* Adjust the size of the background image */
-    background-position: center; /* Position the background image */
 }
 
 h2 {
@@ -100,3 +96,4 @@ h2 {
 #appointmentTablePending td {
     font-size: 14px;
 }
+
