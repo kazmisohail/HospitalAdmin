@@ -16,20 +16,20 @@
 
 <body>
     <div class="login-body">
-        <!-- <div class="header">
-        <h3>HSM</h3>
-        <button class="btn"><i class="fa-solid fa-house"></i>   View Website</button>
-    </div> -->
-
-        <div class="my-container">
+        <div class="left-container">
+            <h2>Admin</h2>
+            <h4>Hospital Management System</h4>
+        </div>
+        <div class="right-container">
+            <h2>Sign in</h2>
             <form>
-                <h3>Login</h3>
                 <input type="text" id="uname" placeholder="Enter Email" name="uname" required>
                 <div class="password-container">
                     <input type="password" id="password" placeholder="Enter Password" name="psw" required>
                     <span id="togglePassword" class="eye-icon" onclick="togglePasswordVisibility()"><i id="eye-icon"
                             class="fa-regular fa-eye"></i></span>
                 </div>
+                <a href="#" class="forgot-password">Forgot Password?</a>
                 <button type="button" id="submitBtn" onclick="logIn()">Login</button>
             </form>
         </div>
