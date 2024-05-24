@@ -1,66 +1,47 @@
-/* JavaScript code to fetch and display patients */
+function openTab(event, tabName) {
+  const tabContents = document.getElementsByClassName('tab-content');
+  for (let i = 0; i < tabContents.length; i++) {
+      tabContents[i].style.display = 'none';
+  }
 
-// Function to fetch and display all patients
-async function getAllPatients() {
-    try {
-        const response = await fetch('/api/patients');
-        const patients = await response.json();
-        renderPatients(patients);
-    } catch (error) {
-        console.error('Error fetching patients:', error);
-    }
+  const tabButtons = document.getElementsByClassName('tab-button');
+  for (let i = 0; i < tabButtons.length; i++) {
+      tabButtons[i].className = tabButtons[i].className.replace(' active', '');
+  }
+
+  document.getElementById(tabName).style.display = 'block';
+  event.currentTarget.className += ' active';
 }
 
-// Function to search for patients
-async function searchPatients(query) {
-    try {
-        const response = await fetch(`/api/patients?search=${query}`);
-        const patients = await response.json();
-        renderPatients(patients);
-    } catch (error) {
-        console.error('Error searching patients:', error);
-    }
+const apiUrl = 'http://localhost:3001/api/patientsTable';
+
+// Function to fetch pharmacists data and populate table
+function fetchPatientsData() {
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      const tableBody = document.getElementById('patientTableBody');
+      tableBody.innerHTML = '';
+
+      data.forEach(patient => {
+        const row = `
+          <tr>
+            <td>${patient.PatientID}</td>
+            <td>${patient.PatientName}</td>
+            <td>${patient.Gender}</td>
+            <td>${patient.Status}</td>
+            <td>${patient.Contact}</td>
+            <td>
+              <button class="btn btn-info" type="button" data-bs-toggle="modal"
+                data-bs-target="#patientProfileModal">Profile</button>
+            </td>
+          </tr>
+        `;
+        tableBody.innerHTML += row;
+      });
+    })
+    .catch(error => console.error(error));
 }
 
-// Function to render patients on the UI
-function renderPatients(patients) {
-    const tableBody = document.getElementById('patientTable').getElementsByTagName('tbody')[0];
-    tableBody.innerHTML = '';
-    patients.forEach(patient => {
-        const row = tableBody.insertRow();
-        row.innerHTML = `
-                    <td>${patient.id}</td>
-                    <td>${patient.name}</td>
-                    <td>${patient.gender}</td>
-                    <td>${patient.status}</td>
-                    <td>${patient.contact}</td>
-                    <td>
-                        <button onclick="editPatient(${patient.id})">Edit</button>
-                        <button onclick="deletePatient(${patient.id})">Delete</button>
-                    </td>
-                `;
-    });
-}
-
-// Function to handle form submission
-document.getElementById('searchForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const searchInput = document.getElementById('searchInput').value;
-    if (searchInput.trim() !== '') {
-        searchPatients(searchInput);
-    } else {
-        getAllPatients();
-    }
-});
-
-// Function to edit patient details
-function editPatient(patientId) {
-    // Implement edit functionality here
-    alert('Edit patient with ID: ' + patientId);
-}
-
-// Function to delete a patient
-function deletePatient(patientId) {
-    // Implement delete functionality here
-    alert('Delete patient with ID: ' + patientId);
-}
+// Call function to fetch data when page loads
+document.addEventListener('DOMContentLoaded', fetchPatientsData);

@@ -43,6 +43,7 @@
     <script src="../js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="../js/dashboard.js"></script>
+    <script src="../js/inventory.js"></script>
 
     <div class="dashboard">
         <iframe id="side-menu" src="menu.html" frameborder="0" width="0" class="menu-frame"></iframe>
@@ -95,8 +96,10 @@
                                 <th>Price</th>
                                 <th>Actions</th>
                             </tr>
-                            <tr>
-                                <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
+                            <tbody id="inventoryTableBody">
+                                <!-- Data will be populated here -->
+                              </tbody>
+                            <!-- <tr>
                                 <td id="medID">1</td>
                                 <td id="mName">Aspirin</td>
                                 <td id="cat">Pain Relief</td>
@@ -105,7 +108,7 @@
                                 <td id="pActions">
                                     <button class="btn btn-danger" type="button">Delete</button>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </table>
                     </div>
                 </div>

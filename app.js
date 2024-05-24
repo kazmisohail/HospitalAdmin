@@ -12,8 +12,8 @@ const PORT = process.env.PORT || 3001;
 var config = {
     user: "sa",
     password: "1234",
-    //server: "KAZMI",
-    server: "DESKTOP-TONH6GQ",
+    server: "KAZMI",
+    // server: "DESKTOP-TONH6GQ",
     //server: "Arham_laptop",
     database: "HospitalManagementSystem",
     options: {
@@ -148,6 +148,25 @@ app.get('/api/doctors/status', async (req, res) => {
     }
 });
 
+// Add endpoint for fetching doctor report data
+app.get('/api/reports/doctor', async (req, res) => {
+    const { year, month, weekOfMonth } = req.query;
+
+    try {
+        const pool = await sql.connect(config);
+        const result = await pool.request()
+            .input('Year', sql.Int, year)
+            .input('Month', sql.Int, month)
+            .input('WeekOfMonth', sql.Int, weekOfMonth)
+            .execute('GetAppointmentStatusByWeekOfMonth');
+
+        res.json(result.recordset);
+    } catch (err) {
+        console.error('Error fetching doctor report data:', err);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+
 app.get('/api/appointments/status', async (req, res) => {
     try {
         const completed = await sql.query('SELECT COUNT(*) AS CompletedAppointments FROM Appointment WHERE CAST([Date] AS DATE) = CAST(GETDATE() AS DATE) AND Status = \'Completed\';');
@@ -208,7 +227,7 @@ app.post('/api/add-admin', async (req, res) => {
         request.input('Permission', sql.NVarChar, Permission);
 
         await request.query(query);
-        
+
         console.log("Admin Added Successfully");
     } catch (error) {
         console.log(error);
@@ -233,4 +252,75 @@ app.post('/api/add-admin', async (req, res) => {
 //Start the server on port 3001
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+});
+
+
+
+// Pharmacy
+// Define API endpoint to fetch pharmacists data
+app.get('/api/pharmacists', (req, res) => {
+    const query = 'SELECT * FROM AllPharmacists';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Inventory
+// Define API endpoint to fetch inventories data
+app.get('/api/inventories', (req, res) => {
+    const query = 'SELECT * FROM AllItems';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Patient
+// Define API endpoint to fetch patient data
+app.get('/api/patientsTable', (req, res) => {
+    const query = 'SELECT * FROM AllPatients';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Doctor
+// Define API endpoint to fetch doctor data
+app.get('/api/allDoctorsTable', (req, res) => {
+    const query = 'SELECT * FROM AllDoctors';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Define API endpoint to fetch doctor data
+app.get('/api/topDoctorsTable', (req, res) => {
+    const query = 'SELECT * FROM PopularDoctors';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
 });
