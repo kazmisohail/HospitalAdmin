@@ -195,15 +195,15 @@ app.get("/api/issues", async (req, res) => {
 
 //Server End-point for assigning work to admin
 app.post('/api/assign-work', async (req, res) => {
-    const { AdminID, ActionType, Description } = req.body;
+    const { AdminID, ActionType, Description,Details } = req.body;
     try {
-        const query = "exec assignWork @AdminID, @ActionType, @Description;";
+        const query = "exec assignWork @AdminID, @ActionType, @Description,@Details;";
 
         const request = new sql.Request();
         request.input('AdminID', sql.NVarChar, AdminID);
         request.input('ActionType', sql.NVarChar, ActionType);
         request.input('Description', sql.NVarChar, Description);
-
+        request.input('Details', sql.NVarChar, Details);
         await request.query(query);
 
         console.log("Work Assigned Successfully");
@@ -250,9 +250,6 @@ app.post('/api/add-admin', async (req, res) => {
 // });
 
 //Start the server on port 3001
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
 
 
 
@@ -296,4 +293,7 @@ app.get('/api/patientsTable', (req, res) => {
             res.send(result.recordset);
         }
     });
+});
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

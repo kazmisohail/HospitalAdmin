@@ -308,11 +308,12 @@ window.onload = function () {
         const adminID = document.getElementById('AdminID').value;
         const actionType = document.getElementById('ActionType').value;
         const description = document.getElementById('Description').value;
-
+        const details = document.getElementById('Details').value;
         const data = {
             AdminID: adminID,
             ActionType: actionType,
-            Description: description
+            Description: description,
+            Details: details
         };
 
         try {
