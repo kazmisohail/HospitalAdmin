@@ -42,6 +42,7 @@
     <script src="../js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="../js/dashboard.js"></script>
+    <script src="../js/doctors.js"></script>
 
     <div class="dashboard">
         <iframe id="side-menu" src="menu.html" frameborder="0" width="0" class="menu-frame"></iframe>
@@ -96,15 +97,20 @@
                         <input type="text" class="dSearch" id="searchInput" placeholder="Search doctors...">
                         <input type="submit" value="Search">
                     </form>
-                    <table id="doctorTable">
-                        <tr class="dTHead">
-                            <th>Doctor ID</th>
-                            <th>Name</th>
-                            <th>DOB</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </table>
+                    <div class="scrollDiv">
+                        <table id="doctorTable">
+                            <tr class="dTHead">
+                                <th>Doctor ID</th>
+                                <th>Name</th>
+                                <th>DOB</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tbody id="allDoctorsTableBody">
+                                <!-- Data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div id="topDoctorsSection" style="display: none;">
@@ -116,13 +122,16 @@
                             <th>DOB</th>
                             <th>Appointments</th>
                         </tr>
+                        <tbody id="topDoctorsTableBody">
+                            <!-- Data will be populated here -->
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="doctorProfileModal" class="modal">
+    <!-- <div id="doctorProfileModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeDoctorProfile()">&times;</span>
             <div class="tabs">
@@ -150,7 +159,70 @@
                 <p><strong>Placement:</strong> <span id="placementDept"></span></p>
             </div>
         </div>
+    </div> -->
+
+    <!-- Doctor Profile Modal -->
+    <div class="modal fade" id="doctorProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="tabs">
+                        <button class="tab-button active" onclick="openTab(event, 'General')">GENERAL</button>
+                        <button class="tab-button" onclick="openTab(event, 'Departmental')">DEPARTMENTAL</button>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="General" class="tab-content active">
+                        <p><strong>Doctor ID:</strong> <span id="docIdGeneral"></span></p>
+                        <p><strong>Name:</strong> <span id="nameGeneral"></span></p>
+                        <p><strong>DOB:</strong> <span id="dobGeneral"></span></p>
+                        <p><strong>Gender:</strong> <span id="genderGeneral"></span></p>
+                        <p><strong>Contact:</strong> <span id="contactGeneral"></span></p>
+                        <p><strong>Address:</strong> <span id="addressGeneral"></span></p>
+                        <p><strong>Email:</strong> <span id="emailGeneral"></span></p>
+                        <p><strong>DOJ:</strong> <span id="dojGeneral"></span></p>
+                        <p><strong>Salary:</strong> <span id="salaryGeneral"></span></p>
+                        <hr>
+                        <form action="">
+                            <h3>Change Details</h3>
+                            <input type="text" class="form-control" name="" placeholder="New Contact"
+                                required="false">
+                            <input type="text" class="form-control" name="" placeholder="New Address"
+                                required="false">
+                            <input type="number" class="form-control" name="" placeholder="New Salary"
+                                required="false">
+                        </form>
+                    </div>
+                    <div id="Departmental" class="tab-content">
+                        <p><strong>Doctor ID:</strong> <span id="docIdDept"></span></p>
+                        <p><strong>Specialization:</strong> <span id="specializationDept"></span></p>
+                        <p><strong>Status:</strong> <span id="statusDept"></span></p>
+                        <p><strong>OPD Charges:</strong> <span id="opdChargesDept"></span></p>
+                        <p><strong>Shift ID:</strong> <span id="shiftIdDept"></span></p>
+                        <p><strong>Day:</strong> <span id="dayDept"></span></p>
+                        <p><strong>Placement:</strong> <span id="placementDept"></span></p>
+                        <hr>
+                        <form action="">
+                            <h3>Update Details</h3>
+                            <input type="text" class="form-control" name="" placeholder="New Specialization"
+                                required="false">
+                            <input type="text" class="form-control" name="" placeholder="New Status"
+                                required="false">
+                            <input type="number" class="form-control" name="" placeholder="New OPD Charges"
+                                required="false">
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Modal End -->
 
 
     <!-- Footer -->
@@ -202,41 +274,10 @@
 
     <div id="modalContainer"></div>
 
-    <script>
-        // Mock data
-        const doctors = [
-            { id: 1, name: 'Dr. Smith', dob: '1980-01-01', status: 'Active', gender: 'Male', contact: '1234567890', address: '123 Main St', email: 'smith@example.com', doj: '2020-01-01', salary: '100000', specialization: 'Cardiology', opdCharges: '200', shiftId: 1, day: 'Monday', placement: 'Room 101', appointments: 15 },
-            { id: 2, name: 'Dr. Jones', dob: '1975-05-20', status: 'Active', gender: 'Female', contact: '0987654321', address: '456 Market St', email: 'jones@example.com', doj: '2018-03-15', salary: '120000', specialization: 'Neurology', opdCharges: '250', shiftId: 2, day: 'Tuesday', placement: 'Room 102', appointments: 10 },
-            // Add more doctors here
-        ];
-
-        const topDoctors = [
-            { id: 1, name: 'Dr. Smith', dob: '1980-01-01', appointments: 15 },
-            { id: 2, name: 'Dr. Jones', dob: '1975-05-20', appointments: 10 },
-            // Add more top doctors here
-        ];
-
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', () => {
-            loadDoctors();
-            loadTopDoctors();
             document.getElementById('searchForm').addEventListener('submit', searchDoctors);
         });
-
-        function loadDoctors() {
-            const doctorTable = document.getElementById('doctorTable');
-            doctors.forEach(doctor => {
-                const row = doctorTable.insertRow();
-                row.innerHTML = `<td>${doctor.id}</td><td>${doctor.name}</td><td>${doctor.dob}</td><td>${doctor.status}</td><td><button class="btn btn-info" onclick="openDoctorProfile(${doctor.id})">Profile</button><button class="btn btn-warning" onclick="editDoctor(${doctor.id})">Edit</button><button class="btn btn-danger" onclick="deleteDoctor(${doctor.id})">Delete</button></td>`;
-            });
-        }
-
-        function loadTopDoctors() {
-            const topDoctorsTable = document.getElementById('topDoctorsTable');
-            topDoctors.forEach(doctor => {
-                const row = topDoctorsTable.insertRow();
-                row.innerHTML = `<td>${doctor.id}</td><td>${doctor.name}</td><td>${doctor.dob}</td><td>${doctor.appointments}</td>`;
-            });
-        }
 
         function searchDoctors(event) {
             event.preventDefault();
@@ -249,147 +290,8 @@
                 row.innerHTML = `<td>${doctor.id}</td><td>${doctor.name}</td><td>${doctor.dob}</td><td>${doctor.status}</td><td><button class="btn btn-info" onclick="openDoctorProfile(${doctor.id})">Profile</button><button class="btn btn-warning" onclick="editDoctor(${doctor.id})">Edit</button><button class="btn btn-danger" onclick="deleteDoctor(${doctor.id})">Delete</button></td>`;
             });
         }
+    </script> -->
 
-        function openDoctorProfile(doctorId) {
-            const doctor = doctors.find(d => d.id === doctorId);
-            document.getElementById('docIdGeneral').textContent = doctor.id;
-            document.getElementById('nameGeneral').textContent = doctor.name;
-            document.getElementById('dobGeneral').textContent = doctor.dob;
-            document.getElementById('genderGeneral').textContent = doctor.gender;
-            document.getElementById('contactGeneral').textContent = doctor.contact;
-            document.getElementById('addressGeneral').textContent = doctor.address;
-            document.getElementById('emailGeneral').textContent = doctor.email;
-            document.getElementById('dojGeneral').textContent = doctor.doj;
-            document.getElementById('salaryGeneral').textContent = doctor.salary;
-
-            document.getElementById('docIdDept').textContent = doctor.id;
-            document.getElementById('specializationDept').textContent = doctor.specialization;
-            document.getElementById('statusDept').textContent = doctor.status;
-            document.getElementById('opdChargesDept').textContent = doctor.opdCharges;
-            document.getElementById('shiftIdDept').textContent = doctor.shiftId;
-            document.getElementById('dayDept').textContent = doctor.day;
-            document.getElementById('placementDept').textContent = doctor.placement;
-
-            document.getElementById('doctorProfileModal').style.display = 'block';
-        }
-
-        function closeDoctorProfile() {
-            document.getElementById('doctorProfileModal').style.display = 'none';
-        }
-
-        function editDoctor(doctorId) {
-            // Implement edit doctor functionality
-            alert('Editing doctor ID: ' + doctorId);
-        }
-
-        function deleteDoctor(doctorId) {
-            // Implement delete doctor functionality
-            alert('Deleting doctor ID: ' + doctorId);
-        }
-
-        function openTab(event, tabName) {
-            const tabContents = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].style.display = 'none';
-            }
-
-            const tabButtons = document.getElementsByClassName('tab-button');
-            for (let i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].className = tabButtons[i].className.replace(' active', '');
-            }
-
-            document.getElementById(tabName).style.display = 'block';
-            event.currentTarget.className += ' active';
-        }
-
-        function showAllDoctors() {
-            document.getElementById('allDoctorsSection').style.display = 'block';
-            document.getElementById('topDoctorsSection').style.display = 'none';
-            document.getElementById('allDoctorsBtn').classList.add('btn-primary');
-            document.getElementById('allDoctorsBtn').classList.remove('btn-secondary');
-            document.getElementById('topDoctorsBtn').classList.add('btn-secondary');
-            document.getElementById('topDoctorsBtn').classList.remove('btn-primary');
-        }
-
-        function showTopDoctors() {
-            document.getElementById('allDoctorsSection').style.display = 'none';
-            document.getElementById('topDoctorsSection').style.display = 'block';
-            document.getElementById('allDoctorsBtn').classList.add('btn-secondary');
-            document.getElementById('allDoctorsBtn').classList.remove('btn-primary');
-            document.getElementById('topDoctorsBtn').classList.add('btn-primary');
-            document.getElementById('topDoctorsBtn').classList.remove('btn-secondary');
-        }
-    </script>
-
-    <style>
-        #doctorProfileModal .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        #doctorProfileModal .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        #doctorProfileModal .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        #doctorProfileModal .close:hover,
-        #doctorProfileModal .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        #doctorProfileModal .tabs {
-            overflow: hidden;
-            background-color: #f1f1f1;
-        }
-
-        #doctorProfileModal .tab-button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-        }
-
-        #doctorProfileModal .tab-button:hover {
-            background-color: #ddd;
-        }
-
-        #doctorProfileModal .tab-button.active {
-            background-color: #ccc;
-        }
-
-        #doctorProfileModal .tab-content {
-            display: none;
-            padding: 6px 12px;
-            border-top: none;
-        }
-
-        #doctorProfileModal .tab-content.active {
-            display: block;
-        }
-    </style>
 </body>
 
 </html>

@@ -122,7 +122,7 @@
         </div>
     </div>
 
-    <div id="patientProfileModal" class="modal">
+    <!-- <div id="patientProfileModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closePatientProfile()">&times;</span>
             <div class="tabs">
@@ -161,7 +161,68 @@
                 <button class="btn btn-success">Update</button>
             </div>
         </div>
+    </div> -->
+
+
+    <!-- Patient Profile Modal -->
+    <div class="modal fade" id="patientProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="tabs">
+                        <button class="tab-button active" onclick="openTab(event, 'General')">GENERAL</button>
+                        <button class="tab-button" onclick="openTab(event, 'Medical')">MEDICAL</button>
+                        <button class="tab-button" onclick="openTab(event, 'Lab')">LAB</button>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="General" class="tab-content active">
+                        <p><strong>Patient ID:</strong> <span id="patIdGeneral"></span></p>
+                        <p><strong>Name:</strong> <span id="nameGeneral"></span></p>
+                        <p><strong>DOB:</strong> <span id="dobGeneral"></span></p>
+                        <p><strong>Gender:</strong> <span id="genderGeneral"></span></p>
+                        <p><strong>Contact:</strong> <span id="contactGeneral"></span></p>
+                        <p><strong>Address:</strong> <span id="addressGeneral"></span></p>
+                        <p><strong>Email:</strong> <span id="emailGeneral"></span></p>
+                        <p><strong>Status:</strong> <span id="statusGeneral"></span></p>
+                        <hr>
+                        <form action="">
+                            <h3>Update Details</h3>
+                            <input type="text" class="form-control" name="" placeholder="New Contact"
+                                required="false">
+                            <input type="text" class="form-control" name="" placeholder="New Address"
+                                required="false">
+                            <input type="text" class="form-control" name="" placeholder="New Status"
+                                required="false">
+                        </form>
+                    </div>
+                    <div id="Medical" class="tab-content">
+                        <p><strong>Patient ID:</strong> <span id="patIdMedical"></span></p>
+                        <p><strong>Doctor ID:</strong> <span id="docIdMedical"></span></p>
+                        <p><strong>Test Name:</strong> <span id="testNameMedical"></span></p>
+                        <p><strong>Cost:</strong> <span id="costMedical"></span></p>
+                        <p><strong>Results:</strong> <span id="resultsMedical"></span></p>
+                        <p><strong>Diagnosis:</strong> <span id="diagnosisMedical"></span></p>
+                    </div>
+                    <div id="Lab" class="tab-content">
+                        <p><strong>Patient ID:</strong> <span id="patIdLab"></span></p>
+                        <p><strong>Test ID:</strong> <span id="testIdLab"></span></p>
+                        <p><strong>Test Name:</strong> <span id="testNameLab"></span></p>
+                        <p><strong>Cost:</strong> <span id="costLab"></span></p>
+                        <p><strong>Result:</strong> <span id="resultLab"></span></p>
+                        <p><strong>Report Schedule:</strong> <span id="reportScheduleLab"></span></p>
+                        <p><strong>Collection Time:</strong> <span id="collectionTimeLab"></span></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Modal End -->
 
     <!-- Footer -->
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -213,25 +274,9 @@
     <div id="modalContainer"></div>
 
     <!-- <script>
-        // Mock data
-        const patients = [
-            { id: 1, name: 'John Doe', dob: '1980-01-01', gender: 'Male', contact: '1234567890', address: '123 Main St', email: 'john@example.com', status: 'Admitted', doctorId: 101, testName: 'Blood Test', cost: '$200', results: 'Normal', diagnosis: 'Healthy', testId: 301, reportSchedule: '2023-05-20', collectionTime: '10:00 AM' },
-            { id: 2, name: 'Jane Smith', dob: '1985-02-20', gender: 'Female', contact: '0987654321', address: '456 Market St', email: 'jane@example.com', status: 'Discharged', doctorId: 102, testName: 'X-Ray', cost: '$300', results: 'Fracture', diagnosis: 'Injury', testId: 302, reportSchedule: '2023-05-21', collectionTime: '11:00 AM' },
-            // Add more patients here
-        ];
-
         document.addEventListener('DOMContentLoaded', () => {
-            loadPatients();
             document.getElementById('searchForm').addEventListener('submit', searchPatients);
         });
-
-        function loadPatients() {
-            const patientTable = document.getElementById('patientTable');
-            patients.forEach(patient => {
-                const row = patientTable.insertRow();
-                row.innerHTML = `<td>${patient.id}</td><td>${patient.name}</td><td>${patient.gender}</td><td>${patient.status}</td><td>${patient.contact}</td><td><button class="btn btn-info" onclick="openPatientProfile(${patient.id})">Profile</button></td>`;
-            });
-        }
 
         function searchPatients(event) {
             event.preventDefault();
@@ -244,125 +289,8 @@
                 row.innerHTML = `<td>${patient.id}</td><td>${patient.name}</td><td>${patient.gender}</td><td>${patient.status}</td><td>${patient.contact}</td><td><button class="btn btn-info" onclick="openPatientProfile(${patient.id})">Profile</button></td>`;
             });
         }
-
-        function openPatientProfile(patientId) {
-            const patient = patients.find(p => p.id === patientId);
-            document.getElementById('patIdGeneral').textContent = patient.id;
-            document.getElementById('nameGeneral').textContent = patient.name;
-            document.getElementById('dobGeneral').textContent = patient.dob;
-            document.getElementById('genderGeneral').textContent = patient.gender;
-            document.getElementById('contactGeneral').textContent = patient.contact;
-            document.getElementById('addressGeneral').textContent = patient.address;
-            document.getElementById('emailGeneral').textContent = patient.email;
-            document.getElementById('statusGeneral').textContent = patient.status;
-
-            document.getElementById('patIdMedical').textContent = patient.id;
-            document.getElementById('docIdMedical').textContent = patient.doctorId;
-            document.getElementById('testNameMedical').textContent = patient.testName;
-            document.getElementById('costMedical').textContent = patient.cost;
-            document.getElementById('resultsMedical').textContent = patient.results;
-            document.getElementById('diagnosisMedical').textContent = patient.diagnosis;
-
-            document.getElementById('patIdLab').textContent = patient.id;
-            document.getElementById('testIdLab').textContent = patient.testId;
-            document.getElementById('testNameLab').textContent = patient.testName;
-            document.getElementById('costLab').textContent = patient.cost;
-            document.getElementById('resultLab').textContent = patient.results;
-            document.getElementById('reportScheduleLab').textContent = patient.reportSchedule;
-            document.getElementById('collectionTimeLab').textContent = patient.collectionTime;
-
-            document.getElementById('patientProfileModal').style.display = 'block';
-        }
-
-        function closePatientProfile() {
-            document.getElementById('patientProfileModal').style.display = 'none';
-        }
-
-        function openTab(event, tabName) {
-            const tabContents = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].style.display = 'none';
-            }
-
-            const tabButtons = document.getElementsByClassName('tab-button');
-            for (let i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].className = tabButtons[i].className.replace(' active', '');
-            }
-
-            document.getElementById(tabName).style.display = 'block';
-            event.currentTarget.className += ' active';
-        }
     </script> -->
 
-    <style>
-        #patientProfileModal .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        #patientProfileModal .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        #patientProfileModal .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        #patientProfileModal .close:hover,
-        #patientProfileModal .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        #patientProfileModal .tabs {
-            overflow: hidden;
-            background-color: #f1f1f1;
-        }
-
-        #patientProfileModal .tab-button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-        }
-
-        #patientProfileModal .tab-button:hover {
-            background-color: #ddd;
-        }
-
-        #patientProfileModal .tab-button.active {
-            background-color: #ccc;
-        }
-
-        #patientProfileModal .tab-content {
-            display: none;
-            padding: 6px 12px;
-            border-top: none;
-        }
-
-        #patientProfileModal .tab-content.active {
-            display: block;
-        }
-    </style>
 </body>
 
 </html>

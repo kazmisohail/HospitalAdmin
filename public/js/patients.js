@@ -1,3 +1,18 @@
+function openTab(event, tabName) {
+  const tabContents = document.getElementsByClassName('tab-content');
+  for (let i = 0; i < tabContents.length; i++) {
+      tabContents[i].style.display = 'none';
+  }
+
+  const tabButtons = document.getElementsByClassName('tab-button');
+  for (let i = 0; i < tabButtons.length; i++) {
+      tabButtons[i].className = tabButtons[i].className.replace(' active', '');
+  }
+
+  document.getElementById(tabName).style.display = 'block';
+  event.currentTarget.className += ' active';
+}
+
 const apiUrl = 'http://localhost:3001/api/patientsTable';
 
 // Function to fetch pharmacists data and populate table
@@ -18,7 +33,7 @@ function fetchPatientsData() {
             <td>${patient.Contact}</td>
             <td>
               <button class="btn btn-info" type="button" data-bs-toggle="modal"
-                data-bs-target="#pharmacyProfileModal">Profile</button>
+                data-bs-target="#patientProfileModal">Profile</button>
             </td>
           </tr>
         `;
