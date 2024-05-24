@@ -270,6 +270,21 @@ app.get('/api/pharmacists', (req, res) => {
     });
 });
 
+// Define API endpoint to fetch pharmacist data by ID
+app.get('/api/pharmacists/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT * FROM AllPharmacists WHERE EmpID = ${id}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset[0]); // Assuming only one pharmacist is returned
+        }
+    });
+});
+
+
 // Inventory
 // Define API endpoint to fetch inventories data
 app.get('/api/inventories', (req, res) => {
@@ -297,6 +312,49 @@ app.get('/api/patientsTable', (req, res) => {
         }
     });
 });
+
+// Define API endpoint to fetch patients general profile data by ID
+app.get('/api/patientsTable/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT * FROM Patient WHERE PatientID = ${id}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset[0]); // Assuming only one pharmacist is returned
+        }
+    });
+});
+
+// Define API endpoint to fetch patients medical data by ID
+app.get('/api/patientsTable1/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT * FROM GetPatientMedicalProfile(${id})`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset[0]); // Assuming only one pharmacist is returned
+        }
+    });
+});
+
+// Define API endpoint to fetch patients lab data by ID
+app.get('/api/patientsTable2/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT * FROM GetPatientLabProfile(${id})`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset[0]); // Assuming only one pharmacist is returned
+        }
+    });
+});
+
 
 // Doctor
 // Define API endpoint to fetch doctor data
