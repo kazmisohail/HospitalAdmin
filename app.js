@@ -6,6 +6,14 @@ app.use(express.static('./public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const session = require('express-session');
+
+
+app.use(session({
+    secret: 'your_secret_key_here', // This should be a long random string, used to sign the session ID cookie
+    resave: false,
+    saveUninitialized: true
+}));
 const PORT = process.env.PORT || 3001;
 
 // SQL Server configuration
@@ -20,7 +28,6 @@ var config = {
         encrypt: false // Disable encryption
     }
 };
-
 sql.connect(config, err => {
     if (err) {
         console.error("Database connection failed:", err);
@@ -41,7 +48,7 @@ app.post('/api/verifyEmail', async (req, res) => {
         const result = await sql.query`SELECT COUNT(*) AS count FROM admin WHERE email = ${email}`;
         // Check if email exists
         const exists = result.recordset[0].count > 0;
-        res.json({ exists });
+        res.json({ exists, requireOTP: exists }); // Return flag indicating whether OTP verification is required
     } catch (error) {
         console.error('Error verifying email:', error.message);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -51,8 +58,22 @@ app.post('/api/verifyEmail', async (req, res) => {
     }
 });
 
+app.post('/api/verifyOTP', async (req, res) => {
+    const { otp, email } = req.body;
+    const storedOTP = req.session.otp; // Retrieve the stored OTP from the session
+
+    if (otp === storedOTP) {
+        // OTP matched successfully
+        res.json({ success: true });
+    } else {
+        // OTP mismatch
+        res.json({ success: false, error: 'Invalid OTP' });
+    }
+});
+
 app.post('/api/sendOTP', async (req, res) => {
     const { email } = req.body;
+    const otp = generateOTP();
 
     try {
         let transporter = nodemailer.createTransport({
@@ -67,17 +88,22 @@ app.post('/api/sendOTP', async (req, res) => {
             from: 'arhamraza947@gmail.com',
             to: email,
             subject: 'Your OTP for password reset',
-            text: `Your OTP for password reset is: ${generateOTP()}`
+            text: `Your OTP for password reset is: ${otp}`
         };
 
         let info = await transporter.sendMail(mailOptions);
         console.log('Email sent: ', info.response);
+
+        // Store the OTP in the session
+        req.session.otp = otp;
+
         res.json({ success: true });
     } catch (error) {
         console.error('Error occurred: ', error);
         res.status(500).json({ success: false, error: 'Failed to send OTP' });
     }
 });
+
 
 function generateOTP() {
     let digits = '0123456789';
