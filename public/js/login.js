@@ -1,7 +1,4 @@
-// function logIn() {
-//     window.location.href = "./dashboard.html";
-
-// }
+// Function to handle login
 async function logIn() {
     const email = document.getElementById('uname').value;
     const password = document.getElementById('password').value;
@@ -20,8 +17,7 @@ async function logIn() {
         // Handle successful login
         alert('Login successful');
         // Redirect or perform other actions
-         window.location.href = './dashboard.html'; // Example redirection
-       
+        window.location.href = './dashboard.html'; // Example redirection
     } else {
         // Handle login error
         const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
@@ -30,6 +26,7 @@ async function logIn() {
     }
 }
 
+// Function to toggle password visibility
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('password');
     const eyeIcon = document.getElementById('eye-icon');
@@ -42,4 +39,11 @@ function togglePasswordVisibility() {
         eyeIcon.classList.remove('fa-eye-slash');
         eyeIcon.classList.add('fa-eye');
     }
+}
+
+// Function to handle forgot password
+function forgotPassword() {
+    // You can display a dialog box or redirect to a new page for forgot password functionality
+    // For example, redirecting to a new HTML page where the user can enter their email
+    window.location.href = './forgot_password.html';
 }

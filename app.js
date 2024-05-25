@@ -1,6 +1,6 @@
 const express = require("express");
 const sql = require("mssql");
-
+const nodemailer = require('nodemailer');
 const app = express();
 app.use(express.static('./public'));
 app.use(express.json());
@@ -20,31 +20,7 @@ var config = {
         encrypt: false // Disable encryption
     }
 };
-// // Route to verify if email exists
-// app.post('/api/verifyEmail', async (req, res) => {
-//     const { email } = req.body;
-    
-//     try {
-//         // Connect to the database
-//         await sql.connect(config);
 
-//         // Query to check if the email exists in the admin table
-//         const result = await sql.query`SELECT COUNT(*) AS count FROM admin WHERE email = ${email}`;
-
-//         // Check if the email exists (count > 0)
-//         const emailExists = result.recordset[0].count > 0;
-
-//         // Send response to frontend
-//         res.json({ exists: emailExists });
-//     } catch (error) {
-//         console.error('Error occurred: ', error.message);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     } finally {
-//         // Close the database connection
-//         await sql.close();
-//     }
-// });
-// Connect to SQL Server
 sql.connect(config, err => {
     if (err) {
         console.error("Database connection failed:", err);
@@ -52,6 +28,68 @@ sql.connect(config, err => {
     }
     console.log("Connection Successful!");
 });
+
+// In app.js or wherever you define your API routes
+
+app.post('/api/verifyEmail', async (req, res) => {
+    const { email } = req.body;
+    
+    try {
+        // Connect to the database
+        await sql.connect(config);
+        // Query to check if email exists
+        const result = await sql.query`SELECT COUNT(*) AS count FROM admin WHERE email = ${email}`;
+        // Check if email exists
+        const exists = result.recordset[0].count > 0;
+        res.json({ exists });
+    } catch (error) {
+        console.error('Error verifying email:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    } finally {
+        // Close database connection
+        await sql.close();
+    }
+});
+
+app.post('/api/sendOTP', async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        let transporter = nodemailer.createTransport({
+            service: 'Gmail', // Example: Gmail
+            auth: {
+                user: 'arhamraza947@gmail.com', // Your email address
+                pass: 'hngwyqzhrpyoehph' // Your email password or app password if using Gmail
+            }
+        });
+
+        let mailOptions = {
+            from: 'arhamraza947@gmail.com',
+            to: email,
+            subject: 'Your OTP for password reset',
+            text: `Your OTP for password reset is: ${generateOTP()}`
+        };
+
+        let info = await transporter.sendMail(mailOptions);
+        console.log('Email sent: ', info.response);
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error occurred: ', error);
+        res.status(500).json({ success: false, error: 'Failed to send OTP' });
+    }
+});
+
+function generateOTP() {
+    let digits = '0123456789';
+    let OTP = '';
+    for (let i = 0; i < 6; i++) {
+        OTP += digits[Math.floor(Math.random() * 10)];
+    }
+    return OTP;
+}
+
+// Connect to SQL Server
+
 
 // Define route for fetching total number of patients
 app.get('/api/patients/total', async (req, res) => {
