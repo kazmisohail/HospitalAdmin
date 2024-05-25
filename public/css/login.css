@@ -1,83 +1,88 @@
+body {
+    background-color: #727272 !important;
+}
+
 .login-body {
-    background: linear-gradient(to right, #51a0d4, #989898); /* TBD */
+    display: flex;
     height: 100vh;
     width: 100vw;
+    font-family: Arial, sans-serif;
+    background-color: #727272 !important;
 }
 
-.header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: lightskyblue;
-}
-
-.my-container {
-    background-color: rgba(255, 255, 255, 0.105);
-    padding: 20px;
-    border-radius: 10px;
- /*    box-shadow: 0px 0px 10px rgb(195, 195, 195); */
-    width: 400px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.my-container form {
+.left-container {
+    background-color: #121212;
+    color: white;
+    padding: 40px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    /* clip-path: circle(95.0% at 6% 6%); */
+    clip-path: circle(101.0% at 0 0);
 }
 
-.my-container form h3 {
+.left-container h2 {
+    font-size: 32px;
     margin-bottom: 20px;
-    text-align: center;
-    color: white;
 }
 
-.my-container form input[type="text"],
-.my-container form input[type="password"] {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
+.left-container p {
     font-size: 16px;
-    width: 100%;
-    background-color: transparent;
-    color: white;
+    margin-bottom: 30px;
 }
 
-.my-container form input[type="text"]::placeholder,
-.my-container form input[type="password"]::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.my-container form input[type="text"]:focus,
-.my-container form input[type="password"]:focus {
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: none;
-    outline: none;
-}
-
-.my-container form button {
+.signup-btn {
+    background-color: white;
+    color: #2A547E;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #2e7bc3;
-    color: #fff;
-    font-size: 16px;
     cursor: pointer;
+    font-size: 16px;
     transition: background-color 0.3s ease;
-    margin-top: 10px;
 }
 
-.my-container form button:hover {
-    background-color: #1b4d7d;
+.signup-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.right-container {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    color: white;
+}
+
+.right-container h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.right-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+}
+
+.right-container form input[type="text"],
+.right-container form input[type="password"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
 }
 
 .password-container {
     position: relative;
-    display: flex;
-    align-items: center;
+    width: 100%;
 }
 
 .password-container .eye-icon {
@@ -87,9 +92,33 @@
     cursor: pointer;
     font-size: 15px;
     user-select: none;
-    color: rgba(0, 0, 0, 0.801);
+    color: #121212;
 }
 
-.password-container input[type="password"] {
-    width: calc(100% - 30px); /* Adjust width to accommodate eye icon */
+.right-container form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #262626;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.right-container form button:hover {
+    background-color: #121212;
+}
+
+.forgot-password {
+    text-align: right;
+    display: block;
+    margin-bottom: 10px;
+    color: #121212;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
 }

@@ -17,9 +17,6 @@ header {
     padding: 20px 50px;
     height: 750px;
     background-color: #f0f0f0; /* Light gray */
-    background-image: url('../images/invBg.jpg');
-    background-size: cover; /* Adjust the size of the background image */
-    background-position: center; /* Position the background image */
 }
 
 .button-group {
@@ -150,18 +147,18 @@ h2 {
 
 #pharmacyProfileModal .modal-header {
     justify-content: center;
-    background-color: #4CAF50;
+    /* background-color: #4CAF50; */
 }
 
 #pharmacyProfileModal .modal-header h1 {
     font-size: 30px;
 }
 
-#pharmacyProfileModal .modal-body {
+/* #pharmacyProfileModal .modal-body {
     background-color: antiquewhite;
-}
+} */
 
 #pharmacyProfileModal .modal-footer {
     justify-content: center;
-    background-color: #4CAF50;
+    /* background-color: #4CAF50; */
 }

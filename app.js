@@ -13,14 +13,37 @@ var config = {
     user: "sa",
     password: "1234",
     //server: "KAZMI",
-    // server: "DESKTOP-TONH6GQ",
+   // server: "DESKTOP-TONH6GQ",
     server: "Arham_laptop",
     database: "HospitalManagementSystem",
     options: {
         encrypt: false // Disable encryption
     }
 };
+// // Route to verify if email exists
+// app.post('/api/verifyEmail', async (req, res) => {
+//     const { email } = req.body;
+    
+//     try {
+//         // Connect to the database
+//         await sql.connect(config);
 
+//         // Query to check if the email exists in the admin table
+//         const result = await sql.query`SELECT COUNT(*) AS count FROM admin WHERE email = ${email}`;
+
+//         // Check if the email exists (count > 0)
+//         const emailExists = result.recordset[0].count > 0;
+
+//         // Send response to frontend
+//         res.json({ exists: emailExists });
+//     } catch (error) {
+//         console.error('Error occurred: ', error.message);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     } finally {
+//         // Close the database connection
+//         await sql.close();
+//     }
+// });
 // Connect to SQL Server
 sql.connect(config, err => {
     if (err) {
@@ -267,6 +290,21 @@ app.get('/api/pharmacists', (req, res) => {
     });
 });
 
+// Define API endpoint to fetch pharmacist data by ID
+app.get('/api/pharmacists/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT * FROM AllPharmacists WHERE EmpID = ${id}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset[0]); // Assuming only one pharmacist is returned
+        }
+    });
+});
+
+
 // Inventory
 // Define API endpoint to fetch inventories data
 app.get('/api/inventories', (req, res) => {
@@ -296,4 +334,74 @@ app.get('/api/patientsTable', (req, res) => {
 });
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+});
+
+// Define API endpoint to fetch patients general profile data by ID
+app.get('/api/patientsTable/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT * FROM Patient WHERE PatientID = ${id}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset[0]); // Assuming only one pharmacist is returned
+        }
+    });
+});
+
+// Define API endpoint to fetch patients medical data by ID
+app.get('/api/patientsTable1/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT * FROM GetPatientMedicalProfile(${id})`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset[0]); // Assuming only one pharmacist is returned
+        }
+    });
+});
+
+// Define API endpoint to fetch patients lab data by ID
+app.get('/api/patientsTable2/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT * FROM GetPatientLabProfile(${id})`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset[0]); // Assuming only one pharmacist is returned
+        }
+    });
+});
+
+
+// Doctor
+// Define API endpoint to fetch doctor data
+app.get('/api/allDoctorsTable', (req, res) => {
+    const query = 'SELECT * FROM AllDoctors';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Define API endpoint to fetch doctor data
+app.get('/api/topDoctorsTable', (req, res) => {
+    const query = 'SELECT * FROM PopularDoctors';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
 });

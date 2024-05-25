@@ -2,6 +2,8 @@
     width: 0;
     transition: width 0.3s ease-in-out;
     min-height: 100vh;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .dash-menu {
@@ -51,10 +53,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1% 15px;
+    padding: 1% 35px;
     color: white;
     background-color: rgba(255, 255, 255, 0.1);
-    font-size: large !important;
+    font-size: 1.0em !important;
 }
 
 .brand-div p {
