@@ -534,3 +534,44 @@ app.get('/api/topDoctorsTable', (req, res) => {
         }
     });
 });
+
+
+// Appointment
+// Define API endpoint to fetch pending data
+app.get('/api/pendingApp', (req, res) => {
+    const query = 'SELECT * FROM PendingAppointments';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Define API endpoint to fetch completed data
+app.get('/api/completedApp', (req, res) => {
+    const query = 'SELECT * FROM CompletedAppointments';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Define API endpoint to fetch today's data
+app.get('/api/todaysApp', (req, res) => {
+    const query = 'SELECT * FROM TodaysAppointments';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});

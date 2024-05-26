@@ -32,6 +32,7 @@ function fetchPharmacistsData() {
 // Call function to fetch data when page loads
 document.addEventListener('DOMContentLoaded', fetchPharmacistsData);
 
+
 // Function to fetch and display pharmacist profile in modal
 function fetchPharmacistProfile(id) {
   const profileModal = document.getElementById('pharmacyProfileModal');

@@ -82,17 +82,17 @@
                     <button id="todaysBtn" class="btn btn-secondary" onclick="showTodays()">Today's</button>
                 </div>
 
+                <form id="searchForm">
+                    <input type="text" class="aSearch" id="searchInput" placeholder="Search appointments...">
+                    <input type="submit" value="Search">
+                </form>
                 <div id="pendingSection">
                     <h2>Pending Appointments</h2>
-                    <form id="searchForm">
-                        <input type="text" class="aSearch" id="searchInput" placeholder="Search appointments...">
-                        <input type="submit" value="Search">
-                    </form>
                     <table id="appointmentTablePending">
                         <tr class="aTHead">
                             <th>Appointment ID</th>
-                            <th>Patient Name</th>
-                            <th>Doctor Name</th>
+                            <th>Patient ID</th>
+                            <th>Doctor ID</th>
                             <th>Diagnosis</th>
                             <th>Date</th>
                             <th>Time</th>
@@ -109,8 +109,8 @@
                     <table id="appointmentTableCompleted">
                         <tr class="aTHead">
                             <th>Appointment ID</th>
-                            <th>Patient Name</th>
-                            <th>Doctor Name</th>
+                            <th>Patient ID</th>
+                            <th>Doctor ID</th>
                             <th>Diagnosis</th>
                             <th>Date</th>
                             <th>Time</th>
@@ -129,8 +129,8 @@
                     <table id="appointmentTableTodays">
                         <tr class="aTHead">
                             <th>Appointment ID</th>
-                            <th>Patient Name</th>
-                            <th>Doctor Name</th>
+                            <th>Patient ID</th>
+                            <th>Doctor ID</th>
                             <th>Diagnosis</th>
                             <th>Date</th>
                             <th>Time</th>
@@ -138,6 +138,9 @@
                             <th>Comments</th>
                             <th>Actions</th>
                         </tr>
+                        <tbody id="todaysAppTableBody">
+                            <!-- Data will be populated here -->
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -169,35 +172,83 @@
         </div>
     </div> -->
 
-    <!-- Patient Profile Modal -->
-    <div class="modal fade" id="appointmentProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Appointment Update Modal -->
+    <div class="modal fade" id="appointmentUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="tabs">
-                        <button class="tab-button active" onclick="openTab(event, 'Details')">DETAILS</button>
-                        <button class="tab-button" onclick="openTab(event, 'Comments')">COMMENTS</button>
+                        <button class="tab-button active" onclick="openTab(event, 'Details')">UPDATE</button>
+                        <button class="tab-button" onclick="openTab(event, 'Comments')">COMPLETE</button>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div id="Details" class="tab-content active">
+                        <!-- <p><strong>Appointment ID:</strong> <span id="appointmentIdDetails"></span></p>
+                        <p><strong>Patient Name:</strong> <span id="patientNameDetails"></span></p>
+                        <p><strong>Doctor Name:</strong> <span id="doctorNameDetails"></span></p>
+                        <p><strong>Diagnosis:</strong> <span id="diagnosisDetails"></span></p>
+                        <p><strong>Date:</strong> <span id="dateDetails"></span></p>
+                        <p><strong>Time:</strong> <span id="timeDetails"></span></p>
+                        <hr> -->
+                        <form action="">
+                            <h3>Update Details</h3>
+                            <input type="tel" class="form-control" placeholder="Enter New Date" required="false">
+                            <input type="text" class="form-control" placeholder="Enter New Time" required="false">
+                        </form>
+                    </div>
+                    <div id="Comments" class="tab-content">
+                        <!-- <p><strong>Appointment ID:</strong> <span id="appointmentIdDetails"></span></p>
+                        <p><strong>Patient Name:</strong> <span id="patientNameDetails"></span></p>
+                        <p><strong>Doctor Name:</strong> <span id="doctorNameDetails"></span></p>
+                        <p><strong>Diagnosis:</strong> <span id="diagnosisDetails"></span></p>
+                        <p><strong>Date:</strong> <span id="dateDetails"></span></p>
+                        <p><strong>Time:</strong> <span id="timeDetails"></span></p>
+                        <hr> -->
+                        <form action="">
+                            <h3>Update Status</h3>
+                            <input type="tel" class="form-control" placeholder="Enter Rating" required="false">
+                            <input type="text" class="form-control" placeholder="Enter Comments" required="false">
+                            <input type="text" class="form-control" placeholder="Enter Status" required="false">
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="save-btn">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal End -->
+
+    <!-- Appointment Profile Modal -->
+    <div class="modal fade" id="appointmentProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="tabs">
+                        <button class="tab-button active" onclick="openTab(event, 'Profile')">PROFILE</button>
+                        <button class="tab-button" onclick="openTab(event, 'Comment')">COMMENTS</button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="Profile" class="tab-content active">
                         <p><strong>Appointment ID:</strong> <span id="appointmentIdDetails"></span></p>
                         <p><strong>Patient Name:</strong> <span id="patientNameDetails"></span></p>
                         <p><strong>Doctor Name:</strong> <span id="doctorNameDetails"></span></p>
                         <p><strong>Diagnosis:</strong> <span id="diagnosisDetails"></span></p>
                         <p><strong>Date:</strong> <span id="dateDetails"></span></p>
                         <p><strong>Time:</strong> <span id="timeDetails"></span></p>
-                        <p><strong>Status:</strong> <span id="statusDetails"></span></p>
-                        <button class="btn btn-success">Update</button>
-                    </div>
-                    <div id="Comments" class="tab-content">
-                        <p><strong>Rating:</strong> <span id="ratingComments"></span></p>
-                        <p><strong>Comments:</strong> <span id="commentsComments"></span></p>
-                        <button class="btn btn-success">Update</button>
+                   </div>
+                    <div id="Comment" class="tab-content">
+                        <p><strong>Rating:</strong> <span id=""></span></p>
+                        <p><strong>Comments:</strong> <span id=""></span></p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="save-btn">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -321,75 +372,6 @@
 
     </script> -->
 
-    <style>
-        #appointmentProfileModal .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        #appointmentProfileModal .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        #appointmentProfileModal .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        #appointmentProfileModal .close:hover,
-        #appointmentProfileModal .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        #appointmentProfileModal .tabs {
-            overflow: hidden;
-            background-color: #f1f1f1;
-        }
-
-        #appointmentProfileModal .tab-button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-        }
-
-        #appointmentProfileModal .tab-button:hover {
-            background-color: #ddd;
-        }
-
-        #appointmentProfileModal .tab-button.active {
-            background-color: #ccc;
-        }
-
-        #appointmentProfileModal .tab-content {
-            display: none;
-            padding: 6px 12px;
-            border-top: none;
-        }
-
-        #appointmentProfileModal .tab-content.active {
-            display: block;
-        }
-    </style>
 </body>
 
 </html>
