@@ -1,12 +1,47 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Code to execute after the DOM has fully loaded
-    const sendOtpBtn = document.getElementById('sendOtpBtn');
-    sendOtpBtn.addEventListener('click', sendOTP);
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Code to execute after the DOM has fully loaded
+//     const sendOtpBtn = document.getElementById('sendOtpBtn');
+//     sendOtpBtn.addEventListener('click', sendOTP);
 
-    const verifyOtpBtn = document.getElementById('verifyOtpBtn');
-    verifyOtpBtn.addEventListener('click', verifyOTP);
-});
-
+//     const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+//     verifyOtpBtn.addEventListener('click', verifyOTP);
+// });
+async function resetPassword() {
+    const email = document.getElementById('email').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+  
+    if (newPassword !== confirmPassword) {
+      displayErrorMessage('New password and confirm password do not match.');
+      return;
+    }
+  
+    try {
+      const response = await fetch('/api/admins/password', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password: newPassword })
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        // Password updated successfully
+        displaySuccessMessage('Password updated successfully.');
+        setTimeout(() => {
+            parent.window.location.href = './login.html';
+        }, 2000);
+      } else {
+        // Error updating password
+        displayErrorMessage(data.error);
+      }
+    } catch (error) {
+      console.error(error);
+      displayErrorMessage('An error occurred. Please try again later.');
+    }
+  }
 async function sendOTP() {
     console.log('sendOTP function called');
     const email = document.getElementById('email').value; // Get user's email

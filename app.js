@@ -2,6 +2,7 @@ const express = require("express");
 const sql = require("mssql");
 const nodemailer = require('nodemailer');
 const app = express();
+const jwt = require('jsonwebtoken');
 app.use(express.static('./public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -116,6 +117,69 @@ function generateOTP() {
 
 // Connect to SQL Server
 
+app.post('/api/admins/password', async (req, res) => {
+    const { email, password } = req.body;
+    await sql.connect(config);
+    try {
+      // Find the admin by email
+      //const admin = await sql.query(SELECT * FROM Admin WHERE Email = '${email}');
+  
+      // Check if the admin exists
+    //   if (admin.recordset.length === 0) {
+    //     return res.status(404).json({ error: 'Admin not found' });
+    //   }
+  
+      // Validate the new password
+    //   const { error } = validate({ password });
+    //   if (error) {
+    //     return res.status(400).json({ error: error.details[0].message });
+    //   }
+  
+      // Hash the new password
+      //const hashedPassword = await bcrypt.hash(password, 10);
+  
+      // Update the admin's password
+      //await sql.query(UPDATE Admin SET Password = '${password}' WHERE Email = '${email}');
+      await sql.query(`UPDATE Admin SET Password = '${password}' WHERE Email = '${email}'`);
+
+      // Send a success response
+      res.json({ message: 'Password updated successfully' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+  // Define endpoint to fetch admin details
+  app.get('/api/admin/details', async (req, res) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, 'chaljaachaljaa');
+    const email = decoded.email;
+    try {
+        // Connect to the database
+        const pool = await sql.connect(config);
+        // Query to fetch admin details based on email
+        const result = await pool.request()
+            .input('Email', sql.NVarChar, email)
+            .query('SELECT * FROM Admin WHERE Email = @Email');
+        const adminDetails = result.recordset[0];
+        // Check if admin details are found
+        if (result.recordset.length > 0) {
+            // const adminDetails = result.recordset[0];
+            res.json({ success: true, adminDetails });
+            
+        } else {
+            console.log("idhr masla hai")
+            res.status(404).json({ success: false, message: 'idhr masla hai Admin details not found' });
+            console.log(adminDetails)
+        }
+    } catch (error) {
+        console.error('Error fetching admin details:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    } finally {
+        // Close database connection
+        await sql.close();
+    }
+});
 
 // Define route for fetching total number of patients
 app.get('/api/patients/total', async (req, res) => {
@@ -140,11 +204,12 @@ app.post('/api/login', async (req, res) => {
             .input('Password', sql.NVarChar, password)
             .query('SELECT * FROM Admin WHERE Email = @Email AND Password = @Password');
 
-        if (result.recordset.length > 0) {
-            res.json({ message: 'Login successful' });
-        } else {
-            res.status(401).json({ error: 'Invalid email or password' });
-        }
+            if (result.recordset.length > 0) {
+                const token = jwt.sign({ email }, 'chaljaachaljaa', { expiresIn: '1h' });
+                res.json({ success: true, message: 'Login successful', token });
+            } else {
+                res.status(401).json({ success: false, error: 'Invalid email or password' });
+            }
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Database error' });

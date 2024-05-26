@@ -37,6 +37,7 @@
             }
         })();
     </script>
+   
 </head>
 
 <body>
@@ -71,10 +72,10 @@
                             <img class="golayi" id="auto-change-dp" src="../images/default.png" alt="Button Image">
                         </button>
                         <div id="admin-profile" class="admin-profile">
-                            <p><strong>Name:</strong> John Doe</p>
-                            <p><strong>Email:</strong> john.doe@example.com</p>
-                            <p><strong>Admin ID:</strong> ADM123456</p>
-                            <p><strong>Contact:</strong> +1 (555) 123-4567</p>
+                            <p><strong>Name:</strong> <span id="admin-name"></span></p>
+                            <p><strong>Email:</strong> <span id="admin-email"></span></p>
+                            <p><strong>Admin ID:</strong> <span id="admin-id"></span></p>
+                            <p><strong>Contact:</strong> <span id="admin-contact"></span></p>
                             <!-- Sign Out!!! -->
                             <hr>
                             <a class="dropdown-item" href="./LogIn.html">Sign out</a>
@@ -573,7 +574,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-center" id="exampleModalLabel">Settings</h1>
+                    <h1 class="modal-title fs-5 text-center" id="exampleModalLabel" onclick=toggleSettings()>Settings</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
