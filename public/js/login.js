@@ -1,35 +1,45 @@
-// function logIn() {
-//     window.location.href = "./dashboard.html";
-
-// }
+// Function to handle login
+// Function to handle login
 async function logIn() {
     const email = document.getElementById('uname').value;
     const password = document.getElementById('password').value;
 
-    const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-    });
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
 
-    const result = await response.json();
+        const result = await response.json();
 
-    if (response.ok) {
-        // Handle successful login
-        alert('Login successful');
-        // Redirect or perform other actions
-         window.location.href = './dashboard.html'; // Example redirection
-       
-    } else {
-        // Handle login error
+        if (response.ok) {
+            // Store the JWT token in local storage
+            localStorage.setItem('token', result.token);
+
+            // Handle successful login
+            alert('Login successful');
+            // Redirect or perform other actions
+            window.location.href = './dashboard.html'; // Example redirection
+        } else {
+            // Handle login error
+            const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            document.querySelector('#errorModal .modal-body').textContent = result.error || 'Invalid email or password.';
+            errorModal.show();
+        }
+    } catch (error) {
+        console.error('Error during login:', error);
+        // Handle network errors or other exceptions
         const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-        document.querySelector('#errorModal .modal-body').textContent = result.error || 'Invalid email or password.';
+        document.querySelector('#errorModal .modal-body').textContent = 'An error occurred during login. Please try again later.';
         errorModal.show();
     }
 }
 
+
+// Function to toggle password visibility
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('password');
     const eyeIcon = document.getElementById('eye-icon');
@@ -42,4 +52,11 @@ function togglePasswordVisibility() {
         eyeIcon.classList.remove('fa-eye-slash');
         eyeIcon.classList.add('fa-eye');
     }
+}
+
+// Function to handle forgot password
+function forgotPassword() {
+    // You can display a dialog box or redirect to a new page for forgot password functionality
+    // For example, redirecting to a new HTML page where the user can enter their email
+    window.location.href = './forgot_password.html';
 }

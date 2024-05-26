@@ -1,11 +1,20 @@
 const express = require("express");
 const sql = require("mssql");
-
+const nodemailer = require('nodemailer');
 const app = express();
+const jwt = require('jsonwebtoken');
 app.use(express.static('./public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const session = require('express-session');
+
+
+app.use(session({
+    secret: 'your_secret_key_here', // This should be a long random string, used to sign the session ID cookie
+    resave: false,
+    saveUninitialized: true
+}));
 const PORT = process.env.PORT || 3001;
 
 // SQL Server configuration
@@ -20,14 +29,156 @@ var config = {
         encrypt: false // Disable encryption
     }
 };
-
-// Connect to SQL Server
 sql.connect(config, err => {
     if (err) {
         console.error("Database connection failed:", err);
         return;
     }
     console.log("Connection Successful!");
+});
+
+// In app.js or wherever you define your API routes
+
+app.post('/api/verifyEmail', async (req, res) => {
+    const { email } = req.body;
+    
+    try {
+        // Connect to the database
+        await sql.connect(config);
+        // Query to check if email exists
+        const result = await sql.query`SELECT COUNT(*) AS count FROM admin WHERE email = ${email}`;
+        // Check if email exists
+        const exists = result.recordset[0].count > 0;
+        res.json({ exists, requireOTP: exists }); // Return flag indicating whether OTP verification is required
+    } catch (error) {
+        console.error('Error verifying email:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    } finally {
+        // Close database connection
+        await sql.close();
+    }
+});
+
+app.post('/api/verifyOTP', async (req, res) => {
+    const { otp, email } = req.body;
+    const storedOTP = req.session.otp; // Retrieve the stored OTP from the session
+
+    if (otp === storedOTP) {
+        // OTP matched successfully
+        res.json({ success: true });
+    } else {
+        // OTP mismatch
+        res.json({ success: false, error: 'Invalid OTP' });
+    }
+});
+
+app.post('/api/sendOTP', async (req, res) => {
+    const { email } = req.body;
+    const otp = generateOTP();
+
+    try {
+        let transporter = nodemailer.createTransport({
+            service: 'Gmail', // Example: Gmail
+            auth: {
+                user: 'arhamraza947@gmail.com', // Your email address
+                pass: 'hngwyqzhrpyoehph' // Your email password or app password if using Gmail
+            }
+        });
+
+        let mailOptions = {
+            from: 'arhamraza947@gmail.com',
+            to: email,
+            subject: 'Your OTP for password reset',
+            text: `Your OTP for password reset is: ${otp}`
+        };
+
+        let info = await transporter.sendMail(mailOptions);
+        console.log('Email sent: ', info.response);
+
+        // Store the OTP in the session
+        req.session.otp = otp;
+
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error occurred: ', error);
+        res.status(500).json({ success: false, error: 'Failed to send OTP' });
+    }
+});
+
+
+function generateOTP() {
+    let digits = '0123456789';
+    let OTP = '';
+    for (let i = 0; i < 6; i++) {
+        OTP += digits[Math.floor(Math.random() * 10)];
+    }
+    return OTP;
+}
+
+// Connect to SQL Server
+
+app.post('/api/admins/password', async (req, res) => {
+    const { email, password } = req.body;
+    await sql.connect(config);
+    try {
+      // Find the admin by email
+      //const admin = await sql.query(SELECT * FROM Admin WHERE Email = '${email}');
+  
+      // Check if the admin exists
+    //   if (admin.recordset.length === 0) {
+    //     return res.status(404).json({ error: 'Admin not found' });
+    //   }
+  
+      // Validate the new password
+    //   const { error } = validate({ password });
+    //   if (error) {
+    //     return res.status(400).json({ error: error.details[0].message });
+    //   }
+  
+      // Hash the new password
+      //const hashedPassword = await bcrypt.hash(password, 10);
+  
+      // Update the admin's password
+      //await sql.query(UPDATE Admin SET Password = '${password}' WHERE Email = '${email}');
+      await sql.query(`UPDATE Admin SET Password = '${password}' WHERE Email = '${email}'`);
+
+      // Send a success response
+      res.json({ message: 'Password updated successfully' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+  // Define endpoint to fetch admin details
+  app.get('/api/admin/details', async (req, res) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, 'chaljaachaljaa');
+    const email = decoded.email;
+    try {
+        // Connect to the database
+        const pool = await sql.connect(config);
+        // Query to fetch admin details based on email
+        const result = await pool.request()
+            .input('Email', sql.NVarChar, email)
+            .query('SELECT * FROM Admin WHERE Email = @Email');
+        const adminDetails = result.recordset[0];
+        // Check if admin details are found
+        if (result.recordset.length > 0) {
+            // const adminDetails = result.recordset[0];
+            res.json({ success: true, adminDetails });
+            
+        } else {
+            console.log("idhr masla hai")
+            res.status(404).json({ success: false, message: 'idhr masla hai Admin details not found' });
+            console.log(adminDetails)
+        }
+    } catch (error) {
+        console.error('Error fetching admin details:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    } finally {
+        // Close database connection
+        await sql.close();
+    }
 });
 
 // Define route for fetching total number of patients
@@ -53,11 +204,12 @@ app.post('/api/login', async (req, res) => {
             .input('Password', sql.NVarChar, password)
             .query('SELECT * FROM Admin WHERE Email = @Email AND Password = @Password');
 
-        if (result.recordset.length > 0) {
-            res.json({ message: 'Login successful' });
-        } else {
-            res.status(401).json({ error: 'Invalid email or password' });
-        }
+            if (result.recordset.length > 0) {
+                const token = jwt.sign({ email }, 'chaljaachaljaa', { expiresIn: '1h' });
+                res.json({ success: true, message: 'Login successful', token });
+            } else {
+                res.status(401).json({ success: false, error: 'Invalid email or password' });
+            }
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Database error' });
@@ -195,15 +347,15 @@ app.get("/api/issues", async (req, res) => {
 
 //Server End-point for assigning work to admin
 app.post('/api/assign-work', async (req, res) => {
-    const { AdminID, ActionType, Description } = req.body;
+    const { AdminID, ActionType, Description,Details } = req.body;
     try {
-        const query = "exec assignWork @AdminID, @ActionType, @Description;";
+        const query = "exec assignWork @AdminID, @ActionType, @Description,@Details;";
 
         const request = new sql.Request();
         request.input('AdminID', sql.NVarChar, AdminID);
         request.input('ActionType', sql.NVarChar, ActionType);
         request.input('Description', sql.NVarChar, Description);
-
+        request.input('Details', sql.NVarChar, Details);
         await request.query(query);
 
         console.log("Work Assigned Successfully");
@@ -250,9 +402,6 @@ app.post('/api/add-admin', async (req, res) => {
 // });
 
 //Start the server on port 3001
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
 
 
 
@@ -311,6 +460,9 @@ app.get('/api/patientsTable', (req, res) => {
             res.send(result.recordset);
         }
     });
+});
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
 
 // Define API endpoint to fetch patients general profile data by ID
@@ -373,20 +525,6 @@ app.get('/api/allDoctorsTable', (req, res) => {
 // Define API endpoint to fetch doctor data
 app.get('/api/topDoctorsTable', (req, res) => {
     const query = 'SELECT * FROM PopularDoctors';
-    sql.query(query, (err, result) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send({ message: 'Error fetching data' });
-        } else {
-            res.send(result.recordset);
-        }
-    });
-});
-
-// Appointments
-// Define API endpoint to fetch pharmacists data
-app.get('/api/pendingApp', (req, res) => {
-    const query = 'SELECT * FROM PendingAppointments';
     sql.query(query, (err, result) => {
         if (err) {
             console.error(err);
