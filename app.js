@@ -12,8 +12,8 @@ const PORT = process.env.PORT || 3001;
 var config = {
     user: "sa",
     password: "1234",
-    //server: "KAZMI",
-    server: "DESKTOP-TONH6GQ",
+    server: "KAZMI",
+    // server: "DESKTOP-TONH6GQ",
     //server: "Arham_laptop",
     database: "HospitalManagementSystem",
     options: {
@@ -373,6 +373,20 @@ app.get('/api/allDoctorsTable', (req, res) => {
 // Define API endpoint to fetch doctor data
 app.get('/api/topDoctorsTable', (req, res) => {
     const query = 'SELECT * FROM PopularDoctors';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Appointments
+// Define API endpoint to fetch pharmacists data
+app.get('/api/pendingApp', (req, res) => {
+    const query = 'SELECT * FROM PendingAppointments';
     sql.query(query, (err, result) => {
         if (err) {
             console.error(err);

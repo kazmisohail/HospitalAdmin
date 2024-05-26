@@ -42,6 +42,7 @@
     <script src="../js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="../js/dashboard.js"></script>
+    <script src="../js/appointment.js"></script>
 
     <div class="dashboard">
         <iframe id="side-menu" src="menu.html" frameborder="0" width="0" class="menu-frame"></iframe>
@@ -97,6 +98,9 @@
                             <th>Time</th>
                             <th>Actions</th>
                         </tr>
+                        <tbody id="pendingAppTableBody">
+                            <!-- Data will be populated here -->
+                        </tbody>
                     </table>
                 </div>
 
@@ -114,6 +118,9 @@
                             <th>Comments</th>
                             <th>Actions</th>
                         </tr>
+                        <tbody id="completedAppTableBody">
+                            <!-- Data will be populated here -->
+                        </tbody>
                     </table>
                 </div>
 
@@ -137,7 +144,7 @@
         </div>
     </div>
 
-    <div id="appointmentProfileModal" class="modal">
+    <!-- <div id="appointmentProfileModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeAppointmentProfile()">&times;</span>
             <div class="tabs">
@@ -160,7 +167,42 @@
                 <button class="btn btn-success">Update</button>
             </div>
         </div>
+    </div> -->
+
+    <!-- Patient Profile Modal -->
+    <div class="modal fade" id="appointmentProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="tabs">
+                        <button class="tab-button active" onclick="openTab(event, 'Details')">DETAILS</button>
+                        <button class="tab-button" onclick="openTab(event, 'Comments')">COMMENTS</button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="Details" class="tab-content active">
+                        <p><strong>Appointment ID:</strong> <span id="appointmentIdDetails"></span></p>
+                        <p><strong>Patient Name:</strong> <span id="patientNameDetails"></span></p>
+                        <p><strong>Doctor Name:</strong> <span id="doctorNameDetails"></span></p>
+                        <p><strong>Diagnosis:</strong> <span id="diagnosisDetails"></span></p>
+                        <p><strong>Date:</strong> <span id="dateDetails"></span></p>
+                        <p><strong>Time:</strong> <span id="timeDetails"></span></p>
+                        <p><strong>Status:</strong> <span id="statusDetails"></span></p>
+                        <button class="btn btn-success">Update</button>
+                    </div>
+                    <div id="Comments" class="tab-content">
+                        <p><strong>Rating:</strong> <span id="ratingComments"></span></p>
+                        <p><strong>Comments:</strong> <span id="commentsComments"></span></p>
+                        <button class="btn btn-success">Update</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="save-btn">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Modal End -->
 
     <!-- Footer -->
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -211,49 +253,10 @@
 
     <div id="modalContainer"></div>
 
-    <script>
-        // Mock data
-        const pendingAppointments = [
-            { id: 4, patientName: 'Patient 4', doctorName: 'Doctor 4', diagnosis: 'Leukemia', date: '2024-05-29', time: '13:00', status: 'Pending' },
-            { id: 5, patientName: 'Patient 5', doctorName: 'Doctor 5', diagnosis: 'Asthma', date: '2024-05-30', time: '14:00', status: 'Cancelled' },
-            // Add more pending appointments here
-        ];
-
-        const completedAppointments = [
-            { id: 1, patientName: 'Patient 1', doctorName: 'Doctor 1', diagnosis: 'Hypertension', date: '2024-03-02', time: '10:00', status: 'Completed', rating: 5, comments: 'Doctor was very knowledgeable and explained everything clearly.' },
-            { id: 2, patientName: 'Patient 2', doctorName: 'Doctor 2', diagnosis: 'Fracture', date: '2024-03-09', time: '11:00', status: 'Completed', rating: 4, comments: 'Doctor was friendly and gave good advice for recovery.' },
-            { id: 3, patientName: 'Patient 3', doctorName: 'Doctor 3', diagnosis: 'Migraine', date: '2024-04-22', time: '12:00', status: 'Completed', rating: 3, comments: 'Appointment was cancelled last minute, inconvenient.' },
-            // Add more completed appointments here
-        ];
-
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', () => {
-            loadAppointments();
             document.getElementById('searchForm').addEventListener('submit', searchAppointments);
         });
-
-        function loadAppointments() {
-            const pendingTable = document.getElementById('appointmentTablePending');
-            const completedTable = document.getElementById('appointmentTableCompleted');
-            const todaysTable = document.getElementById('appointmentTableTodays');
-            const today = new Date().toISOString().split('T')[0];
-
-            pendingAppointments.forEach(appointment => {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${appointment.id}</td><td>${appointment.patientName}</td><td>${appointment.doctorName}</td><td>${appointment.diagnosis}</td><td>${appointment.date}</td><td>${appointment.time}</td><td><button class="btn btn-info" onclick="openAppointmentProfile(${appointment.id}, 'pending')">Profile</button></td>`;
-                pendingTable.appendChild(row);
-            });
-
-            completedAppointments.forEach(appointment => {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${appointment.id}</td><td>${appointment.patientName}</td><td>${appointment.doctorName}</td><td>${appointment.diagnosis}</td><td>${appointment.date}</td><td>${appointment.time}</td><td>${appointment.rating}</td><td>${appointment.comments}</td><td><button class="btn btn-info" onclick="openAppointmentProfile(${appointment.id}, 'completed')">Profile</button></td>`;
-                completedTable.appendChild(row);
-
-                if (appointment.date === today) {
-                    const todaysRow = row.cloneNode(true);
-                    todaysTable.appendChild(todaysRow);
-                }
-            });
-        }
 
         function searchAppointments(event) {
             event.preventDefault();
@@ -316,59 +319,9 @@
             document.getElementById('appointmentProfileModal').style.display = 'none';
         }
 
-        function showPending() {
-            document.getElementById('pendingSection').style.display = 'block';
-            document.getElementById('completedSection').style.display = 'none';
-            document.getElementById('todaysSection').style.display = 'none';
-            document.getElementById('pendingBtn').classList.add('btn-primary');
-            document.getElementById('pendingBtn').classList.remove('btn-secondary');
-            document.getElementById('completedBtn').classList.add('btn-secondary');
-            document.getElementById('completedBtn').classList.remove('btn-primary');
-            document.getElementById('todaysBtn').classList.add('btn-secondary');
-            document.getElementById('todaysBtn').classList.remove('btn-primary');
-        }
+    </script> -->
 
-        function showCompleted() {
-            document.getElementById('pendingSection').style.display = 'none';
-            document.getElementById('completedSection').style.display = 'block';
-            document.getElementById('todaysSection').style.display = 'none';
-            document.getElementById('pendingBtn').classList.add('btn-secondary');
-            document.getElementById('pendingBtn').classList.remove('btn-primary');
-            document.getElementById('completedBtn').classList.add('btn-primary');
-            document.getElementById('completedBtn').classList.remove('btn-secondary');
-            document.getElementById('todaysBtn').classList.add('btn-secondary');
-            document.getElementById('todaysBtn').classList.remove('btn-primary');
-        }
-
-        function showTodays() {
-            document.getElementById('pendingSection').style.display = 'none';
-            document.getElementById('completedSection').style.display = 'none';
-            document.getElementById('todaysSection').style.display = 'block';
-            document.getElementById('pendingBtn').classList.add('btn-secondary');
-            document.getElementById('pendingBtn').classList.remove('btn-primary');
-            document.getElementById('completedBtn').classList.add('btn-secondary');
-            document.getElementById('completedBtn').classList.remove('btn-primary');
-            document.getElementById('todaysBtn').classList.add('btn-primary');
-            document.getElementById('todaysBtn').classList.remove('btn-secondary');
-        }
-
-        function openTab(event, tabName) {
-            const tabContents = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].style.display = 'none';
-            }
-
-            const tabButtons = document.getElementsByClassName('tab-button');
-            for (let i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].className = tabButtons[i].className.replace(' active', '');
-            }
-
-            document.getElementById(tabName).style.display = 'block';
-            event.currentTarget.className += ' active';
-        }
-    </script>
-
-    <!-- <style>
+    <style>
         #appointmentProfileModal .modal {
             display: none;
             position: fixed;
@@ -436,7 +389,7 @@
         #appointmentProfileModal .tab-content.active {
             display: block;
         }
-    </style> -->
+    </style>
 </body>
 
 </html>

@@ -1,67 +1,87 @@
-/* <!-- JavaScript code to fetch and display appointments --> */
+function showPending() {
+    document.getElementById('pendingSection').style.display = 'block';
+    document.getElementById('completedSection').style.display = 'none';
+    document.getElementById('todaysSection').style.display = 'none';
+    document.getElementById('pendingBtn').classList.add('btn-primary');
+    document.getElementById('pendingBtn').classList.remove('btn-secondary');
+    document.getElementById('completedBtn').classList.add('btn-secondary');
+    document.getElementById('completedBtn').classList.remove('btn-primary');
+    document.getElementById('todaysBtn').classList.add('btn-secondary');
+    document.getElementById('todaysBtn').classList.remove('btn-primary');
+}
 
-// Function to fetch and display all appointments
-async function getAllAppointments() {
-    try {
-        const response = await fetch('/api/appointments');
-        const appointments = await response.json();
-        renderAppointments(appointments);
-    } catch (error) {
-        console.error('Error fetching appointments:', error);
+function showCompleted() {
+    document.getElementById('pendingSection').style.display = 'none';
+    document.getElementById('completedSection').style.display = 'block';
+    document.getElementById('todaysSection').style.display = 'none';
+    document.getElementById('pendingBtn').classList.add('btn-secondary');
+    document.getElementById('pendingBtn').classList.remove('btn-primary');
+    document.getElementById('completedBtn').classList.add('btn-primary');
+    document.getElementById('completedBtn').classList.remove('btn-secondary');
+    document.getElementById('todaysBtn').classList.add('btn-secondary');
+    document.getElementById('todaysBtn').classList.remove('btn-primary');
+}
+
+function showTodays() {
+    document.getElementById('pendingSection').style.display = 'none';
+    document.getElementById('completedSection').style.display = 'none';
+    document.getElementById('todaysSection').style.display = 'block';
+    document.getElementById('pendingBtn').classList.add('btn-secondary');
+    document.getElementById('pendingBtn').classList.remove('btn-primary');
+    document.getElementById('completedBtn').classList.add('btn-secondary');
+    document.getElementById('completedBtn').classList.remove('btn-primary');
+    document.getElementById('todaysBtn').classList.add('btn-primary');
+    document.getElementById('todaysBtn').classList.remove('btn-secondary');
+}
+
+function openTab(event, tabName) {
+    const tabContents = document.getElementsByClassName('tab-content');
+    for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
     }
-}
 
-// Function to search for appointments
-async function searchAppointments(query) {
-    try {
-        const response = await fetch(`/api/appointments?search=${query}`);
-        const appointments = await response.json();
-        renderAppointments(appointments);
-    } catch (error) {
-        console.error('Error searching appointments:', error);
+    const tabButtons = document.getElementsByClassName('tab-button');
+    for (let i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].className = tabButtons[i].className.replace(' active', '');
     }
+
+    document.getElementById(tabName).style.display = 'block';
+    event.currentTarget.className += ' active';
 }
 
-// Function to render appointments on the UI
-function renderAppointments(appointments) {
-    const tableBody = document.getElementById('appointmentTable').getElementsByTagName('tbody')[0];
-    tableBody.innerHTML = '';
-    appointments.forEach(appointment => {
-        const row = tableBody.insertRow();
-        row.innerHTML = `
-                                <td>${appointment.id}</td>
-                                <td>${appointment.patientId}</td>
-                                <td>${appointment.doctorId}</td>
-                                <td>${appointment.diagnosis}</td>
-                                <td>${appointment.date}</td>
-                                <td>${appointment.time}</td>
-                                <td>${appointment.status}</td>
-                                <td>
-                                    <button onclick="editAppointment(${appointment.id})">Edit</button>
-                                    <button onclick="deleteAppointment(${appointment.id})">Delete</button>
-                                </td>
-                            `;
-    });
+
+// Backend Starts Here
+const apiUrl = 'http://localhost:3001/api/pendingApp';
+
+// Function to fetch pharmacists data and populate table
+function fetchPendingAppData() {
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      const tableBody = document.getElementById('pendingAppTableBody');
+      tableBody.innerHTML = '';
+
+      data.forEach(pendApp => {
+        const row = `
+          <tr>
+            <td>${pendApp.AppointmentID}</td>
+            <td>${pendApp.PatientID}</td>
+            <td>${pendApp.DoctorID}</td>
+            <td>${pendApp.DiagnosisName}</td>
+            <td>${pendApp.Date}</td>
+            <td>${pendApp.Time}</td>
+            <td>
+            <button class="btn btn-info profile-button" type="button"
+                data-bs-toggle="modal" data-bs-target="#appointmentProfileModal"
+                data-appointment-id="${pendApp.AppointmentIDID}">Profile</button>
+            </td>
+          </tr>
+        `;
+        tableBody.innerHTML += row;
+      });
+    })
+    .catch(error => console.error(error));
 }
 
-// Function to handle form submission
-document.getElementById('searchForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const searchInput = document.getElementById('searchInput').value;
-    if (searchInput.trim() !== '') {
-        searchAppointments(searchInput);
-    } else {
-        getAllAppointments();
-    }
-});
-
-// Function to edit appointment details
-function editAppointment(appointmentId) {
-    // Implement edit functionality here
-    alert('Edit appointment with ID: ' + appointmentId);
-}
-
-// Function to delete an appointment
-function deleteAppointment(appointmentId) {
-    // Implement
-}
+// Call function to fetch data when page loads
+document.addEventListener('DOMContentLoaded', fetchPendingAppData);
