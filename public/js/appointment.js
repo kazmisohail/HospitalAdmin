@@ -54,6 +54,7 @@ function openTab(event, tabName) {
 const apiUrl = 'http://localhost:3001/api/pendingApp';
 const apiUrl1 = 'http://localhost:3001/api/completedApp';
 const apiUrl2 = 'http://localhost:3001/api/todaysApp';
+const apiUrl3 = 'http://localhost:3001/api/completedApp1';
 
 // Pending Appointments
 // Function to fetch data and populate table
@@ -74,7 +75,7 @@ function fetchPendingAppData() {
             <td>${pendApp.Date}</td>
             <td>${pendApp.Time}</td>
             <td>
-            <button class="btn btn-info profile-button" type="button"
+            <button class="btn btn-info" type="button"
                 data-bs-toggle="modal" data-bs-target="#appointmentUpdateModal"
                 data-appointment-id="${pendApp.AppointmentID}">Update</button>
                 <button class="btn btn-danger" type="button">Cancel</button>
@@ -110,11 +111,6 @@ function fetchCompletedAppData() {
             <td>${compApp.Time}</td>
             <td>${compApp.Rating}</td>
             <td>${compApp.Comments}</td>
-            <td>
-            <button class="btn btn-info profile-button" type="button"
-                data-bs-toggle="modal" data-bs-target="#appointmentProfileModal"
-                data-appointment-id="${compApp.AppointmentID}">Profile</button>
-            </td>
           </tr>
         `;
         tableBody.innerHTML += row;
@@ -147,7 +143,7 @@ function fetchTodayAppData() {
             <td>${tApp.Rating}</td>
             <td>${tApp.Comments}</td>
             <td>
-            <button class="btn btn-info profile-button" type="button"
+            <button class="btn btn-info" type="button"
                 data-bs-toggle="modal" data-bs-target="#appointmentUpdateModal"
                 data-appointment-id="${tApp.AppointmentID}">Update</button>
             <button class="btn btn-danger" type="button">Cancel</button>
@@ -162,3 +158,62 @@ function fetchTodayAppData() {
 
 // Call function to fetch data when page loads
 document.addEventListener('DOMContentLoaded', fetchTodayAppData);
+
+// Completed Appointment Profile
+// Function to fetch and display appointment profile in modal
+function fetchCompAppProfile(id) {
+  const profileModal = document.getElementById('appointmentProfileModal');
+  const modalBody = profileModal.querySelector('.compAppP1');
+
+  fetch(`${apiUrl1}/${id}`)
+    .then(response => response.json())
+    .then(compApp => {
+      modalBody.innerHTML = `
+                <p><strong>Appointment ID: </strong>${compApp.AppointmentID}</p>
+                <p><strong>Patient ID: </strong>${compApp.PatientID}</p>
+                <p><strong>Dcotor ID: </strong>${compApp.DoctorID}</p>
+                <p><strong>Diagnosis: </strong>${compApp.DiagnosisName}</p>
+                <p><strong>Date: </strong>${compApp.Date}</p>
+                <p><strong>Time: </strong>${compApp.Time}</p>
+          `;
+      // Open the modal
+      const modal = new bootstrap.Modal(profileModal);
+      modal.show();
+    })
+    .catch(error => console.error(error));
+}
+
+// Event listener for profile buttons
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('profile-button')) {
+    const compAppointmentID = event.target.dataset.compAppointmentId;
+    fetchCompAppProfile(compAppointmentID);
+  }
+});
+
+// Function to fetch and display appointment profile2 in modal
+function fetchCompApp1Profile(id1) {
+  const profileModal = document.getElementById('appointmentProfileModal');
+  const modalBody = profileModal.querySelector('.compAppP2');
+
+  fetch(`${apiUrl3}/${id1}`)
+    .then(response => response.json())
+    .then(compApp => {
+      modalBody.innerHTML = `
+            <p><strong>Rating: </strong>${compApp.AppointmentID}</p>
+            <p><strong>Comments: </strong>${compApp.PatientID}</p>
+          `;
+      // Open the modal
+      const modal = new bootstrap.Modal(profileModal);
+      modal.show();
+    })
+    .catch(error => console.error(error));
+}
+
+// Event listener for profile buttons
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('profile-button')) {
+    const compAppointmentID1 = event.target.dataset.compAppointmentId;
+    fetchCompApp1Profile(compAppointmentID1);
+  }
+});

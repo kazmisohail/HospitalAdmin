@@ -131,36 +131,6 @@
         </div>
     </div>
 
-    <!-- <div id="doctorProfileModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeDoctorProfile()">&times;</span>
-            <div class="tabs">
-                <button class="tab-button active" onclick="openTab(event, 'General')">GENERAL</button>
-                <button class="tab-button" onclick="openTab(event, 'Departmental')">DEPARTMENTAL</button>
-            </div>
-            <div id="General" class="tab-content active">
-                <p><strong>Doctor ID:</strong> <span id="docIdGeneral"></span></p>
-                <p><strong>Name:</strong> <span id="nameGeneral"></span></p>
-                <p><strong>DOB:</strong> <span id="dobGeneral"></span></p>
-                <p><strong>Gender:</strong> <span id="genderGeneral"></span></p>
-                <p><strong>Contact:</strong> <span id="contactGeneral"></span></p>
-                <p><strong>Address:</strong> <span id="addressGeneral"></span></p>
-                <p><strong>Email:</strong> <span id="emailGeneral"></span></p>
-                <p><strong>DOJ:</strong> <span id="dojGeneral"></span></p>
-                <p><strong>Salary:</strong> <span id="salaryGeneral"></span></p>
-            </div>
-            <div id="Departmental" class="tab-content">
-                <p><strong>Doctor ID:</strong> <span id="docIdDept"></span></p>
-                <p><strong>Specialization:</strong> <span id="specializationDept"></span></p>
-                <p><strong>Status:</strong> <span id="statusDept"></span></p>
-                <p><strong>OPD Charges:</strong> <span id="opdChargesDept"></span></p>
-                <p><strong>Shift ID:</strong> <span id="shiftIdDept"></span></p>
-                <p><strong>Day:</strong> <span id="dayDept"></span></p>
-                <p><strong>Placement:</strong> <span id="placementDept"></span></p>
-            </div>
-        </div>
-    </div> -->
-
     <!-- Doctor Profile Modal -->
     <div class="modal fade" id="doctorProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -173,47 +143,8 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <div id="General" class="tab-content active">
-                        <p><strong>Doctor ID:</strong> <span id="docIdGeneral"></span></p>
-                        <p><strong>Name:</strong> <span id="nameGeneral"></span></p>
-                        <p><strong>DOB:</strong> <span id="dobGeneral"></span></p>
-                        <p><strong>Gender:</strong> <span id="genderGeneral"></span></p>
-                        <p><strong>Contact:</strong> <span id="contactGeneral"></span></p>
-                        <p><strong>Address:</strong> <span id="addressGeneral"></span></p>
-                        <p><strong>Email:</strong> <span id="emailGeneral"></span></p>
-                        <p><strong>DOJ:</strong> <span id="dojGeneral"></span></p>
-                        <p><strong>Salary:</strong> <span id="salaryGeneral"></span></p>
-                        <hr>
-                        <form action="">
-                            <h3>Change Details</h3>
-                            <input type="text" class="form-control" name="" placeholder="New Contact"
-                                required="false">
-                            <input type="text" class="form-control" name="" placeholder="New Address"
-                                required="false">
-                            <input type="number" class="form-control" name="" placeholder="New Salary"
-                                required="false">
-                        </form>
-                    </div>
-                    <div id="Departmental" class="tab-content">
-                        <p><strong>Doctor ID:</strong> <span id="docIdDept"></span></p>
-                        <p><strong>Specialization:</strong> <span id="specializationDept"></span></p>
-                        <p><strong>Status:</strong> <span id="statusDept"></span></p>
-                        <p><strong>OPD Charges:</strong> <span id="opdChargesDept"></span></p>
-                        <p><strong>Shift ID:</strong> <span id="shiftIdDept"></span></p>
-                        <p><strong>Day:</strong> <span id="dayDept"></span></p>
-                        <p><strong>Placement:</strong> <span id="placementDept"></span></p>
-                        <hr>
-                        <form action="">
-                            <h3>Update Details</h3>
-                            <input type="text" class="form-control" name="" placeholder="New Specialization"
-                                required="false">
-                            <input type="text" class="form-control" name="" placeholder="New Status"
-                                required="false">
-                            <input type="number" class="form-control" name="" placeholder="New OPD Charges"
-                                required="false">
-                        </form>
-                    </div>
                 </div>
+                <div class="modal-body1"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>

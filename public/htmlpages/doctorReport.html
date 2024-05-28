@@ -27,11 +27,7 @@
                         <th>Visiting Patient</th>
                         <th>Admitted Patient</th>
                     </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="vPat">Smith</td>
-                        <td id="aPat">smith@pharmacy.net</td>
-                    </tr>
+                    <tbody id="docTable1"></tbody>
                 </table>
             </div>
         </div>
@@ -41,13 +37,13 @@
             </div>
             <div class="col-lg-6 py-2 rBtn">
                 <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
+                    <input type="month" name="monthReport" id="docM1" class="monthReport">
+                    <button type="button" class="btn btn-primary docG1" id="generateBtn">Generate Report</button>
 
                 </form>
             </div>
         </div>
-        <br><br>
+        <br><hr><br>
         <div class="row">
             <div class="col-lg-12">
                 <h2>Monthly Revenue of Doctors Department</h2>
@@ -56,11 +52,7 @@
                         <th>Week</th>
                         <th>Revenue</th>
                     </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="day" style="width: 150px;">1</td>
-                        <td id="aPat" style="width: 150px;">smith@pharmacy.net</td>
-                    </tr>
+                    <tbody id="docTable2"></tbody>
                 </table>
             </div>
         </div>
@@ -70,8 +62,8 @@
             </div>
             <div class="col-lg-6 py-2 rBtn">
                 <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
+                    <input type="month" name="monthReport" id="docM2" class="monthReport">
+                    <button type="button" class="btn btn-primary docG2" id="generateBtn">Generate Report</button>
 
                 </form>
             </div>

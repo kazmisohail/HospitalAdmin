@@ -23,8 +23,13 @@ var config = {
     password: "1234",
    // server: "KAZMI",
     // server: "DESKTOP-TONH6GQ",
+
     server: "Arham_laptop",
     database: "HospitalManagementSystem", 
+
+    // server: "Arham_laptop",
+    database: "HospitalManagementSystem",
+
     options: {
         encrypt: false // Disable encryption
     }

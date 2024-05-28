@@ -24,14 +24,10 @@
                 <h2>Weekly Revenue of Pharmacy</h2>
                 <table id="pharmacyTable">
                     <tr class="pTHead">
-                        <th>Day</th>
-                        <th>Revenue</th>
+                        <th style="width: 150px;">Day</th>
+                        <th style="width: 150px;">Revenue</th>
                     </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="day" style="width: 150px;">1</td>
-                        <td id="day" style="width: 150px;">1</td>
-                    </tr>
+                    <tbody id="revenueTableBody"></tbody>
                 </table>
             </div>
         </div>
@@ -41,21 +37,20 @@
             </div>
             <div class="col-lg-6 py-2 rBtn">
                 <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <select id="moduleReport">
+                    <input type="month" name="monthReport" id="monthReport" class="monthReport">
+                    <select id="moduleReport" class="moduleReport">
                         <option selected>Select Week</option>
-                        <option value="doctor">1</option>
-                        <option value="patient">2</option>
-                        <option value="emergency">3</option>
-                        <option value="lab">4</option>
-                        <option value="lab">5</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
-                    
+                    <button type="button" class="btn btn-primary phR1" id="generateBtn">Generate Report</button>
                 </form>
             </div>
         </div>
-        <br><br>
+        <br><hr><br>
         <div class="row">
             <div class="col-lg-12">
                 <h2>Weekly Top 5 Medicines Sold</h2>
@@ -65,12 +60,7 @@
                         <th>Medicine Name</th>
                         <th>Quantity Sold</th>
                     </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="day" style="width: 75px;">1</td>
-                        <td id="day" style="width: 75px;">1</td>
-                        <td id="day" style="width: 75px;">1</td>
-                    </tr>
+                    <tbody id="medicineTableBody"></tbody>
                 </table>
             </div>
         </div>
@@ -80,16 +70,16 @@
             </div>
             <div class="col-lg-6 py-2 rBtn">
                 <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <select id="moduleReport">
+                    <input type="month" name="monthReport" id="btn1" class="monthReport">
+                    <select id="btn2" class="moduleReport">
                         <option selected>Select Week</option>
-                        <option value="doctor">1</option>
-                        <option value="patient">2</option>
-                        <option value="emergency">3</option>
-                        <option value="lab">4</option>
-                        <option value="lab">5</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
+                    <button type="button" class="btn btn-primary phR2" id="generateBtn">Generate Report</button>
                     
                 </form>
             </div>
