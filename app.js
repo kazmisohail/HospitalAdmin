@@ -21,9 +21,9 @@ const PORT = process.env.PORT || 3001;
 var config = {
     user: "sa",
     password: "1234",
-   // server: "KAZMI",
+   server: "KAZMI",
     // server: "DESKTOP-TONH6GQ",
-    server: "Arham_laptop",
+    // server: "Arham_laptop",
     database: "HospitalManagementSystem",
     options: {
         encrypt: false // Disable encryption
@@ -549,6 +549,34 @@ app.get('/api/topDoctorsTable', (req, res) => {
             res.status(500).send({ message: 'Error fetching data' });
         } else {
             res.send(result.recordset);
+        }
+    });
+});
+
+// Define API endpoint to fetch doctor general profile data by ID
+app.get('/api/allDoctorsTable/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT * FROM AllDoctors WHERE DoctorID = ${id}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset[0]); // Assuming only one pharmacist is returned
+        }
+    });
+});
+
+// Define API endpoint to fetch doctors special data by ID
+app.get('/api/allDoctorsTable1/:id', (req, res) => {
+    const id = req.params.id;
+    const query = `SELECT * FROM GetDoctorSpecificProfile(${id})`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset[0]); // Assuming only one pharmacist is returned
         }
     });
 });
