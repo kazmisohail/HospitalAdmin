@@ -266,7 +266,33 @@ async function fetchDoctorStatus() {
 
 window.onload = function () {
     console.log("Page Khul Gaya");
-
+    // $.get('/api/admin/details', {
+    //     headers: {
+    //         'Authorization': `Bearer ${token}`
+    //     }
+    // })
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error('Network response was not ok');
+    //         }
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         if (data.success) {
+    //             const assignWorkItem = document.querySelector('.control-panel-item.item-1');
+    //             const adminDetails = data.adminDetails;
+    //             if(adminDetails.Permission !='All Access')
+    //                 assignWorkItem.removeEventListener('click', toggleLayer2Panel);
+    //             // Add a class to visually indicate that the functionality is disabled (optional)
+    //             assignWorkItem.classList.add('disabled');
+    //         } else {
+    //             console.error('Error:', data.message);
+    //         }
+    //     })
+    //     .catch(error => {
+    //         console.error('Error fetching admin details:', error);
+    //     });
+ 
     // Fetch total number of doctors
     $.get("/api/doctors/total", function (data) {
         console.log("Total Doctors Data:", data);

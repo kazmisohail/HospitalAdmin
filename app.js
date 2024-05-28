@@ -21,9 +21,9 @@ const PORT = process.env.PORT || 3001;
 var config = {
     user: "sa",
     password: "1234",
-    server: "KAZMI",
+   // server: "KAZMI",
     // server: "DESKTOP-TONH6GQ",
-    //server: "Arham_laptop",
+    server: "Arham_laptop",
     database: "HospitalManagementSystem",
     options: {
         encrypt: false // Disable encryption
@@ -117,29 +117,10 @@ function generateOTP() {
 
 // Connect to SQL Server
 
-app.post('/api/admins/password', async (req, res) => {
+app.put('/api/admins/password', async (req, res) => {
     const { email, password } = req.body;
     await sql.connect(config);
     try {
-      // Find the admin by email
-      //const admin = await sql.query(SELECT * FROM Admin WHERE Email = '${email}');
-  
-      // Check if the admin exists
-    //   if (admin.recordset.length === 0) {
-    //     return res.status(404).json({ error: 'Admin not found' });
-    //   }
-  
-      // Validate the new password
-    //   const { error } = validate({ password });
-    //   if (error) {
-    //     return res.status(400).json({ error: error.details[0].message });
-    //   }
-  
-      // Hash the new password
-      //const hashedPassword = await bcrypt.hash(password, 10);
-  
-      // Update the admin's password
-      //await sql.query(UPDATE Admin SET Password = '${password}' WHERE Email = '${email}');
       await sql.query(`UPDATE Admin SET Password = '${password}' WHERE Email = '${email}'`);
 
       // Send a success response
@@ -346,11 +327,19 @@ app.get("/api/issues", async (req, res) => {
 });
 
 //Server End-point for assigning work to admin
-app.post('/api/assign-work', async (req, res) => {
-    const { AdminID, ActionType, Description,Details } = req.body;
-    try {
-        const query = "exec assignWork @AdminID, @ActionType, @Description,@Details;";
+const transporter = nodemailer.createTransport({
+    service: 'gmail', // you can use any email service you prefer
+    auth: {
+        user: 'arhamraza947@gmail.com',
+        pass: 'hngwyqzhrpyoehph'
+    }
+});
 
+app.post('/api/assign-work', async (req, res) => {
+    const { AdminID, ActionType, Description, Details } = req.body;
+    try {
+        // Save the work assignment to the database
+        const query = "exec assignWork @AdminID, @ActionType, @Description, @Details;";
         const request = new sql.Request();
         request.input('AdminID', sql.NVarChar, AdminID);
         request.input('ActionType', sql.NVarChar, ActionType);
@@ -358,12 +347,41 @@ app.post('/api/assign-work', async (req, res) => {
         request.input('Details', sql.NVarChar, Details);
         await request.query(query);
 
-        console.log("Work Assigned Successfully");
+        // Fetch the admin's email address
+        const emailQuery = "SELECT Email FROM Admin WHERE AdminID = @AdminID";
+        const emailRequest = new sql.Request();
+        emailRequest.input('AdminID', sql.NVarChar, AdminID);
+        const emailResult = await emailRequest.query(emailQuery);
+
+        if (emailResult.recordset.length > 0) {
+            const adminEmail = emailResult.recordset[0].Email;
+
+            // Send the email with the work details
+            const mailOptions = {
+                from: 'arhamraza947@gmail.com',
+                to: adminEmail,
+                subject: 'New Work Assignment',
+                text: `You have been assigned a new work:
+Action Type: ${ActionType}
+Description: ${Description}
+Details: ${Details}`
+            };
+
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                }
+            });
+        }
+
+        res.status(200).json({ message: "Work assigned and email sent successfully" });
     } catch (error) {
         console.log(error);
+        res.status(500).json({ error: "An error occurred" });
     }
 });
-
 app.post('/api/add-admin', async (req, res) => {
     const { AdminName, Email, Password, Contact, Role, Permission } = req.body;
     try {

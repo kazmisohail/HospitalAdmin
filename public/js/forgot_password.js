@@ -29,17 +29,17 @@ async function resetPassword() {
   
       if (response.ok) {
         // Password updated successfully
-        displaySuccessMessage('Password updated successfully.');
+        //displaySuccessMessage('Password updated successfully.');
         setTimeout(() => {
             parent.window.location.href = './login.html';
         }, 2000);
       } else {
         // Error updating password
-        displayErrorMessage(data.error);
+       // displayErrorMessage(data.error);
       }
     } catch (error) {
       console.error(error);
-      displayErrorMessage('An error occurred. Please try again later.');
+     // displayErrorMessage('An error occurred. Please try again later.');
     }
   }
 async function sendOTP() {
