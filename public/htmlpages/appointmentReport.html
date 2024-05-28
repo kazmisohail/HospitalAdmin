@@ -24,14 +24,10 @@
                 <h2>Weekly Appointment Count</h2>
                 <table id="pharmacyTable">
                     <tr class="pTHead">
-                        <th>Week</th>
-                        <th>Appiointment Count</th>
+                        <th style="width: 150px;">Week</th>
+                        <th style="width: 150px;">Appiointment Count</th>
                     </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="day" style="width: 150px;">1</td>
-                        <td id="aPat" style="width: 150px;">smith@pharmacy.net</td>
-                    </tr>
+                    <tbody id="app1TableBody"></tbody>
                 </table>
             </div>
         </div>
@@ -41,13 +37,13 @@
             </div>
             <div class="col-lg-6 py-2 rBtn">
                 <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
+                    <input type="month" name="monthReport" id="btnR1" class="monthReport">
+                    <button type="button" class="btn btn-primary genR1" id="generateBtn">Generate Report</button>
                     
                 </form>
             </div>
         </div>
-        <br><br>
+        <br><hr><br>
         <div class="row">
             <div class="col-lg-12">
                 <h2>Weekly Appointment Status</h2>
@@ -58,13 +54,7 @@
                         <th>Pending</th>
                         <th>Cancelled</th>
                     </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="day" style="width: 75px;">1</td>
-                        <td id="day" style="width: 75px;">1</td>
-                        <td id="day" style="width: 75px;">1</td>
-                        <td id="day" style="width: 75px;">1</td>
-                    </tr>
+                    <tbody id="app2TableBody"></tbody>
                 </table>
             </div>
         </div>
@@ -74,16 +64,16 @@
             </div>
             <div class="col-lg-6 py-2 rBtn">
                 <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <select id="moduleReport">
+                    <input type="month" name="monthReport" id="mR1" class="monthReport">
+                    <select id="wR1" class="moduleReport">
                         <option selected>Select Week</option>
-                        <option value="doctor">1</option>
-                        <option value="patient">2</option>
-                        <option value="emergency">3</option>
-                        <option value="lab">4</option>
-                        <option value="lab">5</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
+                    <button  type="button" class="btn btn-primary genR2" id="generateBtn">Generate Report</button>
                     
                 </form>
             </div>

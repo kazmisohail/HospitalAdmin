@@ -24,14 +24,10 @@
                 <h2>Weekly Emergency Calls</h2>
                 <table id="pharmacyTable">
                     <tr class="pTHead">
-                        <th>Day</th>
-                        <th>Emergency Calls</th>
+                        <th style="width: 150px;">Day</th>
+                        <th style="width: 150px;">Emergency Calls</th>
                     </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="day" style="width: 150px;">1</td>
-                        <td id="day" style="width: 150px;">1</td>
-                    </tr>
+                    <tbody id="emTable1"></tbody>
                 </table>
             </div>
         </div>
@@ -41,34 +37,30 @@
             </div>
             <div class="col-lg-6 py-2 rBtn">
                 <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <select id="moduleReport">
+                    <input type="month" name="monthReport" id="emM1" class="monthReport">
+                    <select id="emW1" class="moduleReport">
                         <option selected>Select Week</option>
-                        <option value="doctor">1</option>
-                        <option value="patient">2</option>
-                        <option value="emergency">3</option>
-                        <option value="lab">4</option>
-                        <option value="lab">5</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
+                    <button type="button" class="btn btn-primary emG1" id="generateBtn">Generate Report</button>
                     
                 </form>
             </div>
         </div>
-        <br><br>
+        <br><hr><br>
         <div class="row">
             <div class="col-lg-12">
                 <h2>Monthly Life to Death Ratio</h2>
                 <table id="pharmacyTable">
                     <tr class="pTHead">
-                        <th>Life Count</th>
-                        <th>Death Count</th>
+                        <th style="width: 150px;">Life Count</th>
+                        <th style="width: 150px;">Death Count</th>
                     </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="day" style="width: 150px;">1</td>
-                        <td id="day" style="width: 150px;">1</td>
-                    </tr>
+                    <tbody id="emTable2"></tbody>
                 </table>
             </div>
         </div>
@@ -78,8 +70,8 @@
             </div>
             <div class="col-lg-6 py-2 rBtn">
                 <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
+                    <input type="month" name="monthReport" id="emM2" class="monthReport">
+                    <button type="button" class="btn btn-primary emG2" id="generateBtn">Generate Report</button>
                     
                 </form>
             </div>

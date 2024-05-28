@@ -28,12 +28,7 @@
                         <th>Visiting Patient</th>
                         <th>Admitted Patient</th>
                     </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="day">1</td>
-                        <td id="vPat">Smith</td>
-                        <td id="aPat">smith@pharmacy.net</td>
-                    </tr>
+                    <tbody id="patTable1"></tbody>
                 </table>
             </div>
         </div>
@@ -43,21 +38,21 @@
             </div>
             <div class="col-lg-6 py-2 rBtn">
                 <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <select id="moduleReport">
+                    <input type="month" name="monthReport" id="patM1" class="monthReport">
+                    <select id="patW1" class="moduleReport">
                         <option selected>Select Week</option>
-                        <option value="doctor">1</option>
-                        <option value="patient">2</option>
-                        <option value="emergency">3</option>
-                        <option value="lab">4</option>
-                        <option value="lab">5</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
+                    <button type="button" class="btn btn-primary patG1" id="generateBtn">Generate Report</button>
                     
                 </form>
             </div>
         </div>
-        <br><br>
+        <br><hr><br>
         <div class="row">
             <div class="col-lg-12">
                 <h2>Top 5 Disease of the Month</h2>
@@ -66,11 +61,7 @@
                         <th>Disease Name</th>
                         <th>Patient Count</th>
                     </tr>
-                    <tr>
-                        <!-- Test Data id ko backend pr use kre gy or db sa data fetch kre gy -->
-                        <td id="day">1</td>
-                        <td id="aPat">smith@pharmacy.net</td>
-                    </tr>
+                    <tbody id="patTable2"></tbody>
                 </table>
             </div>
         </div>
@@ -80,8 +71,8 @@
             </div>
             <div class="col-lg-6 py-2 rBtn">
                 <form action="">
-                    <input type="month" name="monthReport" id="monthReport">
-                    <button onclick="generateReport()" type="button" class="btn btn-primary" id="generateBtn">Generate Report</button>
+                    <input type="month" name="monthReport" id="patM2" class="monthReport">
+                    <button type="button" class="btn btn-primary patG2" id="generateBtn">Generate Report</button>
                     
                 </form>
             </div>

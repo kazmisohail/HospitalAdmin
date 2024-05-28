@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 3001;
 var config = {
     user: "sa",
     password: "1234",
-   server: "KAZMI",
+    server: "KAZMI",
     // server: "DESKTOP-TONH6GQ",
     // server: "Arham_laptop",
     database: "HospitalManagementSystem",
@@ -41,7 +41,7 @@ sql.connect(config, err => {
 
 app.post('/api/verifyEmail', async (req, res) => {
     const { email } = req.body;
-    
+
     try {
         // Connect to the database
         await sql.connect(config);
@@ -121,17 +121,17 @@ app.put('/api/admins/password', async (req, res) => {
     const { email, password } = req.body;
     await sql.connect(config);
     try {
-      await sql.query(`UPDATE Admin SET Password = '${password}' WHERE Email = '${email}'`);
+        await sql.query(`UPDATE Admin SET Password = '${password}' WHERE Email = '${email}'`);
 
-      // Send a success response
-      res.json({ message: 'Password updated successfully' });
+        // Send a success response
+        res.json({ message: 'Password updated successfully' });
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Server error' });
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
     }
-  });
-  // Define endpoint to fetch admin details
-  app.get('/api/admin/details', async (req, res) => {
+});
+// Define endpoint to fetch admin details
+app.get('/api/admin/details', async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const decoded = jwt.verify(token, 'chaljaachaljaa');
     const email = decoded.email;
@@ -147,7 +147,7 @@ app.put('/api/admins/password', async (req, res) => {
         if (result.recordset.length > 0) {
             // const adminDetails = result.recordset[0];
             res.json({ success: true, adminDetails });
-            
+
         } else {
             console.log("idhr masla hai")
             res.status(404).json({ success: false, message: 'idhr masla hai Admin details not found' });
@@ -185,12 +185,12 @@ app.post('/api/login', async (req, res) => {
             .input('Password', sql.NVarChar, password)
             .query('SELECT * FROM Admin WHERE Email = @Email AND Password = @Password');
 
-            if (result.recordset.length > 0) {
-                const token = jwt.sign({ email }, 'chaljaachaljaa', { expiresIn: '1h' });
-                res.json({ success: true, message: 'Login successful', token });
-            } else {
-                res.status(401).json({ success: false, error: 'Invalid email or password' });
-            }
+        if (result.recordset.length > 0) {
+            const token = jwt.sign({ email }, 'chaljaachaljaa', { expiresIn: '1h' });
+            res.json({ success: true, message: 'Login successful', token });
+        } else {
+            res.status(401).json({ success: false, error: 'Invalid email or password' });
+        }
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Database error' });
@@ -612,6 +612,208 @@ app.get('/api/completedApp', (req, res) => {
 // Define API endpoint to fetch today's data
 app.get('/api/todaysApp', (req, res) => {
     const query = 'SELECT * FROM TodaysAppointments';
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+
+// ------------ REPORT ---------------
+// Pharmacy 1
+app.get('/api/pharmacyRevenue/:year/:month/:week', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+    const week = req.params.week;
+
+    const query = `EXEC CalculatePharmacyRevenueByWeekOfMonth ${year}, ${month}, ${week}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Pharmacy 2
+app.get('/api/pharmacyMedicine/:year/:month/:week', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+    const week = req.params.week;
+
+    const query = `EXEC CalculateTopMedicinesByWeekOfMonth ${year}, ${month}, ${week}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+
+// Appointment 1
+app.get('/api/appReport1/:year/:month', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+
+    const query = `EXEC CountAppointmentsByWeek ${month}, ${year}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Appointment 2
+app.get('/api/appReport2/:year/:month/:week', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+    const week = req.params.week;
+
+    const query = `EXEC GetAppointmentStatusByWeekOfMonth ${year}, ${month}, ${week}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Lab 1
+app.get('/api/labReport1/:year/:month/:week', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+    const week = req.params.week;
+
+    const query = `EXEC CalculateLabRevenueByWeekOfMonth ${year}, ${month}, ${week}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Lab 2
+app.get('/api/labReport2/:year/:month/:week', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+    const week = req.params.week;
+
+    const query = `EXEC CountTestsConductedByDaysOfWeek ${year}, ${month}, ${week}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Em 1
+app.get('/api/emReport1/:year/:month/:week', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+    const week = req.params.week;
+
+    const query = `EXEC GetEmergencyCallsByWeekOfMonth ${year}, ${month}, ${week}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Em 2
+app.get('/api/emReport2/:year/:month', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+
+    const query = `EXEC CalculateLifeToDeathCountsByMonth ${month}, ${year}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Pat 1
+app.get('/api/patReport1/:year/:month/:week', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+    const week = req.params.week;
+
+    const query = `EXEC GetPatientsStatusByWeekOfMonth ${year}, ${month}, ${week}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Pat 2
+app.get('/api/patReport2/:year/:month', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+
+    const query = `EXEC GetTopDiagnosesByMonth ${month}, ${year}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Doc 1
+app.get('/api/docReport1/:year/:month', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+
+    const query = `EXEC GetPatientsTreatedByDoctor ${month}, ${year}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Doc 2
+app.get('/api/docReport2/:year/:month', (req, res) => {
+    const year = req.params.year;
+    const month = req.params.month;
+
+    const query = `EXEC CalculateMonthlyDoctorDeptRevenueByWeek ${month}, ${year}`;
     sql.query(query, (err, result) => {
         if (err) {
             console.error(err);
