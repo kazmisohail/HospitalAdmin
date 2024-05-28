@@ -24,7 +24,7 @@ var config = {
    // server: "KAZMI",
     // server: "DESKTOP-TONH6GQ",
     server: "Arham_laptop",
-    database: "HospitalManagementSystem",
+    database: "HospitalManagementSystem", 
     options: {
         encrypt: false // Disable encryption
     }
