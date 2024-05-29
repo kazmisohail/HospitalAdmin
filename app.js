@@ -154,7 +154,7 @@ app.get('/api/admin/details', async (req, res) => {
             res.json({ success: true, adminDetails });
 
         } else {
-            console.log("idhr masla hai")
+            //console.log("idhr masla hai")
             res.status(404).json({ success: false, message: 'idhr masla hai Admin details not found' });
             console.log(adminDetails)
         }
@@ -484,9 +484,7 @@ app.get('/api/patientsTable', (req, res) => {
         }
     });
 });
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+
 
 // Define API endpoint to fetch patients general profile data by ID
 app.get('/api/patientsTable/:id', (req, res) => {
@@ -535,6 +533,7 @@ app.get('/api/patientsTable2/:id', (req, res) => {
 // Define API endpoint to fetch doctor data
 app.get('/api/allDoctorsTable', (req, res) => {
     const query = 'SELECT * FROM AllDoctors';
+    sql.connect(config)
     sql.query(query, (err, result) => {
         if (err) {
             console.error(err);
@@ -827,4 +826,8 @@ app.get('/api/docReport2/:year/:month', (req, res) => {
             res.send(result.recordset);
         }
     });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
