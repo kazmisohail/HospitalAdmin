@@ -45,7 +45,7 @@ h2 {
     margin-right: 35px;
 }
 
-.in input[type="submit"] {
+.in .srchI {
     width: 25%;
     padding: 8px;
     background-color: #4CAF50;
@@ -55,6 +55,7 @@ h2 {
     cursor: pointer;
     margin-right: 25px;
     margin-left: 35px;
+    text-align: center;
 }
 
 .inSearch:focus {

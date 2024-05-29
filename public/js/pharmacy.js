@@ -72,3 +72,47 @@ document.addEventListener('click', event => {
     fetchPharmacistProfile(pharmacistId);
   }
 });
+
+
+// Pharmacy Search
+
+const apiUrlPs = 'http://localhost:3001/api/phSearch';
+
+// Function to fetch pharmacists data and populate table
+function searchPharmacists(name) {
+    fetch(`${apiUrlPs}/${name}`)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('pharmacyTableBody');
+            tableBody.innerHTML = '';
+
+            data.forEach(pharmacist => {
+                const row = `
+          <tr>
+            <td>${pharmacist.EmpID}</td>
+            <td>${pharmacist.EmpName}</td>
+            <td>${pharmacist.Email}</td>
+            <td>${pharmacist.Contact}</td>
+            <td>${pharmacist.Salary}</td>
+            <td>
+            <button class="btn btn-info profile-button" type="button"
+                data-bs-toggle="modal" data-bs-target="#pharmacyProfileModal"
+                data-pharmacist-id="${pharmacist.EmpID}">Profile</button>
+            </td>
+          </tr>
+        `;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error(error));
+
+
+}
+
+// Call function to fetch data on click
+document.addEventListener('click', event => {
+    if (event.target.classList.contains('srch')) {
+        const name = document.getElementById('searchInput').value
+        searchPharmacists(name);
+    }
+});

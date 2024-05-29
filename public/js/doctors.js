@@ -189,3 +189,47 @@ document.addEventListener('click', event => {
     fetchDoctor1Profile(patientId1);
   }
 });
+
+
+// Doctor Search
+
+const apiUrlD = 'http://localhost:3001/api/dcSearch';
+
+// Function to fetch pharmacists data and populate table
+function searchDoctors(name) {
+    fetch(`${apiUrlD}/${name}`)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('allDoctorsTableBody');
+            tableBody.innerHTML = '';
+
+            data.forEach(doctor => {
+                const row = `
+          <tr>
+            <td>${doctor.DoctorID}</td>
+            <td>${doctor.EmpName}</td>
+            <td>${doctor.DOB}</td>
+            <td>${doctor.Status}</td>
+            <td>
+              <button class="btn btn-info profile-button" type="button"
+              data-bs-toggle="modal" data-bs-target="#doctorProfileModal"
+              data-doctor-id="${doctor.DoctorID}">Profile</button>
+              <button class="btn btn-danger" type="button" onclick="deleteDoctor()">Delete</button>
+            </td>
+          </tr>
+        `;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error(error));
+
+
+}
+
+// Call function to fetch data on click
+document.addEventListener('click', event => {
+    if (event.target.classList.contains('srchD')) {
+        const name = document.getElementById('searchInputD').value
+        searchDoctors(name);
+    }
+});

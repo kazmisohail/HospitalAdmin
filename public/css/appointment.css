@@ -37,7 +37,7 @@ h2 {
     box-sizing: border-box;
 }
 
-.apt input[type="submit"] {
+.apt .srchAp {
     width: 25%;
     padding: 8px;
     background-color: #4CAF50;
@@ -45,6 +45,7 @@ h2 {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    text-align: center;
 }
 
 .aSearch:focus {

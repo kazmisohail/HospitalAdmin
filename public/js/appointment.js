@@ -8,6 +8,8 @@ function showPending() {
     document.getElementById('completedBtn').classList.remove('btn-primary');
     document.getElementById('todaysBtn').classList.add('btn-secondary');
     document.getElementById('todaysBtn').classList.remove('btn-primary');
+
+    fetchPendingAppData();
 }
 
 function showCompleted() {
@@ -20,6 +22,8 @@ function showCompleted() {
     document.getElementById('completedBtn').classList.remove('btn-secondary');
     document.getElementById('todaysBtn').classList.add('btn-secondary');
     document.getElementById('todaysBtn').classList.remove('btn-primary');
+
+    fetchCompletedAppData();
 }
 
 function showTodays() {
@@ -32,6 +36,8 @@ function showTodays() {
     document.getElementById('completedBtn').classList.remove('btn-primary');
     document.getElementById('todaysBtn').classList.add('btn-primary');
     document.getElementById('todaysBtn').classList.remove('btn-secondary');
+
+    fetchTodayAppData();
 }
 
 function openTab(event, tabName) {
@@ -91,6 +97,7 @@ function fetchPendingAppData() {
 // Call function to fetch data when page loads
 document.addEventListener('DOMContentLoaded', fetchPendingAppData);
 
+
 // Completed Appointments
 // Function to fetch data and populate table
 function fetchCompletedAppData() {
@@ -121,6 +128,7 @@ function fetchCompletedAppData() {
 
 // Call function to fetch data when page loads
 document.addEventListener('DOMContentLoaded', fetchCompletedAppData);
+
 
 // Today's Appointments
 // Function to fetch data and populate table
@@ -216,4 +224,97 @@ document.addEventListener('click', event => {
     const compAppointmentID1 = event.target.dataset.compAppointmentId;
     fetchCompApp1Profile(compAppointmentID1);
   }
+});
+
+
+// Pending Appointment Search
+
+const apiUrlpA = 'http://localhost:3001/api/pASearch';
+
+// Function to fetch pharmacists data and populate table
+function searchPA(id) {
+    fetch(`${apiUrlpA}/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('pendingAppTableBody');
+            tableBody.innerHTML = '';
+
+            data.forEach(pendApp => {
+                const row = `
+          <tr>
+            <td>${pendApp.AppointmentID}</td>
+            <td>${pendApp.PatientID}</td>
+            <td>${pendApp.DoctorID}</td>
+            <td>${pendApp.DiagnosisName}</td>
+            <td>${pendApp.Date}</td>
+            <td>${pendApp.Time}</td>
+            <td>
+            <button class="btn btn-info" type="button"
+                data-bs-toggle="modal" data-bs-target="#appointmentUpdateModal"
+                data-appointment-id="${pendApp.AppointmentID}">Update</button>
+                <button class="btn btn-danger" type="button">Cancel</button>
+            </td>
+          </tr>
+        `;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error(error));
+
+
+}
+
+// // Call function to fetch data on click
+// document.addEventListener('click', event => {
+//     if (event.target.classList.contains('srchAp')) {
+//         const id = document.getElementById('searchInputAp').value
+//         searchPA(id);
+//     }
+// });
+
+
+// Appointment Search
+
+const apiUrlcA = 'http://localhost:3001/api/cASearch';
+
+// Function to fetch pharmacists data and populate table
+function searchCA(id) {
+    fetch(`${apiUrlcA}/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('completedAppTableBody');
+            tableBody.innerHTML = '';
+
+            data.forEach(pendApp => {
+                const row = `
+          <tr>
+            <td>${pendApp.AppointmentID}</td>
+            <td>${pendApp.PatientID}</td>
+            <td>${pendApp.DoctorID}</td>
+            <td>${pendApp.DiagnosisName}</td>
+            <td>${pendApp.Date}</td>
+            <td>${pendApp.Time}</td>
+            <td>
+            <button class="btn btn-info" type="button"
+                data-bs-toggle="modal" data-bs-target="#appointmentUpdateModal"
+                data-appointment-id="${pendApp.AppointmentID}">Update</button>
+                <button class="btn btn-danger" type="button">Cancel</button>
+            </td>
+          </tr>
+        `;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error(error));
+
+
+}
+
+// Call function to fetch data on click
+document.addEventListener('click', event => {
+    if (event.target.classList.contains('srchAp')) {
+        const id = document.getElementById('searchInputAp').value
+        searchCA(id);
+        searchPA(id);
+    }
 });
