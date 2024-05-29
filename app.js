@@ -21,10 +21,10 @@ const PORT = process.env.PORT || 3001;
 var config = {
     user: "sa",
     password: "1234",
-    //server: "KAZMI",
+    server: "KAZMI",
     // server: "DESKTOP-TONH6GQ",
 
-    server: "Arham_laptop",
+    // server: "Arham_laptop",
     database: "HospitalManagementSystem", 
 
     // server: "Arham_laptop",
