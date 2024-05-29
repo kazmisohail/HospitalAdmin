@@ -44,7 +44,7 @@ h2 {
     margin-right: 35px;
 }
 
-.dc input[type="submit"] {
+.dc .srchD {
     width: 25%;
     padding: 8px;
     background-color: #4CAF50;
@@ -54,6 +54,7 @@ h2 {
     cursor: pointer;
     margin-left: 35px;
     margin-right: 25px;
+    text-align: center;
 }
 
 .dSearch:focus {

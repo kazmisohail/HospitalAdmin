@@ -162,3 +162,48 @@ document.addEventListener('click', event => {
     fetchPatientLabProfile(patientId2);
   }
 });
+
+
+
+// Patient Search
+
+const apiUrlPts = 'http://localhost:3001/api/ptSearch';
+
+// Function to fetch pharmacists data and populate table
+function searchPatients(name) {
+    fetch(`${apiUrlPts}/${name}`)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('patientTableBody');
+            tableBody.innerHTML = '';
+
+            data.forEach(patient => {
+                const row = `
+          <tr>
+            <td>${patient.PatientID}</td>
+            <td>${patient.PatientName}</td>
+            <td>${patient.Gender}</td>
+            <td>${patient.Status}</td>
+            <td>${patient.Contact}</td>
+            <td>
+             <button class="btn btn-info profile-button" type="button"
+                data-bs-toggle="modal" data-bs-target="#patientProfileModal"
+               data-patient-id="${patient.PatientID}">Profile</button>
+            </td>
+          </tr>
+        `;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error(error));
+
+
+}
+
+// Call function to fetch data on click
+document.addEventListener('click', event => {
+    if (event.target.classList.contains('srchP')) {
+        const name = document.getElementById('searchInputP').value
+        searchPatients(name);
+    }
+});

@@ -28,17 +28,19 @@ function appointment() {
 }
 // !!!
 
-function storeImageSourceToLocal() {
 
-    var imageElement = document.getElementById('display-picture');
-    var autoChangeDpElement = parent.document.getElementById('auto-change-dp');
+////// CHANGE KRNA H
+// function storeImageSourceToLocal() {
 
-    if (imageElement) {
-        var imageSource = imageElement.getAttribute('src');
-        localStorage.setItem('imageSource', imageSource);
-        autoChangeDpElement.setAttribute('src', imageSource);
-    }
-}
+//     var imageElement = document.getElementById('display-picture');
+//     var autoChangeDpElement = parent.document.getElementById('auto-change-dp');
+
+//     if (imageElement) {
+//         var imageSource = imageElement.getAttribute('src');
+//         localStorage.setItem('imageSource', imageSource);
+//         autoChangeDpElement.setAttribute('src', imageSource);
+//     }
+// }
 
 function checkActive() {
     document.querySelectorAll(".menu-btn").forEach(function (btn) {

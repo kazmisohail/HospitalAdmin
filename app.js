@@ -21,10 +21,10 @@ const PORT = process.env.PORT || 3001;
 var config = {
     user: "sa",
     password: "1234",
-    //server: "KAZMI",
+    server: "KAZMI",
     // server: "DESKTOP-TONH6GQ",
 
-    server: "Arham_laptop",
+    // server: "Arham_laptop",
     database: "HospitalManagementSystem", 
 
     // server: "Arham_laptop",
@@ -819,6 +819,103 @@ app.get('/api/docReport2/:year/:month', (req, res) => {
     const month = req.params.month;
 
     const query = `EXEC CalculateMonthlyDoctorDeptRevenueByWeek ${month}, ${year}`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+
+// Pharmacy Search
+app.get('/api/phSearch/:name', (req, res) => {
+    const name = req.params.name;
+
+
+    const query = `SELECT * FROM AllPharmacists WHERE EmpName like  '%${name}%'`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Inventory Search
+app.get('/api/inSearch/:name', (req, res) => {
+    const name = req.params.name;
+
+
+    const query = `SELECT * FROM AllItems WHERE MedicineName like  '%${name}%'`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Patient Search
+app.get('/api/ptSearch/:name', (req, res) => {
+    const name = req.params.name;
+
+
+    const query = `SELECT * FROM AllPatients WHERE PatientName like  '%${name}%'`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Doctor Search
+app.get('/api/dcSearch/:name', (req, res) => {
+    const name = req.params.name;
+
+
+    const query = `SELECT * FROM AllDoctors WHERE EmpName like  '%${name}%'`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Pending Appointment Search
+app.get('/api/pASearch/:id', (req, res) => {
+    const id = req.params.id;
+
+
+    const query = `SELECT * FROM PendingAppointments WHERE PatientID =  '${id}'`;
+    sql.query(query, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error fetching data' });
+        } else {
+            res.send(result.recordset);
+        }
+    });
+});
+
+// Complete Appointment Search
+app.get('/api/cASearch/:id', (req, res) => {
+    const id = req.params.id;
+
+
+    const query = `SELECT * FROM CompletedAppointments WHERE PatientID =  '${id}'`;
     sql.query(query, (err, result) => {
         if (err) {
             console.error(err);
